@@ -16,13 +16,13 @@ $ git config --global user.email "gitububを登録したメールアドレス"
 作業するディレクトに移動し
 
 
-$ git clone git@github.com:satellitex/rupc2016.git
+$ git clone git@github.com:satellitex/acpc2016.git
 
 のコマンドをコマンドラインでうちます。
 
 すると
 
-rupc2016 といディレクトリができるのでそこが作業ディレクトリです。
+acpc2016 といディレクトリができるのでそこが作業ディレクトリです。
 
 自分が作ったものを反映させるとき
 
