@@ -7,19 +7,18 @@ int match[MAX_V];
 bool used[MAX_V];
 bool flag[MAX_V];
 
-void init(){
-  for(int i=0;i<MAX_V;i++)used[i]=flag[i];
-}
-
 void add_edge(int u,int v){
   G[u].push_back(v);
   G[v].push_back(u);
 }
  
 bool dfs(int v){
+  if( flag[v] )return false;
+  
   used[v]=true;
   for(int i=0;i<(int)G[v].size();i++){
     int u=G[v][i],w=match[u];
+    if( flag[u] )continue;
     if( w<0 ||( !used[w] && dfs(w) )){
       match[v]=u;
       match[u]=v;
@@ -34,7 +33,7 @@ int bipartite_matching(bool flg=true){
   int res=0;
   for(int v=0;v<MAX_V;v++){
     if(match[v]<0){
-      init();
+      memset( used, false, sizeof(used) );
       if(dfs(v)){
         res++;
       }
@@ -99,14 +98,15 @@ int main(){
 
   for(int i=0;i<(int)vec.size();i++){
     string str=vec[i];
+    
     if(mp.count(str)){
       int id=mp[str];
       if(match[id]==-1)continue;
       int target=match[id];
       match[id]=match[target]=-1;
-      
+
       flag[id]=true;
-      init();
+      memset(used, false, sizeof(used));
       if( dfs(target)==false )cout<<str<<endl;
       else flag[id]=false;
       
@@ -117,13 +117,23 @@ int main(){
       if(match[ib]!=ia)continue;
       erase(G[ia],ib);
       erase(G[ib],ia);
-      match[ia]=match[ib]=-1;
-      init();
-      if( dfs(ia)==false )cout<<str<<endl;
-      else{
-        G[ia].push_back(ib);
-        G[ib].push_back(ia);
+      match[ia]=-1;
+      match[ib]=-1;
+
+      memset(used, false, sizeof(used));
+      if( dfs(ia)==false ){
+        cout<<str<<endl;
+        continue;
       }
+      
+      memset(used, false, sizeof(used));
+      if( dfs(ib)==false ){
+        cout<<str<<endl;
+        continue;
+      }
+      
+      G[ia].push_back(ib);
+      G[ib].push_back(ia);
     }
   }
   return 0;
