@@ -29,8 +29,7 @@ int main() {
     }
     v.push_back(P(0,max(n,m)));
     for(int i=0; i<v.size(); i++)if(v[i].S-i<=y&&y<=v[i].S) f=1;
-    v.pop_back();
-    v.push_back(P(0,-1));
+    v[v.size()-1]=P(0,-1);
     sort(v.begin(),v.end());
     for(int i=0; i<v.size(); i++)if(v[i].S<=y&&y<=v[i].S+v.size()-i-1) f=1;
   }
