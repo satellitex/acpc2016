@@ -1,0 +1,5 @@
+--- /Users/kzyKT/ICPC/git/acpc2016/dohatsu7/rime-out/tests/01_small_00.diff	2016-08-22 18:03:08.000000000 +0900
++++ /Users/kzyKT/ICPC/git/acpc2016/dohatsu7/rime-out/kzyKT/01_small_00.out	2016-08-22 18:08:28.000000000 +0900
+@@ -1 +1 @@
+-0
++10
