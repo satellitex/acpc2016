@@ -25,12 +25,12 @@ int main(){
   while(!Q.empty()){
     P p=Q.top();Q.pop();
     int pos=p.second;
-    int cost=p.second;
+    int cost=p.first;
     if(d[pos]<cost)continue;
     for(int i=0;i<(int)G[pos].size();i++){
       edge e=G[pos][i];
       if(e.cost<d[pos])continue;
-      if(e.to==N)ans=max(ans,e.to);
+      if(e.to==N)ans=max(ans,e.cost);
       if(d[e.to]>e.cost){
         d[e.to]=e.cost;
         Q.push(P(d[e.to],e.to));
