@@ -16,7 +16,7 @@ int main(){
     G[a].push_back((edge){b,c});
   }
   
-  int ans=0;  
+  int ans=-1;  
   priority_queue< P , vector<P> , greater<P> > Q;
 
   fill(d,d+MAX_N,1e9);
