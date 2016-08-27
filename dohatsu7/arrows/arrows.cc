@@ -16,7 +16,7 @@ struct State {
     State (int c, int v) : c(c), v(v) {}
 
     bool operator < (const State &s) const {
-        return c < s.c;
+        return c > s.c;
     }
 };
 
@@ -31,25 +31,30 @@ int main()
         G[a].push_back(Edge(b, c));
     }
     
-    vector<int> d(MAX_N + 1, -1);
+    vector<int> d(MAX_N + 1, INF);
     d[0] = 1;
 
     priority_queue<State> pq;
     pq.push(State(1, 0));
-
+    int res = 0;
+    
     while (!pq.empty()) {
         State s = pq.top(); pq.pop();
-        if (d[s.v] > s.c) continue;
+        if (d[s.v] < s.c) continue;
 
         for (int i = 0; i < (int)G[s.v].size(); i++) {
             Edge &e = G[s.v][i];
-            if (d[s.v] <= e.age && e.age > d[e.to]) {
+            if (d[s.v] <= e.age && e.age < d[e.to]) {
                 d[e.to] = e.age;
                 pq.push(State(d[e.to], e.to));
+                res = max(res, e.age);
             }
         }
     }
-    
-    cout << d[N-1] << endl;
+    if (d[N-1] != INF) {
+        cout << res << endl;
+    } else {
+        cout << -1 << endl;
+    }       
     return 0;
 }
