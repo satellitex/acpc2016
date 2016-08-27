@@ -12,8 +12,9 @@ struct Edge {
 };
 
 struct State {
-    int c, v;
-    State (int c, int v) : c(c), v(v) {}
+    int c, v, max_age;
+    State (int c, int v, int max_age) :
+        c(c), v(v), max_age(max_age) {}
 
     bool operator < (const State &s) const {
         return c > s.c;
@@ -35,26 +36,25 @@ int main()
     d[0] = 1;
 
     priority_queue<State> pq;
-    pq.push(State(1, 0));
-    int res = 0;
+    pq.push(State(1, 0, 1));
+    int res = -1;
     
     while (!pq.empty()) {
         State s = pq.top(); pq.pop();
-        if (d[s.v] < s.c) continue;
-
+        if (s.v == N-1 || d[s.v] < s.c) continue;
+        
         for (int i = 0; i < (int)G[s.v].size(); i++) {
             Edge &e = G[s.v][i];
-            if (d[s.v] <= e.age && e.age < d[e.to]) {
-                d[e.to] = e.age;
-                pq.push(State(d[e.to], e.to));
+            if (e.to == N-1 && s.max_age <= e.age) {
                 res = max(res, e.age);
+            }
+                
+            if (s.max_age <= e.age && e.age < d[e.to]) {
+                d[e.to] = e.age;
+                pq.push(State(d[e.to], e.to, e.age));
             }
         }
     }
-    if (d[N-1] != INF) {
-        cout << res << endl;
-    } else {
-        cout << -1 << endl;
-    }       
+    cout << res << endl;
     return 0;
 }
