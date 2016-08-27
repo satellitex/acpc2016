@@ -12,9 +12,9 @@ struct Edge {
 };
 
 struct State {
-    int c, v, max_age;
-    State (int c, int v, int max_age) :
-        c(c), v(v), max_age(max_age) {}
+    int c, v;
+    State (int c, int v) :
+        c(c), v(v) {}
 
     bool operator < (const State &s) const {
         return c > s.c;
@@ -36,7 +36,7 @@ int main()
     d[0] = 1;
 
     priority_queue<State> pq;
-    pq.push(State(1, 0, 1));
+    pq.push(State(1, 0));
     int res = -1;
     
     while (!pq.empty()) {
@@ -45,13 +45,14 @@ int main()
         
         for (int i = 0; i < (int)G[s.v].size(); i++) {
             Edge &e = G[s.v][i];
-            if (e.to == N-1 && s.max_age <= e.age) {
+            if (d[s.v] > e.age) continue;
+            if (e.to == N-1) {
                 res = max(res, e.age);
             }
                 
-            if (s.max_age <= e.age && e.age < d[e.to]) {
+            if (e.age < d[e.to]) {
                 d[e.to] = e.age;
-                pq.push(State(d[e.to], e.to, e.age));
+                pq.push(State(d[e.to], e.to));
             }
         }
     }
