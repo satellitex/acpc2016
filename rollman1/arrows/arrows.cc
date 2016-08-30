@@ -6,7 +6,6 @@ using namespace std;
 typedef vector<double> vec;
 typedef vector<vec> mat;
 
-
 int main()
 {
     int L, d;
