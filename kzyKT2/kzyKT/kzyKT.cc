@@ -4,13 +4,13 @@ using namespace std;
 #define S second
 typedef pair<int,int> P;
 typedef pair<P,int> PP;
-int h,w,n,N=1<<19;
-P a[100];
+int h,w,n,N=1<<18;
+P a[100000];
 
 class StarrySkyTree{
 public:
-  int Mi[555555],A[555555];
-  void init(){fill(Mi,Mi+555555,0);fill(A,A+555555,0);}
+  int Mi[333333],A[333333];
+  void init(){fill(Mi,Mi+333333,0);fill(A,A+333333,0);}
   void add(int a,int b,int x,int k=0,int l=0,int r=N) {
     if(r<=a||b<=l) return;
     if(a<=l&&r<=b){
@@ -33,10 +33,10 @@ public:
 };
 
 StarrySkyTree t[2];
+vector<PP> v[2][111111];
 bool calc(int m) {
-  t[0].init();
-  t[1].init();
-  vector<PP> v[2][h+w+2];
+  t[0].init(),t[1].init();
+  for(int i=0; i<h+w+2; i++) v[0][i].clear(),v[1][i].clear();
   for(int i=0; i<n; i++) {
     int o=(a[i].F+a[i].S)%2;
     int d1=a[i].F+a[i].S-m;
