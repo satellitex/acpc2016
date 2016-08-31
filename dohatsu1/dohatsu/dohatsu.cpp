@@ -58,7 +58,7 @@ string change(string str,int flg){
 void add_edge(string s){
   string a=change(s,1);
   string b=change(s,2);
-  cout<<s<<' '<<a<<' '<<b<<endl;
+  //cout<<s<<' '<<a<<' '<<b<<endl;
   int ia,ib;
   if(mp.count(a)==0)mp[a]=mp.size();
   ia=mp[a];
