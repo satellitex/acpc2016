@@ -3,14 +3,15 @@
 using namespace std;
 typedef pair<int,int> P;
 typedef long long ll;
+const int N=50000;
 
 int main(int argc, char* argv[]) {
   registerGen(argc, argv,1);
   for(int t=0; t<10; t++) {
     ofstream ofs(format("03_random_%02d.in",t).c_str());
-    int n=rnd.next(1,100000),m=rnd.next(1,100000);
+    int n=rnd.next(1,N),m=rnd.next(1,N);
     int k=rnd.next(1,(int)min((ll)n*m,(ll)100000));
-    ofs << n << " " << m << endl;
+    ofs << n << " " << m << " " << k << endl;
     int x=rnd.next(0,n-1),y=rnd.next(0,m-1);
     ofs << x << " " << y << endl;
     set<P> s;
