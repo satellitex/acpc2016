@@ -1,0 +1,2 @@
+cxx_generator(src='generator.cc')
+cxx_validator(src='validator.cc')
