@@ -42,7 +42,7 @@ def generate():
         if i is not 0:
             f.write(" ")
         #print("{} {} {}".format(L-csum, d-i, L-csum - (d-i) + 1))
-        c = random.randint(c_MIN, (L - csum) - (d - i) + 1)
+        c = random.randint(c_MIN, min(c_MAX, (L - csum) - (d - i) + 1))
         csum += c
         f.write( "{}".format( random.randint(c_MIN, c) ) )
     f.write("\n")
