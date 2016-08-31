@@ -46,7 +46,7 @@ vector<string> vec;
 string tmp="0123456789abcdef";
 string change(string str,int flg){
   if(flg==0)return str;
-  for(int i=0;i<str.size();i++){
+  for(int i=0;i<(int)str.size();i++){
     int num=tmp.find(str[i]);
     if(num%2==1)continue;
     if(flg==1)str[i]=tmp[(num+1)%16];
