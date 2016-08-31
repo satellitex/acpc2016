@@ -13,13 +13,14 @@ int N = 1000;
 
 std::mt19937 mt( (int)time(0) );
 std::uniform_int_distribution<> randA(0,17);
-std::uniform_int_distribution<> randB(0,3);
+std::uniform_int_distribution<> randB(0,4);
 string tmp0="02468ace00000eeeee";
 string tmp1="13579bdf11111fffff";
 
-vector<string> vec;
+
 
 void solve(int ID){
+  vector<string> vec;
   ofstream fout ( "random"+ i2s(ID) +".in" );
   
   set<string> st;
@@ -28,10 +29,11 @@ void solve(int ID){
     string str="";
     int target=randB( mt );
     
-    for(int j=0;j<4;j++){
+    for(int j=0;j<5;j++){
       if(j==target) str+=tmp0[ randA(mt) ];
       else str+=tmp1[ randA(mt) ];
     }
+
     
     if(st.count(str)>0)continue;
     st.insert(str);
