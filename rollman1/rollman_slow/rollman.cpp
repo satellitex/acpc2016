@@ -7,13 +7,12 @@ int L, d;
 double p;
 vector<double> S;
 vector<int> c;
-vector<double> regsum;
 double memo[L_MAX][d_MAX];
 
 double getReg(int l, int r){
 	double res = 0;
 	for(int i = l; i < r; i++){
-		res += 1 / S[i];
+		res += p / S[i];
 	}
 	return res;
 }
@@ -29,7 +28,7 @@ double func(int pos, int bar){
 	double res = INF;
 	res = func(pos+1, bar);
 	if(pos+c[bar] <= L)
-		res = min(res, func(pos+c[bar], bar+1) + regsum[pos+c[bar]] - regsum[pos]);
+		res = min(res, func(pos+c[bar], bar+1) + getReg(pos, pos+c[bar]));
 	return memo[pos][bar] = res;
 }
 
@@ -38,16 +37,12 @@ int main(void){
 	cin.tie(0);
 	for(int i = 0; i < L_MAX; i++) for(int j = 0; j < d_MAX; j++) memo[i][j] = -1;
 	cin >> L >> p >> d;
-	S.resize(L); c.resize(d); regsum.resize(L+1);
+	S.resize(L); c.resize(d);
 	for(int i = 0; i < L; i++){
 		cin >> S[i];
 	}
 	for(int i = 0; i < d; i++){
 		cin >> c[i];
 	}
-	regsum[0] = 0;
-	for(int i = 1; i <= L; i++){
-		regsum[i] = regsum[i-1] + (1 / S[i-1]);
-	}
-	printf("%.10f\n", p*func(0, 0));
+	printf("%.10f\n",func(0, 0));
 }
