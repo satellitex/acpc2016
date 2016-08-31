@@ -46,7 +46,7 @@ vector<string> vec;
 string tmp="0123456789abcdef";
 string change(string str,int flg){
   if(flg==0)return str;
-  for(int i=0;i<4;i++){
+  for(int i=0;i<(int)str.size();i++){
     int num=tmp.find(str[i]);
     if(num%2==1)continue;
     if(flg==1)str[i]=tmp[(num+1)%16];
@@ -59,18 +59,24 @@ void add_edge(string s){
   string a=change(s,1);
   string b=change(s,2);
   //cout<<s<<' '<<a<<' '<<b<<endl;
+
+    
   int ia,ib;
+      
   if(mp.count(a)==0)mp[a]=mp.size();
   ia=mp[a];
+  
   if(mp.count(b)==0)mp[b]=mp.size();
   ib=mp[b];
   mA[s]=ia;
   mB[s]=ib;
+
   add_edge(ia,ib);
   vec.push_back(s);
   vec.push_back(a);
   vec.push_back(b);
 }
+
 
 void clean(int id){
   for(int i=0;i<(int)G[id].size();i++){
@@ -87,6 +93,7 @@ int main(){
     cin>>s;
     add_edge(s);
   }
+
   
   int ans=bipartite_matching();
   cout<<ans<<endl;
