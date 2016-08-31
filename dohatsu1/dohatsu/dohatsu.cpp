@@ -5,7 +5,6 @@ using namespace std;
 vector<int> G[MAX_V];
 int match[MAX_V];
 bool used[MAX_V];
-bool flag[MAX_V];
 
 void add_edge(int u,int v){
   G[u].push_back(v);
@@ -13,12 +12,9 @@ void add_edge(int u,int v){
 }
  
 bool dfs(int v){
-  if( flag[v] )return false;
-  
   used[v]=true;
   for(int i=0;i<(int)G[v].size();i++){
     int u=G[v][i],w=match[u];
-    if( flag[u] )continue;
     if( w<0 ||( !used[w] && dfs(w) )){
       match[v]=u;
       match[u]=v;
@@ -28,8 +24,8 @@ bool dfs(int v){
   return false;
 }
  
-int bipartite_matching(bool flg=true){
-  if(flg)memset(match,-1,sizeof(match));
+int bipartite_matching(){
+  memset( match, -1, sizeof(match) );
   int res=0;
   for(int v=0;v<MAX_V;v++){
     if(match[v]<0){
@@ -62,6 +58,7 @@ string change(string str,int flg){
 void add_edge(string s){
   string a=change(s,1);
   string b=change(s,2);
+  //cout<<s<<' '<<a<<' '<<b<<endl;
   int ia,ib;
   if(mp.count(a)==0)mp[a]=mp.size();
   ia=mp[a];
@@ -75,11 +72,12 @@ void add_edge(string s){
   vec.push_back(b);
 }
 
-void erase( vector<int> &v , int key ){
-  vector<int> nv;
-  for(int i=0;i<(int)v.size();i++)
-    if(v[i]!=key)nv.push_back(v[i]);
-  v=nv;
+void clean(int id){
+  for(int i=0;i<(int)G[id].size();i++){
+    int to=G[id][i];
+    G[to].erase( find( G[to].begin(), G[to].end() , id ) );
+  }
+  G[id].clear();
 }
 
 int main(){
@@ -101,39 +99,53 @@ int main(){
     
     if(mp.count(str)){
       int id=mp[str];
-      if(match[id]==-1)continue;
+      
+      if(match[id]<=0)continue;
+      
       int target=match[id];
-      match[id]=match[target]=-1;
-
-      flag[id]=true;
+      
+      match[id]=0;
+      match[target]=-1;
       memset(used, false, sizeof(used));
-      if( dfs(target)==false )cout<<str<<endl;
-      else flag[id]=false;
+      if( dfs(target)==false ){
+        cout<<str<<endl;
+        clean( id );
+        continue;
+      }
+      
+      if(match[target]>0)match[match[target]]=-1;
+      match[id]=target;
+      match[target]=id;
       
     }else{
       int ia=mA[str];
       int ib=mB[str];
       if(match[ia]!=ib)continue;
       if(match[ib]!=ia)continue;
-      erase(G[ia],ib);
-      erase(G[ib],ia);
       match[ia]=-1;
       match[ib]=-1;
 
+      G[ia].erase( find(G[ia].begin(),G[ia].end(),ib) );
+      G[ib].erase( find(G[ib].begin(),G[ib].end(),ia) );
+
       memset(used, false, sizeof(used));
-      if( dfs(ia)==false ){
+      bool fa=dfs(ia);
+      
+      memset(used, false, sizeof(used));
+      bool fb=dfs(ib);
+      
+      if(fa==false && fb==false){
         cout<<str<<endl;
         continue;
       }
-      
-      memset(used, false, sizeof(used));
-      if( dfs(ib)==false ){
-        cout<<str<<endl;
-        continue;
-      }
-      
+
+      if(match[ia]>0)match[match[ia]]=-1;
+      if(match[ib]>0)match[match[ib]]=-1;
+
       G[ia].push_back(ib);
       G[ib].push_back(ia);
+      match[ia]=ib;
+      match[ib]=ia;
     }
   }
   return 0;

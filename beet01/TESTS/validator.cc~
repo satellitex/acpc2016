@@ -1,0 +1,24 @@
+#include "testlib.h"
+#include<cassert>
+using namespace std;
+
+static const int W_MIN = 1;
+static const int W_MAX = 1000;
+static const int H_MIN = 1;
+static const int H_MAX = 1000;
+static const int C_MIN = 1;
+static const int C_MAX = 1000;
+
+int main(){
+  registerValidation();
+
+  int W = inf.readInt(W_MIN, W_MAX);
+  inf.readSpace();
+  int H = inf.readInt(H_MIN, H_MAX);
+  inf.readSpace();
+  int C = inf.readInt(C_MIN, C_MAX);
+  inf.readEoln();
+  inf.readEof();
+  
+  return 0;
+}
