@@ -19,14 +19,10 @@ int main()
     for (int i = 0; i < d; i++) {
         cin >> c[i];
     }
-    
-    mat cost(L+1, vec(L+1));
+
+    vec cost(L+1);
     for (int i = 0; i < L; i++) {
-        double sumS = 0;
-        for (int j = i; j < L; j++) {
-            sumS += S[j];
-            cost[i][j+1] = p * (j - i + 1) / sumS;
-        }
+        cost[i+1] = p / S[i] + cost[i];
     }
     
     mat dp(d+1, vec(L+1, INF));
@@ -38,10 +34,10 @@ int main()
             int next = i + c[j];
             if (next <= L) {
                 dp[j+1][next] = min(dp[j+1][next],
-                                    dp[j][i] + cost[i][next]);
+                                    dp[j][i] + cost[next] - cost[i]);
             }
         }
     }
-    printf("%.15f\n", *min_element(dp[d].begin(), dp[d].end()));   
+    printf("%.10f\n", *min_element(dp[d].begin(), dp[d].end()));   
     return 0;
 }
