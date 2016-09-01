@@ -2,7 +2,7 @@
 
 using namespace std;
 
-const int MAX_N = (1<<13);
+const int MAX_N = (1<<11);
 const int MAX_L = (1<<10);
 typedef pair<int, int> pii;
 typedef pair<pii, int> P;
