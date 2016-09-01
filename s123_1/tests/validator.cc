@@ -57,6 +57,8 @@ void check() {
     AB[a[i]-1][b[i]-1]=1;
   }
 
+
+  //連結かどうかと時間内でゴールまでいけるか。
   int G[N_MAX][N_MAX];
   for(int i=0;i<n;i++)
     for(int j=0;j<n;j++) G[i][j]=1e9*(i!=j);
@@ -73,7 +75,6 @@ void check() {
       ensuref(G[i][j]<1e9, "Input 'renketsu janaiyo");
   
   ensuref(G[0][n-1]<=r, "'G[0][n-1]>r'");
-
 }
 
 int main() {
