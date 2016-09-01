@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     ofstream of(format("01_random_%02d.in", t+1).c_str());
     int n, m, r;
     n = rnd.next(3, 30);
-    m = rnd.next(n-1, n*(n-1)/2);
+    m = rnd.next(n-1, min(300,n*(n-1)/2));
     r = rnd.next(10,R);
         
     vector<int> a(n-1), b(n-1);
