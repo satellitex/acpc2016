@@ -10,8 +10,8 @@ int main(int argc, char *argv[])
     int N, M, L;
     for (int t = 0; t < 15; t++) {
         ofstream of(format("03_random_%02d.in", t+1).c_str());
-        N = rnd.next(2, 1000);
-        M = rnd.next(0, 1000);
+        N = rnd.next(2, 300);
+        M = rnd.next(0, 300);
         L = rnd.next(1, M);
         of << N << " " << M << " " << L << endl;
         for (int i = 0; i < M; i++) {

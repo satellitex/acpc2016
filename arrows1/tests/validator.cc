@@ -8,9 +8,9 @@ int main()
     registerValidation();
     int N, M, L;
     
-    N = inf.readInt(2, 1000, "N");
+    N = inf.readInt(2, 300, "N");
     inf.readSpace();
-    M = inf.readInt(0, 1000, "M");
+    M = inf.readInt(0, 300, "M");
     inf.readSpace();
     L = inf.readInt(0, M, "L");
     inf.readEoln();
