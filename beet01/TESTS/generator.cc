@@ -16,7 +16,7 @@ void getSet(int &X, int &Y){
   do{
     X=rand()%1000000;
     Y=rand()%500000;
-  }while(__gcd(X,Y)!=1||X>Y/2||Y<2||X<5);
+  }while(__gcd(X,Y)!=1||X<Y/2||Y<2||X<5);
 }
 
 void randomCaseGenerator(const char *filename){

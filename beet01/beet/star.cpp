@@ -75,7 +75,7 @@ Point getCrossPoint(Point p0,Point p1,Point p2,Point p3){
 double area(Polygon p){
   double x=0;
   for(int i=0;i<p.size();i++){
-    x+=cross(p[i],p[(i+1)%p.size()]);
+    x+=cross(p[i],p[(i+1)%p.size()])/2.0;
   }
   return x;
 }

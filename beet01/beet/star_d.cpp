@@ -75,7 +75,7 @@ Point getCrossPoint(Point p0,Point p1,Point p2,Point p3){
 double area(Polygon p){
   double x=0;
   for(int i=0;i<p.size();i++){
-    x+=cross(p[i],p[(i+1)%p.size()]);
+    x+=cross(p[i],p[(i+1)%p.size()])/2.0;
   }
   return x;
 }
@@ -88,6 +88,8 @@ int main(){
     double x=2*PI/n*i;
     v.push_back(Point(cos(x),sin(x)));
   }
+  //for(i=0;i<n;i++) cout << "set label "<<(i+1)<<" point pt 7 ps 1 at " << v[i].x << "," << v[i].y << endl;
+  //for(i=0;i<=n;i++) cout << v[(i*2)%n].x << " " << v[(i*2)%n].y << endl;
   for(i=0;i<n;i++){
     c.push_back(getCrossPoint(v[(i+n)%n],v[(i+n+k)%n],v[(i+n+1)%n],v[(i+n+1-k)%n]));
   }
@@ -95,6 +97,7 @@ int main(){
     p.push_back(v[i]);
     p.push_back(c[i]);
   }
+  
   for(i=0;i<2*n+1;i++) cout << p[i%(2*n)].x << " " << p[i%(2*n)].y << endl;
   
   //  cout << area(p) << endl;
