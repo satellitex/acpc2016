@@ -12,18 +12,18 @@
 
 using namespace std;
 
-void getSet(int &X, int &Y){
+void getSet(int &N, int &K){
   do{
-    X=rand()%1000000;
-    Y=rand()%500000;
-  }while(__gcd(X,Y)!=1||X<Y/2||Y<2||X<5);
+    N=rand()%1000000;
+    K=rand()%500000;
+  }while(__gcd(N,K)!=1||!(K<N/2)||K<2||N<5);
 }
 
 void randomCaseGenerator(const char *filename){
-  int X,Y;
-  getSet(X,Y);
+  int N,K;
+  getSet(N,K);
   FILE *fp = fopen(filename, "w");
-  fprintf(fp, "%d %d", X,Y);
+  fprintf(fp, "%d %d", N,K);
   fprintf(fp, "\n");
   fclose(fp);
 }
