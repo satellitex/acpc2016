@@ -41,6 +41,8 @@ void input()
 
 void check()
 {
+    ensuref(K <= N, "K equals %d and N equals %d, violates K <= min(3, N)",
+            K, N);
 }
 
 int main()
