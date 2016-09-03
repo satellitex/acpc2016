@@ -18,25 +18,25 @@ int a[N_MAX], b[N_MAX];
 
 void input()
 {
-    N = inf.readInt(N_MIN, N_MAX);
-    inf.readSpace();
-    M = inf.readInt(M_MIN, M_MAX);
-    inf.readSpace();
-    K = inf.readInt(K_MIN, K_MAX);
-    inf.readEoln();
+  N = inf.readInt(N_MIN, N_MAX,"N");
+  inf.readSpace();
+  M = inf.readInt(M_MIN, M_MAX,"M");
+  inf.readSpace();
+  K = inf.readInt(K_MIN, min(N,K_MAX),"K");
+  inf.readEoln();
+  
+  for (int i = 0; i < N; i++) {
+    if (i > 0) inf.readSpace();
+    a[i] = inf.readInt(a_MIN, a_MAX, format("a[%d]", i + 1));
+  }
+  inf.readEoln();
 
-    for (int i = 0; i < N; i++) {
-        if (i > 0) inf.readSpace();
-        a[i] = inf.readInt(a_MIN, a_MAX, format("a[%d]", i + 1));
-    }
-    inf.readEoln();
-
-    for (int i = 0; i < N; i++) {
-        if (i > 0) inf.readSpace();
-        b[i] = inf.readInt(b_MIN, b_MAX, format("b[%d]", i + 1));
-    }
-    inf.readEoln();
-    inf.readEof();
+  for (int i = 0; i < N; i++) {
+    if (i > 0) inf.readSpace();
+    b[i] = inf.readInt(b_MIN, b_MAX, format("b[%d]", i + 1));
+  }
+  inf.readEoln();
+  inf.readEof();
 }
 
 void check()
@@ -45,11 +45,11 @@ void check()
 
 int main()
 {
-    registerValidation();
+  registerValidation();
     
-    input();
+  input();
 
-    check();
+  check();
     
-    return 0;
+  return 0;
 }
