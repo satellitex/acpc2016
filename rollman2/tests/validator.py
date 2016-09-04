@@ -23,7 +23,7 @@ def main():
     Y = float(line_split[1])
     Z = int(line_split[2])
     assert X_MIN <= X <= X_MAX, 'X out of range: {}'.format(X)
-    assert Y_MIN < Y <= Y_MAX, 'Y out of range: {}'.format(Y)
+    assert Y_MIN <= Y <= Y_MAX, 'Y out of range: {}'.format(Y)
     assert Z_MIN <= Z <= Z_MAX, 'Z out of range: {}'.format(Z)
 
     line = input()
