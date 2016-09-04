@@ -16,7 +16,7 @@ int main(void){
 		S[z][y][x] = 1;
 	}
 
-	vector< vector<int> > net(Y, vector<int> (Y, 0));
+	vector< vector<int> > net(Y, vector<int> (X, 0));
 	for(int y = 0; y < Y; y++){
 		for(int x = 0; x < X; x++){
 			cin >> net[y][x];
