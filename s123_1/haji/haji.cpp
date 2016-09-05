@@ -9,6 +9,9 @@ int dp[31][31][5001];
 int main(){
   int n,m,r;
   cin>>n>>m>>r;
+
+  for(int i=0;i<n;i++) cin>>ball[i];
+
   for(int i=0;i<n;i++) 
     for(int j=0;j<n;j++)G[i][j]=INF;
 
@@ -17,7 +20,7 @@ int main(){
     G[a-1][b-1]=G[b-1][a-1]=c;
   }
   
-  for(int i=0;i<n;i++) cin>>ball[i];
+
   
   for(int k=0;k<n;k++)
     for(int i=0;i<n;i++)

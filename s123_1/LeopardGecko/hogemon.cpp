@@ -9,6 +9,8 @@ int dp[R][N][N];
 
 int main(){
   cin>>n>>m>>r;
+  for(int i=0;i<n;i++)cin>>d[i];
+
   for(int i=0;i<n;i++)
     for(int j=0;j<n;j++)t[i][j]=INF;
   for(int i=0;i<m;i++){
@@ -16,7 +18,7 @@ int main(){
     t[a-1][b-1]=c;
     t[b-1][a-1]=c;
   }
-  for(int i=0;i<n;i++)cin>>d[i];
+
   for(int k=0;k<n;k++)
     for(int i=0;i<n;i++)
       for(int j=0;j<n;j++)
