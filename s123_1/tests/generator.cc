@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     n = rnd.next(3, 30);
     m = rnd.next(n-1, min(300,n*(n-1)/2));
     r = rnd.next(10,R);
-        
+    
     vector<int> a(n-1), b(n-1);
     for (int i = 1; i < n; i++) {
       int par = rnd.next(0, i-1);
@@ -75,15 +75,16 @@ int main(int argc, char *argv[])
     if(dp[0][n-1]>r)r=rnd.next(dp[0][n-1],1000);
     if(r>R) {t--;continue;};
     of << n << " " << m << " " << r << endl;
-        
+
+    of << 0 << ' ';
+    for(int i=1;i<n-1;i++) of << rnd.next(0,10) << ' ';
+    of << 0 << endl;
+    
     // 連結になるように入力しないといけない。
     for(ite=used2.begin(),idx=0;ite!=used2.end();ite++,idx++){
       of << (*ite).first << ' ' << (*ite).second<< ' ';
       of << cost[idx] << endl;
     }
-    of << 0 << ' ';
-    for(int i=1;i<n-1;i++) of << rnd.next(0,10) << ' ';
-    of << 0 << endl;
 	
     of.close();
   }
