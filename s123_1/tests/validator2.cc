@@ -34,6 +34,12 @@ void input()
     R = inf.readInt(R_MIN, R_MAX);
     inf.readEoln();
 
+    for (int i = 0; i < N; i++) {
+        if (i > 0) inf.readSpace();
+        d[i] = inf.readInt(d_MIN, d_MAX, format("d[%d]", i + 1));
+    }
+    inf.readEoln();
+    
     for (int i = 0; i < M; i++) {
         a[i] = inf.readInt(a_MIN, a_MAX, format("a[%d]", i + 1));
         inf.readSpace();
@@ -42,11 +48,6 @@ void input()
         c[i] = inf.readInt(c_MIN, c_MAX, format("c[%d]", i + 1));
         inf.readEoln();
     }
-    for (int i = 0; i < N; i++) {
-        if (i > 0) inf.readSpace();
-        d[i] = inf.readInt(d_MIN, d_MAX, format("d[%d]", i + 1));
-    }
-    inf.readEoln();
     inf.readEof();
 }
 
