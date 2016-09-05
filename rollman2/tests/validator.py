@@ -35,6 +35,8 @@ def main():
     lines = sys.stdin.readlines()
     assert len(lines) == p+Y, '{} extra line(s) detected.'.format( p+Y-len(lines) )
 
+    coord_list = []
+
     for index, line in enumerate(lines[0:p]):
         m = re.match(r'^(0|[1-9](\d)*) (0|[1-9](\d)*) (0|[1-9](\d)*)$', line)
         assert m, 'strange line \"{}\" at {}'.format(line, 3+index)
@@ -45,6 +47,10 @@ def main():
         assert 0 <= x < X, 'x out of range: {} at {}'.format(x, 3+index)
         assert 0 <= y < Y, 'y out of range: {} at {}'.format(x, 3+index)
         assert 0 <= z < Z, 'z out of range: {} at {}'.format(x, 3+index)
+        coord_list.append((x, y, z))
+    t = set()
+    tt = [x for x in coord_list if x in t or t.add(x)]
+    assert tt == [], 'material duplicated:\n  {}'.format(tt)
 
     #net_pattern = r'^'
     #for i in range(X):
