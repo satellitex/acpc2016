@@ -24,11 +24,11 @@ struct State {
 int main()
 {
     int N, M, a, b, c;
-    cin >> N >> M;
+    scanf("%d %d", &N, &M);
     
     vector<Edge> G[MAX_N];
     for (int i = 0; i < M; i++) {
-        cin >> a >> b >> c; a--; b--;
+        scanf("%d %d %d", &a, &b, &c); a--; b--;
         G[a].push_back(Edge(b, c));
     }
     
@@ -56,6 +56,6 @@ int main()
             }
         }
     }
-    cout << res << endl;
+    printf("%d\n", res);
     return 0;
 }
