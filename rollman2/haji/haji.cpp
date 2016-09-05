@@ -7,7 +7,8 @@ int main(){
   cin>>X>>Y>>Z;
   cin>>p;
   for(int i=0,x,y,z;i<p;i++){
-    cin>>x>>y>>z;mp[x][y]++;
+    cin>>x>>y>>z;
+    mp[y][x]++;
   }
   
   int ans=0;

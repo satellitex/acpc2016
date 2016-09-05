@@ -75,7 +75,11 @@ int main(int argc, char *argv[])
     if(dp[0][n-1]>r)r=rnd.next(dp[0][n-1],1000);
     if(r>R) {t--;continue;};
     of << n << " " << m << " " << r << endl;
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 22847c66ec603745440e4090b09279e09d2a5e0f
     of << 0 << ' ';
     for(int i=1;i<n-1;i++) of << rnd.next(0,10) << ' ';
     of << 0 << endl;
@@ -84,7 +88,11 @@ int main(int argc, char *argv[])
     for(ite=used2.begin(),idx=0;ite!=used2.end();ite++,idx++){
       of << (*ite).first << ' ' << (*ite).second<< ' ';
       of << cost[idx] << endl;
+<<<<<<< HEAD
     }
+=======
+    }    
+>>>>>>> 22847c66ec603745440e4090b09279e09d2a5e0f
 	
     of.close();
   }
