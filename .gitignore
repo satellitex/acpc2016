@@ -7,5 +7,7 @@
 *.pyc
 # rime-out/下は無視
 rime-out/
+# rime/
+rime/
 #.DS_Storeは無視
 .DS_Store
