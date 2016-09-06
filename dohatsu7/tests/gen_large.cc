@@ -15,8 +15,12 @@ int main(int argc, char *argv[])
         of << N << " " << M << endl;
         for (int i = 0; i < M; i++) {
             int a, b, c;
+            PREV:
             a = rnd.next(1, N-1);
             b = rnd.next(1, N);
+            if (a == b) {
+                goto PREV;
+            }
             c = rnd.next(1, 100000);
             of << a << " " << b << " " << c << endl;
         }        
