@@ -4,7 +4,7 @@
 using namespace std;
 
 const int N_MIN =   2;
-const int N_MAX = 300;
+const int N_MAX =   8;
 const int M_MIN =   0;
 const int M_MAX = 300;
 const int L_MIN =   0;
@@ -12,14 +12,14 @@ const int L_MAX = 300;
 const int d_MIN =   0;
 const int d_MAX =   4;
 const int a_MIN =   1;
-const int a_MAX = 300;
+const int a_MAX =   8;
 const int k_MIN =   1;
-const int k_MAX = 300;
+const int k_MAX =   8;
 const int t_MIN =   1;
 const int t_MAX = 100;
 
 int N, M, L;
-int d[N_MAX], a[N_MAX], k[N_MAX], t[N_MAX];
+int d[M_MAX], a[M_MAX], k[M_MAX], t[M_MAX];
 
 void input()
 {      
