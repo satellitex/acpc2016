@@ -1,14 +1,21 @@
 <%@ page pageEncoding="UTF-8"%>
 
-<h1>Problem C: Credit</h1>
+<h1>Problem C: Unhappy Class</h1>
 
 <h2>Problem</h2>
 <p>
- 月曜日から金曜日の1限から<var>N</var>限までの科目の枠があり、<var>M</var>個の履修可能な科目がある。<br>
-科目<var>i</var>は、曜日<var>d<sub>i</sub></var> (<var>d<sub>i</sub></var> = 0が月曜日, <var>d<sub>i</sub></var> = 1が火曜日, ...,<var>d<sub>i</sub></var> = 4が金曜日)の<var>a<sub>i</sub></var>限から始まり、連続して<var>k<sub>i</sub></var>コマで行われ、その単位数は<var>t<sub>i</sub></var>である。<br><br>
+  山之御船学園の1年G組は、不幸を背負った女子高生たちが集まるクラスである。<br>
+  彼女たちは、幸福になることを目標に日々、様々な試練に立ち向かう。<br><br>
 
-科目を重ならないように<var>L</var>個まで選んだときに取れる単位数を最大化せよ。<br>
-ただし、履修した科目の単位は必ず取れるものとする。
+  彼女たちのクラスでは、幸福になるための試練の一環として、幸福実技科目がある。<br>
+  月曜日から金曜日のそれぞれ1限から<var>N</var>限までに授業科目の枠があり、<var>M</var>個の受講可能な幸福実技科目がある。<br><br>
+  
+  幸福実技科目<var>i</var>は、曜日<var>d<sub>i</sub></var> (<var>d<sub>i</sub></var> = 0、1、...、4がそれぞれ、月曜日、火曜日、...、金曜日に対応する)の<var>a<sub>i</sub></var> 限目から始まり、連続して<var>k<sub>i</sub></var>コマで行われ、それを受講したときに得られる幸福度は<var>t<sub>i</sub></var> である。<br><br>
+
+  彼女たちは、受講する科目を他の科目と重ならないように最大<var>L</var>個まで自由に選べるが、どの科目を受講するか迷っている。<br>
+しかし、できるだけ幸福になりたいと思っているので、幸福度の和ができるだけ大きくなるように受講したいと考えている。<br><br>
+
+彼女たちは、どのように受講する科目を選べば最大の幸福度が得られるかわからないので、あなたは、プログラムを書いて教えてあげることにした。
 </p>
 
 <h2>Input</h2>
@@ -28,9 +35,9 @@
 <h2>Constraints</h2>
 <p>入力は以下の条件を満たす。</p>
 <ul>
-    <li>2 &le; <var>N</var> &le; 300</li>
+    <li>2 &le; <var>N</var> &le; 8</li>
     <li>0 &le; <var>M</var> &le; 300</li>
-    <li>0 &le; <var>L</var> &le; <var>M</var></li>
+    <li>0 &le; <var>L</var> &le; <var>min(N*5, M)</var></li>
     <li>0 &le; <var>d<sub>i</sub></var> &le; 4</li>
     <li>1 &le; <var>a<sub>i</sub></var> &le; <var>N</var></li>
     <li>1 &le; <var>k<sub>i</sub></var></li>
@@ -40,7 +47,7 @@
 
 <h2>Output</h2>
 <p>
-科目を重ならないように<var>L</var>個まで選んだときに取れる単位数を最大化する。
+幸福度の和の最大値を1行に出力する。
 </p>
 
 <h2>Sample Input 1</h2>
