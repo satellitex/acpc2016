@@ -14,7 +14,7 @@ int dijkstra(){
   priority_queue<P,vector<P>,greater<P> >Q;
   Q.push(P(1,0));
   D[0]=1;
-  
+ 
   while(!Q.empty()){
     P t=Q.top();Q.pop();
     int cost=t.f,pos=t.s;
@@ -24,10 +24,11 @@ int dijkstra(){
       if(ncost>=cost)Q.push(P(ncost,npos)),D[npos]=min(D[npos],ncost);
     }
   }
+  
   int res=-1;
   for(int i=0;i<n;i++)
     for(int j=0;j<G[i].size();j++)
-      if(G[i][j].s==n-1&&D[i]!=INF&&D[i]<=G[i][j].f)res=max(res,G[i][j].f);
+      if(G[i][j].s==n-1&&D[i]!=INF)res=max(res,G[i][j].f);
   
   return res;
 }
