@@ -24,7 +24,7 @@ int main() {
     if(d[x]<cc) continue;
     for(int i=0; i<v[x].size(); i++) {
       int y=v[x][i].first,c=v[x][i].second;
-      if(d[y]>c) {
+      if(d[y]>c&&d[x]<=c) {
         d[y]=c;
         que.push(P(c,y));
       }
