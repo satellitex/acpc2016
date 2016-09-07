@@ -7,6 +7,6 @@
 ##   time_limit: The time limit of this problem in seconds.
 problem(title = "satellite1",
     id = "X",
-    time_limit = 1.0,
+    time_limit = 2.0,
     reference_solution='sate'
 )
