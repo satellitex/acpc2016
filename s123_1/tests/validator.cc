@@ -50,6 +50,7 @@ void check() {
   
   //多重辺がないか
   for(int i=0,AB[N_MAX][N_MAX]={};i<m;i++){
+    ensuref(a[i]<b[i], "Input must be a[i]<b[i]");
     ensuref(AB[a[i]-1][b[i]-1]==0&&AB[b[i]-1][a[i]-1]==0, "Input 'tajuhen");
     AB[a[i]-1][b[i]-1]=AB[b[i]-1][a[i]-1]=1;
   }
