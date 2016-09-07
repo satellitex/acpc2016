@@ -45,7 +45,10 @@ void input()
 
 void check()
 {
-    for (int i = 0; i < N; i++) {
+    ensuref(0 <= L && L <= min(N * 5, M), "violates 0 <= L <= min(N * 5, M)");
+    
+    
+    for (int i = 0; i < M; i++) {
         ensuref(a[i] + k[i] - 1 <= N
                 , "a[%d] equals %d and k[%d] equals %d, violates a[i] + k[i] - 1 <= N"
                 , i + 1, a[i], i + 1, k[i]);
