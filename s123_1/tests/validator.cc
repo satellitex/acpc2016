@@ -44,31 +44,26 @@ void input() {
 }
 
 void check() {
-  
   // ai != bi
   for (int i = 0; i < n - 1; ++i) 
     ensuref(a[i] < b[i], "Input 'a[i]' and 'b[i]' must be 'a[i] < b[i]'");
   
-
-
   //多重辺がないか
   for(int i=0,AB[N_MAX][N_MAX]={};i<m;i++){
-    ensuref(AB[a[i]-1][b[i]-1]==0, "Input 'tajuhen");
-    AB[a[i]-1][b[i]-1]=1;
+    ensuref(AB[a[i]-1][b[i]-1]==0&&AB[b[i]-1][a[i]-1]==0, "Input 'tajuhen");
+    AB[a[i]-1][b[i]-1]=AB[b[i]-1][a[i]-1]=1;
   }
-
-
+  
   //連結かどうかと時間内でゴールまでいけるか。
   int G[N_MAX][N_MAX];
   for(int i=0;i<n;i++)
-    for(int j=0;j<n;j++) G[i][j]=1e9*(i!=j);
-
+    for(int j=0;j<n;j++)G[i][j]=1e9;
   for(int i=0;i<m;i++) G[a[i]-1][b[i]-1]=G[b[i]-1][a[i]-1]=c[i];
   
   for(int k=0;k<n;k++)
-  for(int i=0;i<n;i++)
-    for(int j=0;j<n;j++)
-      G[i][j]=min(G[i][j],G[i][k]+G[k][j]);
+    for(int i=0;i<n;i++)
+      for(int j=0;j<n;j++)
+	G[i][j]=min(G[i][j],G[i][k]+G[k][j]);
   
   for(int i=0;i<n;i++)
     for(int j=0;j<n;j++)
