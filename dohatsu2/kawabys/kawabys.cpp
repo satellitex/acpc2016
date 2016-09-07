@@ -7,7 +7,7 @@ bool chy(int a){return a==0||a==h-1;}
 int main(){
   char f;
   cin>>h>>w;
-  int x[2],y[2],c,gx=-1,gy,a=-1,b=max(h,w),t=0;
+  int x[2],y[2],c=0,gx=-1,gy,a=-1,b=max(h,w),t=0;
   for(int i=0;i<h;i++)
     for(int j=0;j<w;j++){
       cin>>f;
