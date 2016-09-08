@@ -1,0 +1,107 @@
+<%@ page pageEncoding="UTF-8"%>
+
+<h1>Problem D: Magical Girl Sun Ranger</h1>
+
+<h2>Problem</h2>
+<p>
+魔法少女サンレンジャーは、悪の組織から人々を守るために日々活動をしている。<br>
+彼女は敵を倒すときの決め技「テラ粒子レクイエムシュート」を持っていて、それは、両手でハート型を作りながらステッキを持ち、ステッキから攻撃を繰り出すというものである。
+</p>
+<p>
+このステッキは内部で魔力をチャージし、発射するという仕組みになっている。<br>
+内部には、1~<var>N</var>の<var>N</var>個の点があり、点1~<var>N</var>-1は自由に魔力を増幅させることのできる点であり、点<var>N</var>は、魔力を使い、決め技を発射するための点である。
+</p>
+<p>
+さらに<var>M</var>個の魔力伝達装置があり、各伝達装置iは、魔力がちょうど<var>c<sub>i</sub></var>になるときに点<var>a<sub>i</sub></var>から点<var>b<sub>i</sub></var>へすべての魔力をまとめて伝達させることができる。<br>
+<var>c<sub>i</sub></var>を下回ったり、<var>c<sub>i</sub></var>を超えて伝達しようとすると、制御が効かなくなり、ステッキが壊れてしまうので、そのようなことはできない。
+</p>
+<p>
+最初、点1に魔力1を生成する。これ以降、新たに魔力の生成はできない。<br>
+サンレンジャーは、点<var>N</var>に魔力が伝達される際にできるだけ魔力を大きくしたいと考えている。
+</p>
+<p>
+魔力の動きはプログラムによって制御できる。<br>
+サンレンジャーに依頼されたあなたは、プログラムを書いて点<var>N</var>に伝達することが可能な魔力の最大値を調べることにした。
+</p>
+<h2>Input</h2>
+<p>入力は以下の形式で与えられる。</p>
+<pre>
+<var>N</var> <var>M</var>
+<var>a<sub>1</sub></var> <var>b<sub>1</sub></var> <var>c<sub>1</sub></var>
+<var>a<sub>2</sub></var> <var>b<sub>2</sub></var> <var>c<sub>2</sub></var>
+…
+<var>a<sub>M</sub></var> <var>b<sub>M</sub></var> <var>c<sub>M</sub></var>
+</pre>
+<p>
+1行目には、2つの整数<var>N</var>, <var>M</var>が空白区切りで与えられる。
+2行目から<var>M</var>+1行目のそれぞれの行iには、3つの整数<var>a<sub>i</sub></var>, <var>b<sub>i</sub></var>, <var>c<sub>i</sub></var>が空白区切りで与えられる。
+</p>
+
+<h2>Constraints</h2>
+<p>入力は以下の条件を満たす。</p>
+<ul>
+    <li>2 &le; <var>N</var> &le; 5000</li>
+    <li>1 &le; <var>M</var> &le; 100000</li>
+    <li>1 &le; <var>a<sub>i</sub></var> &lt; N</li>
+    <li>1 &le; <var>b<sub>i</sub></var> &le; N</li>
+    <li>1 &le; <var>c<sub>i</sub></var> &le; 100000</li>
+    <li><var>a<sub>i</sub></var> と <var>b<sub>i</sub></var> は相異なる。</li>
+</ul>
+
+<h2>Output</h2>
+<p>
+「テラ粒子レクイエムシュート」を発射できる場合は、その最大の魔力を1行に出力する。
+</p>
+
+<h2>Sample Input 1</h2>
+<pre>
+3 2
+1 2 10
+2 3 20
+</pre>
+
+<h2>Sample Output 1</h2>
+<pre>
+20
+</pre>
+<p>
+まず、点1で魔力を10まで上げ、点2へ魔力を伝達させる。<br>
+次に、点2で魔力を20まで上げ、点3へ魔力を伝達させる。<br>
+以上より、点3に魔力20で伝達させることができる。
+</p>
+
+<h2>Sample Input 2</h2>
+<pre>
+4 4
+1 2 27
+1 3 37
+2 3 47
+3 1 57
+</pre>
+<p>
+点4への伝達装置がないため、点4へ魔力を伝達させることができない。
+</p>
+
+
+<h2>Sample Output 2</h2>
+<pre>
+-1
+</pre>
+
+<h2>Sample Input 3</h2>
+<pre>
+3 3
+1 2 13
+2 3 17
+2 3 15
+</pre>
+
+<h2>Sample Output 3</h2>
+<pre>
+17
+</pre>
+<p>
+まず、点1で魔力を13まで上げ、点2へ魔力を伝達させる。<br>
+次に、点2からの伝達装置には、点3へ魔力17で伝達できるものと魔力15で伝達できるものがあるので、より大きい魔力17で伝達させる。<br>
+以上より、点3に魔力17で伝達させることができる。
+</p>
