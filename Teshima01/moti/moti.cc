@@ -300,7 +300,12 @@ int main() {
     pd.add_edge(N + i, SINK, 1, 0);
   }
   
-  printf("%.10f\n", pd.min_cost_flow(SRC, SINK, N));
+  auto r = pd.min_cost_flow(SRC, SINK, N);
+  
+  if(r < 0)
+    cout << -1 << endl;
+  else 
+    printf("%.10f\n", r);
   
   return 0;
 }
