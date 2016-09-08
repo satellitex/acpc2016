@@ -21,7 +21,7 @@ int main() {
   vector<vector<pii> > g(N);
 
   rep(i, M) {
-    int a, b, c; cin >> a >> b >> c;
+    int a, b, c; scanf("%d%d%d", &a, &b, &c);
     a--, b--;
     g[a].push_back(make_pair(b, c));
   }
