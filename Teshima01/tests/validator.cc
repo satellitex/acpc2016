@@ -35,9 +35,23 @@ struct Point {
     Point () {}
     Point (double x, double y) : x(x), y(y) {}
 
+    Point operator + (const Point &p) const {
+        return Point(x + p.x, y + p.y);
+    }
+    
     Point operator - (const Point &p) const {
         return Point(x - p.x, y - p.y);
     }
+
+    Point operator * (const double &k) const {
+        return Point(x * k, y * k);
+    }
+};
+
+struct Segment {
+    Point s, t;
+    Segment () {}
+    Segment (Point s, Point t) : s(s), t(t) {}
 };
 
 struct Circle {
@@ -49,6 +63,8 @@ struct Circle {
 bool isIntersectCP(const Circle &, const Point &);
 bool contain_in_circle();
 bool isIntersectCC(const Circle &, const Circle &);
+bool isIntersectCLs(const Circle &, const vector<Segment> &);
+bool isIntersectCL(const Circle &, const Segment &);
 
 void input()
 {
@@ -93,8 +109,22 @@ void check()
     // Point contain in Circles
     ensuref(!contain_in_circle(), "Points are contained in circle");
     
+    
     // two circles haven't common parts.
     ensuref(!isIntersectCC(c1, c2), "violates two circles haven't common parts.");
+
+    
+    vector<Segment> red(n), blue(n);
+    for (int i = 0; i < n; i++) {
+        red[i]  = Segment(Point(rx[i], ry[i]), Point(X1, Y1));
+        blue[i] = Segment(Point(bx[i], by[i]), Point(X2, Y2));
+    }
+    
+    // intersection blue oct body and red oct arms.
+    ensuref(!isIntersectCLs(c2, red), "intersect blue oct body and red oct arm");
+    
+    // intersection red oct body and blue oct arms.
+    ensuref(!isIntersectCLs(c1, blue), "intersect red oct body and blue oct arm");
 }
 
 int main()
@@ -136,4 +166,30 @@ bool isIntersectCC(const Circle &a, const Circle &b)
 {
     double d = abs(a.p - b.p);
     return (d < a.r + b.r && d > abs(a.r - b.r) + EPS);
+}
+
+bool isIntersectCLs(const Circle &c, const vector<Segment> &ps)
+{
+    for (int i = 0; i < n; i++) {
+        if (isIntersectCL(c, ps[i])) return true;
+    }
+    return false;
+}
+
+Point projection(const Segment &s, const Point &p)
+{
+    Point b = s.t - s.s;
+    double t = dot(p - s.s, b) / norm(b);
+    return s.s + b * t;
+}
+
+double distanceSP(const Segment &s, const Point &p)
+{
+    return abs(p - projection(s, p));
+}
+
+bool isIntersectCL(const Circle &c, const Segment &s)
+{
+    double d = distanceSP(s, c.p);
+    return (d < c.r + EPS);
 }
