@@ -9,7 +9,7 @@ vector <P> G[N];
 int n,m;
 
 int dijkstra(){
-  int D[N];
+  int D[N],used[N]={};
   for(int i=0;i<n;i++) D[i]=INF;
   priority_queue<P,vector<P>,greater<P> >Q;
   Q.push(P(1,0));
@@ -18,12 +18,13 @@ int dijkstra(){
   while(!Q.empty()){
     P t=Q.top();Q.pop();
     int cost=t.f,pos=t.s;
-    if(D[pos]<cost)continue;
+    if(used[pos]++)continue;
     for(int i=0;i<G[pos].size();i++){
       int ncost=G[pos][i].f,npos=G[pos][i].s;
       if(ncost>=cost)Q.push(P(ncost,npos)),D[npos]=min(D[npos],ncost);
     }
   }
+
   int res=-1;
   for(int i=0;i<n;i++)
     for(int j=0;j<G[i].size();j++)
