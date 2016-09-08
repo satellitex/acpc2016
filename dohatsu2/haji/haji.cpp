@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-int h,w,n;
+int h,w;
 char mp[16][16];
 vector<int> sx,sy;
 int dx[]={0,0,1,-1};
@@ -28,15 +28,25 @@ int dfs(int x,int y,int a,int b){
   return res|dfs(a,b,x,y);
 }
 
+int check(int x,int y,int dir){
+  int cnt=0,cnt2=0;
+  while(mp[y][x]!='@')cnt+=mp[y][x]=='o',x+=dx[dir],y+=dy[dir];
+  while(x>=0&&y>=0&&x<w&&y<h&&mp[y][x]!='o')cnt2++,x+=dx[dir],y+=dy[dir];
+  return cnt>=cnt2;  
+}
+
 bool check(){
   for(int i=0;i<h;i++)
     for(int j=0;j<w;j++)
       if(mp[i][j]=='o')sx.push_back(j),sy.push_back(i);
   int n=sx.size();
-  if(n>=3)return 1;
+  if(n>=3){
+    if(h==1) return check(0,0,2)|check(w-1,0,3);
+    if(w==1) return check(0,0,1)|check(0,h-1,0);
+    return 1;
+  }
   if(n==2) return dfs(sx[0],sy[0],sx[1],sy[1]);
   if(n==1) return dfs(sx[0],sy[0],-10000,-10000);
-  assert(0);
 }
 
 int main(){
