@@ -115,7 +115,7 @@ double distanceSP(const Segment &s, const Point &p)
 bool isIntersectCS(const Circle &c, const Segment &l)
 {
     double d = distanceSP(l, c.p);
-    return (d < c.r + EPS);
+    return (d < c.r - EPS);
 }
 
 #define MAX_V 300
@@ -201,7 +201,7 @@ int main()
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
             Segment s(r[i], b[j]);
-            double d = INF;            
+            double d = INF;
             if (!isIntersectCS(c[0], s) && !isIntersectCS(c[1], s)) {
                 d = min(d, dist(r[i], b[j]));
             }
@@ -213,7 +213,11 @@ int main()
                         Line l1(r[i], vp1[l]), l2(b[j], vp2[m]);
                         if (isIntersectLL(l1, l2)) {
                             Point cp = crosspointLL(l1, l2);
-                            d = min(d, dist(r[i], cp) + dist(b[j], cp));
+                            Segment s1(r[i], cp), s2(b[j], cp);
+                            if (!isIntersectCS(c[1-k], s1) &&
+                                !isIntersectCS(c[1-k], s2)) {
+                                d = min(d, dist(r[i], cp) + dist(b[j], cp));
+                            }
                         }
                     }
                 }
