@@ -126,7 +126,7 @@ int main() {
     cin >> x >> y;
     b[i]=P(x,y);
     for(int j=0; j<2; j++) {
-      vector<P> g=tangent(c[j],a[i]);
+      vector<P> g=tangent(c[j],b[i]);
       for(int k=0; k<g.size(); k++) v2[i].push_back(L(b[i],g[k]));
     }
   }
@@ -135,9 +135,9 @@ int main() {
     for(int j=0; j<n; j++) {
       d[i][j]=INF;
       for(int k=0; k<v[i].size(); k++) {
-        for(int l=0; l<v[j].size(); l++) {
-          if(!intersectLL(v[i][k],v[j][l])) continue;
-          P p=crosspoint(v[i][k],v[j][l]);
+        for(int l=0; l<v2[j].size(); l++) {
+          if(!intersectLL(v[i][k],v2[j][l])) continue;
+          P p=crosspoint(v[i][k],v2[j][l]);
           bool f=1;
           for(int x=0; x<2; x++) {
             if(D(p,c[x].p)<c[x].r) f=0;
