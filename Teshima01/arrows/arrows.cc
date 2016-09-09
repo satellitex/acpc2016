@@ -3,6 +3,9 @@
 using namespace std;
 
 #define EPS (1e-8)
+#define MAX_V 300
+#define INF 1e9
+typedef pair<double, int> P;
 
 struct Point {
     double x, y;
@@ -14,13 +17,6 @@ struct Point {
     Point operator - (const Point &p) const { return Point(x - p.x, y - p.y); }
     Point operator * (const double &k) const { return Point(x * k, y * k); }
 };
-
-typedef Point Vector;
-
-istream &operator >> (istream &is, Point &p)
-{
-    return is >> p.x >> p.y;
-}
 
 double dot(const Point &a, const Point &b)
 {
@@ -52,6 +48,24 @@ Point rotate90(const Point &p)
     return Point(-p.y, p.x);
 }
 
+#define COUNTER_CLOCKWISE +1
+#define CLOCKWISE         -1
+#define ONLINE_BACK       +2
+#define ONLINE_FRONT      -2
+#define ON_SEGMENT        +0
+typedef Point Vector;
+
+int ccw(const Point &p0, const Point &p1, const Point &p2)
+{
+    Vector a = p1 - p0;
+    Vector b = p2 - p0;
+    if(cross(a, b) > EPS)  return COUNTER_CLOCKWISE;
+    if(cross(a, b) < -EPS) return CLOCKWISE;
+    if(dot(a, b) < -EPS)   return ONLINE_BACK; 
+    if(norm(a) < norm(b))  return ONLINE_FRONT;
+    return ON_SEGMENT; 
+}
+
 struct Segment {
     Point s, t;
     Segment () {}
@@ -81,15 +95,9 @@ struct Circle {
     Circle (Point p, double r) : p(p), r(r) {}
 };
 
-istream &operator >> (istream &is, Circle &c)
-{
-    return is >> c.p.x >> c.p.y >> c.r;
-}
-
 vector<Point> tangentCP(const Circle &c, const Point &p)
 {
-    double x = norm(p - c.p);
-    double d = x - c.r * c.r;
+    double x = norm(p - c.p), d = x - c.r * c.r;
     if (d < -EPS) return vector<Point>();
     d = max(d, 0.0);
     Point p1 = (p - c.p) * (c.r * c.r / x);
@@ -98,6 +106,11 @@ vector<Point> tangentCP(const Circle &c, const Point &p)
     res.push_back(c.p + p1 - p2);
     res.push_back(c.p + p1 + p2);
     return res;
+}
+
+bool isIntersectSP(const Segment &s, const Point &p)
+{
+    return (ccw(s.s, s.t, p) == ON_SEGMENT);
 }
 
 Point projection(const Segment &s, const Point &p)
@@ -109,7 +122,9 @@ Point projection(const Segment &s, const Point &p)
 
 double distanceSP(const Segment &s, const Point &p)
 {
-    return abs(p - projection(s, p));
+    Point r = projection(s, p);
+    if (isIntersectSP(s, r)) return abs(r - p);
+    return min(abs(s.s - p), abs(s.t - p));
 }
 
 bool isIntersectCS(const Circle &c, const Segment &l)
@@ -117,10 +132,6 @@ bool isIntersectCS(const Circle &c, const Segment &l)
     double d = distanceSP(l, c.p);
     return (d < c.r - EPS);
 }
-
-#define MAX_V 300
-#define INF 1e9
-typedef pair<double, int> P;
 
 struct edge {
     int to, cap, rev;
@@ -146,8 +157,7 @@ double min_cost_flow(int s, int t, int f)
     while (f > 0) {
 	priority_queue<P, vector<P>, greater<P> > Q;
 	fill(dst, dst+V, INF);
-	dst[s] = 0;
-	Q.push(P(0, s));
+	dst[s] = 0; Q.push(P(0, s));
 	while (!Q.empty()) {
 	    P p = Q.top(); Q.pop();
 	    int v = p.second;
@@ -186,14 +196,14 @@ int main()
     vector<Circle> c(2);
     cin >> N;
     for (int i = 0; i < 2; i++) {
-        cin >> c[i];
+        cin >> c[i].p.x >> c[i].p.y >> c[i].r;
     }
     vector<Point> r(N), b(N);
     for (int i = 0; i < N; i++) {
-        cin >> r[i];
+        cin >> r[i].x >> r[i].y;
     }
     for (int i = 0; i < N; i++) {
-        cin >> b[i];
+        cin >> b[i].x >> b[i].y;
     }
     
     int S = N * 2, T = S + 1;
