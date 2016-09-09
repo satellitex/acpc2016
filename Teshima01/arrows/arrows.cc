@@ -213,7 +213,6 @@ int main()
             Segment s(r[i], b[j]);
             double d = INF;
             if (!isIntersectCS(c[0], s) && !isIntersectCS(c[1], s)) {
-                cout << "OK" << endl;
                 d = min(d, dist(r[i], b[j]));
             }
             for (int k = 0; k < 2; k++) {
@@ -235,9 +234,7 @@ int main()
                     }
                 }
             }
-            if (d != INF) {
-                add_edge(i, j + N, 1, d);
-            }
+            if (d != INF) add_edge(i, j + N, 1, d);            
         }
     }
     
