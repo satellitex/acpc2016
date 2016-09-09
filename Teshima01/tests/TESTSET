@@ -2,7 +2,8 @@
 
 ## Input generators.
 #c_generator(src='generator.c')
-cxx_generator(src='gen_small.cc')
+cxx_generator(src='gen_n_eq_1.cc')
+cxx_generator(src='gen_n_eq_100.cc')
 cxx_generator(src='gen_random.cc')
 #java_generator(src='Generator.java', encoding='UTF-8', mainclass='Generator')
 

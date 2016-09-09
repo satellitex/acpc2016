@@ -10,7 +10,7 @@ int const inf = 1<<29;
 namespace point_2d {
 using Real = double;
 
-Real const EPS = 1e-11;  // !!! DO CHECK EPS !!!
+Real const EPS = 1e-8;  // !!! DO CHECK EPS !!!
 
 typedef complex<Real> P;
 
@@ -178,6 +178,12 @@ int main() {
     for(auto rc: rps) for(auto bc: bps) {
       auto rtanline = Line(rs[i], rc);
       auto btanline = Line(bs[j], bc);
+
+      if(rtanline[0] == rtanline[1])  
+        rtanline = Line(rtanline[0], rtanline[0] + (cs[k].p - rtanline[0]) * P(0, 1));
+
+      if(btanline[0] == btanline[1])
+        btanline = Line(btanline[0], btanline[0] + (cs[l].p - btanline[0]) * P(0, 1));
 
       bool ok = 1;
       rep(x, 2) if(intersect_cs(cs[x], rtanline)) ok = 0;
