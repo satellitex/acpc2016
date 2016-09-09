@@ -71,29 +71,29 @@ int main(int argc, char** argv)
     fscanf(fpDiff, "%s", diff_cs);
     fclose(fpDiff);
 
-    char ans_cs[MAX_DOUBLE_LEN];
-    fscanf(fpOut, "%s", ans_cs);
+    char out_cs[MAX_DOUBLE_LEN];
+    fscanf(fpOut, "%s", out_cs);
     fclose(fpOut);
 
-    if(strcmp(diff_cs, ans_cs) == 0) {
+    if(strcmp(diff_cs, out_cs) == 0) {
       return 0;
     }
 
     std::string diff_str = diff_cs;
-    std::string ans_str = ans_cs;
+    std::string out_str = out_cs;
 
-    if(!validate_double(ans_str)) {
+    if(!validate_double(diff_str)) {
       ensuref(false, "judge validation failed. judge value is not double.");
     }
 
-    if(!validate_double(diff_str)) {
+    if(!validate_double(out_str)) {
       return 1;
     }
 
     double diff = stod(diff_str);
-    double ans = stod(ans_str);
+    double out = stod(out_str);
 
-    if(fabs( diff - ans ) <= EPS) {
+    if(fabs( diff - out ) <= EPS) {
         return 0;
     }
     
