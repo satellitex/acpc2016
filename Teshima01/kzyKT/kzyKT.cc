@@ -149,7 +149,7 @@ int main() {
       }
       bool f=1;
       for(int x=0; x<2; x++) {
-        if(getIntersectCS(c[x],L(a[i],b[j])).size()>0) f=0;
+        if(getIntersectCS(c[x],L(a[i],b[j])).size()>=2) f=0;
       }
       if(f) d[i][j]=min(d[i][j],D(a[i],b[j]));
       if(d[i][j]!=INF) add_edge(i,n+j,1,d[i][j]);
