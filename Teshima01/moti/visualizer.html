@@ -1,0 +1,44 @@
+<script>
+  function line(x,y,a,b,color){
+  c.beginPath();
+  c.moveTo(x,y);
+  c.lineTo(a,b);
+  c.strokeStyle=color;
+  c.stroke();
+  }
+  function circle(x,y,r,color){
+  c.beginPath();
+  c.arc(x,y,r,0,7,0);
+  c.strokeStyle=color;
+  c.stroke();
+  }
+  function polygon_start(x,y) {
+  c.beginPath();
+  c.moveTo(x, y);
+  }
+  function lineTo(x, y) {
+  c.lineTo(x, y);
+  }
+  function polygon_end() {
+  c.closePath();
+  c.stroke();
+  }
+  function draw_text(text, x, y) {
+  c.fillStyle = "black";
+  c.font = "20px 'Arial'";
+  c.textAlign = "left";
+  c.fillText(text, x, y);
+  }
+  window.onload = function(){
+  c=document.getElementById('canvas').getContext('2d');
+  document.getElementById('source').src='data.js?';
+  };
+</script>
+<body>
+  <canvas id="canvas" width="800" height="500"
+          style="border:1px solid #000;"></canvas>
+  <script id="source"></script>
+  <p>
+    <img src="digraph.png" />
+  </p>
+</body>
