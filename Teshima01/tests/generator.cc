@@ -10,7 +10,7 @@ namespace point_2d {
 
 using Real = double;
 
-Real const EPS = 1e-7;  // !!! DO CHECK EPS !!!
+Real const EPS = 1e-8;  // !!! DO CHECK EPS !!!
 
 typedef complex<Real> P;
 
