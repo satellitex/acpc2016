@@ -3,8 +3,8 @@ using namespace std;
 
 class BIT{
 public:
-  int n,bit[500010];
-  BIT(){fill(bit,bit+500010,0);}
+  int n,bit[555555];
+  BIT(){fill(bit,bit+555555,0);}
   void add(int i,int x){
     while(i<=n){
       bit[i]+=x;
@@ -26,7 +26,7 @@ int main() {
   string s;
   cin >> s;
   BIT b=BIT();
-  b.n=1<<s.size();
+  b.n=1<<19;
   vector<int> v[26];
   for(int i=0; i<s.size(); i++) v[s[i]-'a'].push_back(i);
   for(int t=0; t<s.size()/2; t++) {
