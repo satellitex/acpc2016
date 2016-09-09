@@ -58,7 +58,7 @@ Real distance_lp(Line const& l, P const& p) {
 
 bool intersect_cs(Circle const& c, Line const& l) {
   if(abs(l[0] - c.p) < c.r - EPS && abs(l[1] - c.p) < c.r - EPS) { return false; }
-  return distance_lp(l, c.p) < c.r;// - EPS; // EPS調整でやばげ
+  return distance_lp(l, c.p) < c.r - EPS;
 }
 
 P crosspoint(const Line &l, const Line &m) {
@@ -79,6 +79,7 @@ vector<P> tangent_points(Circle const& c, P const& p) {
   ret.push_back(c.p + nv - pv);
   return ret;
 }
+
 istream& operator >> (istream& is, P& p) { Real x, y; is >> x >> y; p = P(x, y); return is; }
 }
 using namespace point_2d;
@@ -185,9 +186,19 @@ int main() {
         auto rtanline = Line(rs[i], rc);
         auto btanline = Line(bs[j], bc);
 
-        if(intersect_cs(cs[l], rtanline))
+        bool ok = 1;
+        rep(x, 2)
+          if(intersect_cs(cs[x], rtanline))
+            ok = 0;
+
+        if(!ok)
           continue;
-        if(intersect_cs(cs[k], btanline))
+
+        rep(x, 2)
+          if(intersect_cs(cs[x], btanline))
+            ok = 0;
+
+        if(!ok)
           continue;
 
         if(intersect_ll(rtanline, btanline)) {
