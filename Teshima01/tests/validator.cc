@@ -148,7 +148,7 @@ double abs(const Point &p) { return sqrt(norm(p)); }
 
 bool isIntersectCP(const Circle &c, const Point &p)
 {
-    return (abs(c.p - p) < c.r + EPS);
+    return (abs(c.p - p) < c.r - EPS);
 }
 
 bool contain_in_circle()
