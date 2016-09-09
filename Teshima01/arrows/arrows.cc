@@ -213,6 +213,7 @@ int main()
             Segment s(r[i], b[j]);
             double d = INF;
             if (!isIntersectCS(c[0], s) && !isIntersectCS(c[1], s)) {
+                cout << "OK" << endl;
                 d = min(d, dist(r[i], b[j]));
             }
             for (int k = 0; k < 2; k++) {
@@ -224,7 +225,9 @@ int main()
                         if (isIntersectLL(l1, l2)) {
                             Point cp = crosspointLL(l1, l2);
                             Segment s1(r[i], cp), s2(b[j], cp);
-                            if (!isIntersectCS(c[1-k], s1) &&
+                            if (!isIntersectCS(c[k], s1) &&
+                                !isIntersectCS(c[k], s2) &&
+                                !isIntersectCS(c[1-k], s1) &&
                                 !isIntersectCS(c[1-k], s2)) {
                                 d = min(d, dist(r[i], cp) + dist(b[j], cp));
                             }
