@@ -140,6 +140,8 @@ int main()
 
 double dot(const Point &a, const Point &b) { return a.x * b.x + a.y * b.y; }
 
+double cross(const Point &a, const Point &b) { return a.x * b.y - b.x * a.y; }
+
 double norm(const Point &p) { return dot(p, p); }
 
 double abs(const Point &p) { return sqrt(norm(p)); }
@@ -165,12 +167,12 @@ bool contain_in_circle()
 bool isIntersectCC(const Circle &a, const Circle &b)
 {
     double d = abs(a.p - b.p);
-    return (d < a.r + b.r && d > abs(a.r - b.r) + EPS);
+    return (d < a.r + b.r && d > abs(a.r - b.r) - EPS);
 }
 
 bool isIntersectCLs(const Circle &c, const vector<Segment> &ps)
 {
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {        
         if (isIntersectCL(c, ps[i])) return true;
     }
     return false;
@@ -183,13 +185,38 @@ Point projection(const Segment &s, const Point &p)
     return s.s + b * t;
 }
 
-double distanceSP(const Segment &s, const Point &p)
+#define COUNTER_CLOCKWISE +1
+#define CLOCKWISE         -1
+#define ONLINE_BACK       +2
+#define ONLINE_FRONT      -2
+#define ON_SEGMENT        +0
+typedef Point Vector;
+
+int ccw(const Point &p0, const Point &p1, const Point &p2)
 {
-    return abs(p - projection(s, p));
+    Vector a = p1 - p0;
+    Vector b = p2 - p0;
+    if(cross(a, b) > EPS)  return COUNTER_CLOCKWISE;
+    if(cross(a, b) < -EPS) return CLOCKWISE;
+    if(dot(a, b) < -EPS)   return ONLINE_BACK; // p2-p0-p1
+    if(norm(a) < norm(b))  return ONLINE_FRONT; // p0-p1-p2
+    return ON_SEGMENT; // p0-p2-p1
+}
+
+bool isIntersectSP(const Segment &s, const Point &p)
+{
+    return (ccw(s.s, s.t, p) == 0);
+}
+
+double distanceSP(const Segment &s, const Point &p)
+{    
+    Point r = projection(s, p);
+    if(isIntersectSP(s, r)) return abs(r - p);
+    return min(abs(s.s - p), abs(s.t - p));
 }
 
 bool isIntersectCL(const Circle &c, const Segment &s)
 {
     double d = distanceSP(s, c.p);
-    return (d < c.r + EPS);
+    return (d < c.r - EPS);
 }
