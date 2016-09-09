@@ -11,3 +11,5 @@ rime-out/
 rime*
 #.DS_Storeは無視
 .DS_Store
+# prefix として __for_me_* をつけたファイルは無視する
+__for_me_*
