@@ -117,7 +117,7 @@ struct primal_dual {
       while(!pq.empty()) {
         P p = pq.top(); pq.pop();
         int v = p.second;
-        if(dist[v] < p.first) { continue; }
+        if(dist[v] < p.first) continue;
         for(int i=0; i<G[v].size(); i++) {
           auto& e = G[v][i];
           if(e.cap > 0 && dist[e.to] > dist[v] + e.cost + h[v] - h[e.to]) {
@@ -129,7 +129,7 @@ struct primal_dual {
         }
       }
 
-      if(dist[t] == inf) { return -1; }
+      if(dist[t] == inf) return -1;
       for(int i=0; i<h.size(); i++) h[i] += dist[i];
 
       double d = f;
@@ -151,16 +151,15 @@ struct primal_dual {
 
 }
 
-int N;
-Circle cs[2];
-P rs[100], bs[100];
-
 int main() {
 
-  cin >> N;
+  int N; cin >> N;
+
+  Circle cs[2];
   rep(i, 2) cin >> cs[i].p >> cs[i].r;
-  rep(i, N) cin >> rs[i];
-  rep(i, N) cin >> bs[i];
+
+  P rs[100]; rep(i, N) cin >> rs[i];
+  P bs[100]; rep(i, N) cin >> bs[i];
 
   flow::primal_dual pd(2 * N + 2);
   int const SRC = 2 * N;
@@ -169,43 +168,26 @@ int main() {
   rep(i, N) rep(j, N) {
     auto seg = Segment(rs[i], bs[j]);
     bool ok = 1;
-    rep(k, 2) {
-      if(intersect_cs(cs[k], seg))
-        ok = 0;
-    }
-
-    if(ok)
-      pd.add_edge(i, N + j, 1, abs(seg[1] - seg[0]));
+    rep(k, 2) if(intersect_cs(cs[k], seg)) ok = 0;
+    if(ok) pd.add_edge(i, N + j, 1, abs(seg[1] - seg[0]));
   }
 
-  rep(i, N) rep(j, N) {
-    rep(k, 2) rep(l, 2) {
-      auto rps = tangent_points(cs[k], rs[i]);
-      auto bps = tangent_points(cs[l], bs[j]);
-      for(auto rc: rps) for(auto bc: bps) {
-        auto rtanline = Line(rs[i], rc);
-        auto btanline = Line(bs[j], bc);
+  rep(i, N) rep(j, N) rep(k, 2) rep(l, 2) {
+    auto rps = tangent_points(cs[k], rs[i]);
+    auto bps = tangent_points(cs[l], bs[j]);
+    for(auto rc: rps) for(auto bc: bps) {
+      auto rtanline = Line(rs[i], rc);
+      auto btanline = Line(bs[j], bc);
 
-        bool ok = 1;
-        rep(x, 2)
-          if(intersect_cs(cs[x], rtanline))
-            ok = 0;
+      bool ok = 1;
+      rep(x, 2) if(intersect_cs(cs[x], rtanline)) ok = 0;
+      rep(x, 2) if(intersect_cs(cs[x], btanline)) ok = 0;
+      if(!ok) continue;
 
-        if(!ok)
-          continue;
-
-        rep(x, 2)
-          if(intersect_cs(cs[x], btanline))
-            ok = 0;
-
-        if(!ok)
-          continue;
-
-        if(intersect_ll(rtanline, btanline)) {
-          auto purple_p = crosspoint(rtanline, btanline);
-          auto len = abs(purple_p - rs[i]) + abs(purple_p - bs[j]);
-          pd.add_edge(i, N + j, 1, len);
-        }
+      if(intersect_ll(rtanline, btanline)) {
+        auto purple_p = crosspoint(rtanline, btanline);
+        auto len = abs(purple_p - rs[i]) + abs(purple_p - bs[j]);
+        pd.add_edge(i, N + j, 1, len);
       }
     }
   }
@@ -215,12 +197,9 @@ int main() {
     pd.add_edge(N + i, SINK, 1, 0);
   }
   
-  auto r = pd.min_cost_flow(SRC, SINK, N);
-  
-  if(r < 0)
-    cout << -1 << endl;
-  else 
-    printf("%.10f\n", r);
+  auto r = pd.min_cost_flow(SRC, SINK, N);  
+  if(r < 0) cout << -1 << endl;
+  else      printf("%.10f\n", r);
   
   return 0;
 }
