@@ -1,7 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-//最大流 Ford-Fulkerson O(F|E|)
 const int MAX_V = 2222;
 const int INF = 1<<29;
 struct edge{int to,cap,rev;};
@@ -50,13 +49,14 @@ int max_flow(int s,int t){
     flow += f;
   }
 }
+
 int S,T;
 int once_flow(int s,int t){
   memset(used,0,sizeof(used));
   return dfs(s,t,INF);
 }
-//辺の削除
-int remove_flow(edge &u,edge &v){//u:正辺,v:逆辺
+
+int remove_flow(edge &u,edge &v){
   bool f = false;
   if( u.cap == 0 ) f = true;
   u.cap = 0;
@@ -73,7 +73,7 @@ int remove_flow(edge &u,edge &v){//u:正辺,v:逆辺
   }
   return 0;
 }
-//辺のcapを1にする(いくつでもいいはず)
+
 int add_flow(edge &u,edge &v){
   u.cap = 1;
   v.cap = 0;
@@ -85,6 +85,7 @@ char otoc(int n){
   if( 0 <= n && n <= 9 ) return n+'0';
   else return n + 'a' - 10;
 }
+
 int ctoo(char c){
   if( '0' <= c && c <= '9' ) return c - '0';
   else return c - 'a' + 10;
@@ -169,15 +170,6 @@ void nuri(int id,int n){
   return;
 }
 
-bool useNode( int id ){
-  if( !Enum[id] ) return false;
-  for( edge e : G[id] ){
-    if( e.to == S && e.cap == 0 ) return false;
-    if( e.to == T && e.cap == 1 ) return false;
-  }
-  return true;
-}
-
 int main(){
   cin >> N;
   vector<ox> vs;
@@ -222,7 +214,6 @@ int main(){
     add_edge( e.u, e.v, 1 );
   }
 
-
   ans = max_flow(S,T);  
   cout << ans << endl;
 
@@ -248,7 +239,5 @@ int main(){
   }
   sort( res.begin(), res.end() );
   for( string s : res )
-    cout << s << endl;
-  
-  
+    cout << s << endl; 
 }
