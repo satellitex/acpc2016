@@ -1,38 +1,51 @@
 <script>
-  function line(x,y,a,b,color){
+
+ox = 0, oy = 0;
+
+function set_offset(x,y){
+  ox = x;
+  oy = y;
+}
+function line(x,y,a,b,color){
   c.beginPath();
-  c.moveTo(x,y);
-  c.lineTo(a,b);
+  c.moveTo(ox+x,oy+y);
+  c.lineTo(ox+a,oy+b);
   c.strokeStyle=color;
   c.stroke();
-  }
-  function circle(x,y,r,color){
+}
+function circle(x,y,r,color,fill){
   c.beginPath();
-  c.arc(x,y,r,0,7,0);
+  c.arc(ox+x,oy+y,r,0,7,0);
   c.strokeStyle=color;
-  c.stroke();
+  if(fill) {
+    c.fillStyle=color;
+    c.fill();
+  } else {
+    c.stroke();
   }
-  function polygon_start(x,y) {
+}
+function polygon_start(x,y) {
   c.beginPath();
-  c.moveTo(x, y);
-  }
-  function lineTo(x, y) {
-  c.lineTo(x, y);
-  }
-  function polygon_end() {
+  c.moveTo(ox+x,oy+y);
+}
+function lineTo(x, y) {
+  c.lineTo(ox+x,oy+y);
+}
+function polygon_end() {
   c.closePath();
   c.stroke();
-  }
-  function draw_text(text, x, y) {
+}
+function draw_text(text, x, y) {
   c.fillStyle = "black";
   c.font = "20px 'Arial'";
   c.textAlign = "left";
-  c.fillText(text, x, y);
-  }
-  window.onload = function(){
+  c.fillText(text,ox+x,oy+y);
+}
+window.onload = function(){
   c=document.getElementById('canvas').getContext('2d');
   document.getElementById('source').src='data.js?';
-  };
+};
+
 </script>
 <body>
   <canvas id="canvas" width="800" height="500"

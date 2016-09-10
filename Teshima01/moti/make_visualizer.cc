@@ -192,41 +192,38 @@ struct xor128 {
 
 namespace visualizer {
 
+////////////////////////////////////
 ofstream ofs;
-
-P offset = P(0, 0);
-int zoom = 1;
-
-void init() {
-  ofs = ofstream("data.js");
-}
+double zoom = 1;
+////////////////////////////////////
 
 string random_color() {
   stringstream ss; ss << std::hex << rndgen.next(16777216);
   return "#" + ss.str();
 }
 
-ostream& line(Line l, bool use_random_color = true) {
-  l[0] += offset, l[1] += offset;
+ostream& set_offset(P p) {
+  return ofs << "set_offset(" << p.real() << "," << p.imag() << ")" << endl;
+}
+
+ostream& line(Line l, string color = "") {
   l[0] *= zoom, l[1] *= zoom;
   return ofs << "line(" << l[0].real() << "," << l[0].imag() << ","
     << l[1].real() << "," << l[1].imag() << ","
-    << (use_random_color ? "\"" + random_color() + "\"" : "\"#000000\"") << ")"
+    << (color.empty() ? "\"" + random_color() + "\"" : "\"" + color + "\"") << ")"
     << endl;
 }
 
 ostream& circle(Circle c, string color = "") {
-  c.p += offset;
   c = Circle(P(c.p.real() * zoom, c.p.imag() * zoom), c.r * zoom);
   return ofs << "circle(" << c.p.real() << "," << c.p.imag() << "," << c.r << ","
   << (color.empty() ? "\"" + random_color() + "\"" : "\"" + color + "\"") << ")" << endl;
 }
 
 ostream& plot(P p, string color = "") {
-  p += offset;
   auto c = Circle(P(p.real() * zoom, p.imag() * zoom), 0.1 * zoom);
   return ofs << "circle(" << c.p.real() << "," << c.p.imag() << "," << c.r << ","
-  << (color.empty() ? "\"" + random_color() + "\"" : "\"" + color + "\"") << ")" << endl;
+  << (color.empty() ? "\"" + random_color() + "\"" : "\"" + color + "\"") << ", true)" << endl;
 }
 
 void show_picture() {
@@ -235,20 +232,41 @@ void show_picture() {
   assert(!WEXITSTATUS(r));
 }
 
+////////////////////////////////////////////////////
+
+void init() {
+  ofs = ofstream("data.js");
 }
 
-int main() {
+void set_grid() {
+  int Min = -100, Max = +100;
+  for(int i=Min; i<Max; i++) {
+    line(Line(P(i, -1000), P(i, 1000)), "#eeeeee");
+    line(Line(P(-1000, i), P(1000, i)), "#eeeeee");
+  }
+}
+
+}
+
+int main(int argc, char** argv) {
 
   int N; cin >> N;
   Circle cs[2]; rep(i, 2) cin >> cs[i].p >> cs[i].r;
   P rp[100];    rep(i, N) cin >> rp[i];
   P bp[100];    rep(i, N) cin >> bp[i];
 
+
   {
     using namespace visualizer;
     init();
-    offset = P(100, 100);
-    zoom = 3;
+    if(argc > 1) {
+      zoom = stoi(string(argv[1]));
+    }
+    if(argc > 3) {
+      set_offset(P(stoi(string(argv[2])), stoi(string(argv[3]))));
+    }
+    set_grid();
+    plot(P(), "#000000");
     circle(cs[0], "#ff0000");
     circle(cs[1], "#0000ff");
     rep(i, N) plot(rp[i], "#ff0000"), plot(bp[i], "#0000ff");
