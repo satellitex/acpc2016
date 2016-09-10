@@ -83,7 +83,7 @@ double min_cost_flow(int s,int t,int f){
         if(dist[v]==INF) continue;
         for(int i=0;i<(int)G[v].size();i++){
           edge &e=G[v][i];
-          if(e.cap>0 && dist[e.to]>dist[v]+e.cost){
+          if(e.cap>0 && dist[e.to]>dist[v]+e.cost+EPS){
             dist[e.to]=dist[v]+e.cost;
             prevv[e.to]=v; preve[e.to]=i; update=true;
           }
