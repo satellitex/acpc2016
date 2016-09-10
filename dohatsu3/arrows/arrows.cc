@@ -2,16 +2,17 @@
 
 using namespace std;
 
-#define MAX_N (1<<20)
 typedef long long ll;
 
 class BIT {
   public:
-    int bit[MAX_N+1], n;
-  
+    int n;
+    vector<int> bit;
+    
     BIT(int N)
     {
         n = N + 1;
+        bit.resize(n);
         for (int i = 0; i < n; i++) {
             bit[i] = 0;
         }
