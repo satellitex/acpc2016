@@ -248,13 +248,15 @@ void set_grid() {
 
 }
 
+/*
+  ./a.out [zoom] [offsetx] [offsety] < [infile]
+*/
 int main(int argc, char** argv) {
 
   int N; cin >> N;
   Circle cs[2]; rep(i, 2) cin >> cs[i].p >> cs[i].r;
   P rp[100];    rep(i, N) cin >> rp[i];
   P bp[100];    rep(i, N) cin >> bp[i];
-
 
   {
     using namespace visualizer;

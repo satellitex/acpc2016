@@ -23,10 +23,13 @@ bool operator > (P const& l, P const& r) {
 }
 
 struct Line : public pair<P, P> {
-  Line(P const& a, P const& b) { first = a, second = b; }
+  Line() = default;
+  Line(P const& a, P const& b) { first = a, second = b; }  
   const P& operator[] (int x) const { return x == 0 ? first : second; }
   P& operator[] (int x) { return x == 0 ? first : second; }
+  Real length() const { return abs(second - first); }
 };
+
 typedef Line Segment;
 
 struct Circle {
@@ -52,13 +55,18 @@ P projection(Line const& l, P const& p) {
   return l[0] + t*(l[0]-l[1]);
 }
 
-Real distance_lp(Line const& l, P const& p) {
-  return abs(p - projection(l, p));
+bool intersect_sp(Line const& s, P const& p) {
+  return abs(s[0]-p)+abs(s[1]-p)-abs(s[1]-s[0]) < EPS; // triangle inequality
+}
+
+Real distance_sp(Line const& s, P const& p) {
+  P const r = projection(s, p);
+  if(intersect_sp(s, r)) return abs(r - p);
+  return min(abs(s[0] - p), abs(s[1] - p));
 }
 
 bool intersect_cs(Circle const& c, Line const& l) {
-  if(abs(l[0] - c.p) < c.r - EPS && abs(l[1] - c.p) < c.r - EPS) { return false; }
-  return distance_lp(l, c.p) < c.r - EPS;
+  return distance_sp(l, c.p) < c.r - EPS;
 }
 
 P crosspoint(const Line &l, const Line &m) {
@@ -120,7 +128,7 @@ struct primal_dual {
         if(dist[v] < p.first) continue;
         for(int i=0; i<G[v].size(); i++) {
           auto& e = G[v][i];
-          if(e.cap > 0 && dist[e.to] > dist[v] + e.cost + h[v] - h[e.to]) {
+          if(e.cap > 0 && dist[e.to] > dist[v] + e.cost + h[v] - h[e.to] + EPS) { // ココらへんでEPSを加える
             dist[e.to] = dist[v] + e.cost + h[v] - h[e.to];
             prevv[e.to] = v;
             preve[e.to] = i;
@@ -151,7 +159,88 @@ struct primal_dual {
 
 }
 
+using namespace point_2d;
+
+struct xor128 {
+  unsigned x,y,z,w;
+  xor128(): x(89165727), y(157892372), z(7777777), w(757328) {}
+  unsigned next() {
+    unsigned t=x^(x<<11);
+    x=y;y=z;z=w;
+    return w=w^(w>>19)^t^(t>>8);
+  }
+  unsigned next(unsigned k) {
+    return next()%k;
+  }
+} rndgen;
+
+namespace visualizer {
+
+////////////////////////////////////
+ofstream ofs;
+double zoom = 1;
+////////////////////////////////////
+
+string random_color() {
+  stringstream ss; ss << std::hex << rndgen.next(16777216);
+  return "#" + ss.str();
+}
+
+ostream& set_offset(P p) {
+  return ofs << "set_offset(" << p.real() << "," << p.imag() << ")" << endl;
+}
+
+ostream& line(Line l, string color = "") {
+  l[0] *= zoom, l[1] *= zoom;
+  return ofs << "line(" << l[0].real() << "," << l[0].imag() << ","
+    << l[1].real() << "," << l[1].imag() << ","
+    << (color.empty() ? "\"" + random_color() + "\"" : "\"" + color + "\"") << ")"
+    << endl;
+}
+
+ostream& circle(Circle c, string color = "") {
+  c = Circle(P(c.p.real() * zoom, c.p.imag() * zoom), c.r * zoom);
+  return ofs << "circle(" << c.p.real() << "," << c.p.imag() << "," << c.r << ","
+  << (color.empty() ? "\"" + random_color() + "\"" : "\"" + color + "\"") << ")" << endl;
+}
+
+ostream& plot(P p, string color = "") {
+  auto c = Circle(P(p.real() * zoom, p.imag() * zoom), 0.1 * zoom);
+  return ofs << "circle(" << c.p.real() << "," << c.p.imag() << "," << c.r << ","
+  << (color.empty() ? "\"" + random_color() + "\"" : "\"" + color + "\"") << ", true)" << endl;
+}
+
+void show_picture() {
+  ofs.close();
+  int r = system("open visualizer.html");
+  assert(!WEXITSTATUS(r));
+}
+
+////////////////////////////////////////////////////
+
+void init() {
+  ofs = ofstream("data.js");
+}
+
+void set_grid() {
+  int Min = -100, Max = +100;
+  for(int i=Min; i<Max; i++) {
+    line(Line(P(i, -1000), P(i, 1000)), "#eeeeee");
+    line(Line(P(-1000, i), P(1000, i)), "#eeeeee");
+  }
+}
+
+}
+
 int main() {
+
+  #ifdef __DEBUG
+  using namespace visualizer;
+  init();
+  zoom = 15;//stoi(string(argv[1]));
+  set_offset(P(300, 160));
+  set_grid();
+  #endif
 
   int N; cin >> N;
 
@@ -165,36 +254,93 @@ int main() {
   int const SRC = 2 * N;
   int const SINK = 2 * N + 1;
 
+  vector<vector<double>> dists(N, vector<double>(N, inf));
+
   rep(i, N) rep(j, N) {
     auto seg = Segment(rs[i], bs[j]);
     bool ok = 1;
-    rep(k, 2) if(intersect_cs(cs[k], seg)) ok = 0;
-    if(ok) pd.add_edge(i, N + j, 1, abs(seg[1] - seg[0]));
+    rep(k, 2) {
+      ok &= !intersect_cs(cs[k], seg);
+    }
+
+    if(ok) {
+      dists[i][j] = min(dists[i][j], seg.length());
+      #ifdef __DEBUG
+      line(seg, "#dddddd");
+      #endif
+    }
   }
 
+  vector<vector<Segment>> min_rsegment(N, vector<Segment>(N, Segment(P(0,0), P(1,1))));
+  vector<vector<Segment>> min_bsegment(N, vector<Segment>(N, Segment(P(0,0), P(1,1))));
+
   rep(i, N) rep(j, N) rep(k, 2) rep(l, 2) {
-    auto rps = tangent_points(cs[k], rs[i]);
-    auto bps = tangent_points(cs[l], bs[j]);
-    for(auto rc: rps) for(auto bc: bps) {
-      auto rtanline = Line(rs[i], rc);
-      auto btanline = Line(bs[j], bc);
 
-      if(rtanline[0] == rtanline[1])  
-        rtanline = Line(rtanline[0], rtanline[0] + (cs[k].p - rtanline[0]) * P(0, 1));
+    auto& rpoint      = rs[i];
+    auto& bpoint      = bs[j];
+    auto& rtarcircle  = cs[k];
+    auto& btarcircle  = cs[l];
 
-      if(btanline[0] == btanline[1])
-        btanline = Line(btanline[0], btanline[0] + (cs[l].p - btanline[0]) * P(0, 1));
+    auto rtangents = tangent_points(rtarcircle, rpoint);
+    auto btangents = tangent_points(btarcircle, bpoint);
 
-      bool ok = 1;
-      rep(x, 2) if(intersect_cs(cs[x], rtanline)) ok = 0;
-      rep(x, 2) if(intersect_cs(cs[x], btanline)) ok = 0;
-      if(!ok) continue;
+    for(auto rtangent: rtangents) {
+      for(auto btangent: btangents) {
 
-      if(intersect_ll(rtanline, btanline)) {
-        auto purple_p = crosspoint(rtanline, btanline);
-        auto len = abs(purple_p - rs[i]) + abs(purple_p - bs[j]);
-        pd.add_edge(i, N + j, 1, len);
+        auto rtangent_line = Line(rpoint, rtangent);
+        auto btangent_line = Line(bpoint, btangent);
+
+        // TODO: rtangent_line same as btangent_line の分岐はしてないがOKか？
+
+        if(rpoint == rtangent) {
+          rtangent_line = Line(rtangent, rtangent + (rtarcircle.p - rtangent) * P(0, 1));
+        }
+
+        if(bpoint == btangent) {
+          btangent_line = Line(btangent, btangent + (btarcircle.p - btangent) * P(0, 1));
+        }
+
+        if(!intersect_ll(rtangent_line, btangent_line))
+          continue;
+
+        auto purple_point = crosspoint(rtangent_line, btangent_line);
+        auto rsegment = Segment(rpoint, purple_point);
+        auto bsegment = Segment(bpoint, purple_point);
+
+        bool intersect = 0;
+        rep(x, 2) {
+          intersect |= intersect_cs(cs[x], rsegment);
+          intersect |= intersect_cs(cs[x], bsegment);
+        }
+
+        if(intersect)
+          continue;
+
+        #ifdef __DEBUG
+        line(rsegment, "#dddddd");
+        line(bsegment, "#dddddd");
+        if(intersect_sp(rsegment, rtangent))
+          plot(rtangent, "#ff8888");
+        if(intersect_sp(bsegment, btangent))
+          plot(btangent, "#8888ff");
+        plot(purple_point, "#ff00ff");
+        #endif
+
+        //pd.add_edge(i, N + j, 1, rsegment.length() + bsegment.length());
+        auto length = rsegment.length() + bsegment.length();
+        if(dists[i][j] > length) {
+          dists[i][j] = min(dists[i][j], length);
+          min_rsegment[i][j] = rsegment;
+          min_bsegment[i][j] = bsegment;
+        }
+
       }
+    }
+  }
+
+  rep(i, N) rep(j, N) {
+    if(dists[i][j] < inf) {
+      pd.add_edge(i, N + j, 1, dists[i][j]);
     }
   }
 
@@ -207,5 +353,22 @@ int main() {
   if(r < 0) cout << -1 << endl;
   else      printf("%.10f\n", r);
   
+  #ifdef __DEBUG
+
+  rep(i, N) rep(j, N) {
+    if(dists[i][j] < inf) {
+      line(min_rsegment[i][j], "#ff88ff");
+      line(min_bsegment[i][j], "#ff88ff");
+      cout << "length: " << min_rsegment[i][j].length() + min_bsegment[i][j].length() << endl;
+    }
+  }
+
+  plot(P(), "#000000");     // 原点
+  circle(cs[0], "#ff0000"); // 赤いタコ
+  circle(cs[1], "#0000ff"); // 青いタコ
+  rep(i, N) plot(rs[i], "#ff0000"), plot(bs[i], "#0000ff"); // 赤いタコの足、青いタコの足
+  show_picture();
+  #endif
+
   return 0;
 }
