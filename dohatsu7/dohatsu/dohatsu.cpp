@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-#define MAX_N 5001
+#define MAX_N 100001
 struct edge{ int to,cost; };
 typedef pair<int,int> P;
 
