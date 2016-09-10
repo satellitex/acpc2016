@@ -2,7 +2,7 @@
 
 using namespace std;
 
-#define MAX_N 5000
+#define MAX_N 100000
 const int INF = (1<<29);
 
 struct Edge {
