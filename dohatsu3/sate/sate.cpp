@@ -45,7 +45,7 @@ bool check(){
 }
 
 Seg seg;
-bool used[100005];
+bool used[400005];
 int main(){
   cin >> S; N = S.size();
   if( check() ) {
