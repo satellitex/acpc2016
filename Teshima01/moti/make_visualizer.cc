@@ -221,9 +221,17 @@ ostream& circle(Circle c, string color = "") {
 }
 
 ostream& plot(P p, string color = "") {
-  auto c = Circle(P(p.real() * zoom, p.imag() * zoom), 0.1 * zoom);
+  auto c = Circle(P(p.real() * zoom, p.imag() * zoom), 1 * zoom);
   return ofs << "circle(" << c.p.real() << "," << c.p.imag() << "," << c.r << ","
   << (color.empty() ? "\"" + random_color() + "\"" : "\"" + color + "\"") << ", true)" << endl;
+  /*
+  auto l1 = Line(P((p.real() - 1) * zoom, (p.imag() - 1) * zoom), P((p.real() + 1) * zoom, (p.imag() + 1) * zoom));
+  auto l2 = Line(P((p.real() - 1) * zoom, (p.imag() + 1) * zoom), P((p.real() + 1) * zoom, (p.imag() - 1) * zoom));
+  return ofs  << "line(" << l1[0].real() << "," << l1[0].imag() << "," << l1[1].real() << "," << l1[1].imag() << ","
+              << (color.empty() ? "\"" + random_color() + "\"" : "\"" + color + "\"") << ")" << endl
+              << "line(" << l2[0].real() << "," << l2[0].imag() << "," << l2[1].real() << "," << l2[1].imag() << ","
+              << (color.empty() ? "\"" + random_color() + "\"" : "\"" + color + "\"") << ")" << endl;
+              */
 }
 
 void show_picture() {
@@ -239,7 +247,7 @@ void init() {
 }
 
 void set_grid() {
-  int Min = -100, Max = +100;
+  int Min = -1000, Max = +1000;
   for(int i=Min; i<Max; i++) {
     line(Line(P(i, -1000), P(i, 1000)), "#eeeeee");
     line(Line(P(-1000, i), P(1000, i)), "#eeeeee");
@@ -248,10 +256,20 @@ void set_grid() {
 
 }
 
-/*
-  ./a.out [zoom] [offsetx] [offsety] < [infile]
-*/
-int main(int argc, char** argv) {
+map<string, double> parse_settings(ifstream& ifs) {
+  map<string, double> ret;
+  string query;
+  while(getline(ifs, query)) {
+    stringstream ss(query);
+    string name, val_str;
+    getline(ss, name, ',');
+    getline(ss, val_str);
+    ret[name] = stod(val_str);
+  }
+  return ret;
+}
+
+int main() {
 
   int N; cin >> N;
   Circle cs[2]; rep(i, 2) cin >> cs[i].p >> cs[i].r;
@@ -261,11 +279,22 @@ int main(int argc, char** argv) {
   {
     using namespace visualizer;
     init();
-    if(argc > 1) {
-      zoom = stoi(string(argv[1]));
+
+    ifstream ifs("settings.txt");
+    auto settings = parse_settings(ifs);
+
+    if(settings.find("zoom") != settings.end()) {
+      zoom = settings["zoom"];
     }
-    if(argc > 3) {
-      set_offset(P(stoi(string(argv[2])), stoi(string(argv[3]))));
+
+    if(settings.find("offx") != settings.end()) {
+      double offx = settings["offx"];
+      double offy = settings["offy"];
+      set_offset(P(offx, offy));
+//      cout << zoom << ", " << offx << ", " << offy << endl;
+    } else {
+      auto center = P();//(cs[0].p + cs[1].p) / 2.0;
+      set_offset(center);
     }
     set_grid();
     plot(P(), "#000000");
