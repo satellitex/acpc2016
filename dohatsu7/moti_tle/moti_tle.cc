@@ -37,10 +37,11 @@ int main() {
   while(!pq.empty()) {
     pii p = pq.top(); pq.pop();
     int weight = p.first, curr = p.second;
-
+/*
+// TLE: 99_handlarge_01.in
     if(dist[curr] < weight)
       continue;
-
+*/
     for(int i=0; i<g[curr].size(); i++) {
       pii p = g[curr][i];
       int next = p.first, cost = p.second;

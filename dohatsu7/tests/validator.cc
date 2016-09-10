@@ -3,12 +3,12 @@
 
 using namespace std;
 
-const int N_MIN =      2;
-const int N_MAX = 100000;
-const int M_MIN =      1;
-const int M_MAX = 200000;
-const int c_MIN =      1;
-const int c_MAX = 100000;
+const int N_MIN =          2;
+const int N_MAX =     100000;
+const int M_MIN =          1;
+const int M_MAX =     200000;
+const int c_MIN =          1;
+const int c_MAX = 1000000000;
 
 int N, M;
 int a[M_MAX], b[M_MAX], c[M_MAX];

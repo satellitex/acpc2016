@@ -1,0 +1,62 @@
+<%@ page pageEncoding="UTF-8"%>
+
+<h1>Problem J: Char Swap</h1>
+
+<h2>Problem</h2>
+<p>
+  長さが偶数の文字列<var>S</var>が与えられる。<br>
+  あなたは、隣り合った2つの文字を入れ替える操作を何回でも行うことができる。<br>
+  文字列を回文にするためには、最小で何回の操作を行う必要があるだろうか?<br>
+  不可能な場合は-1を出力せよ。
+</p>
+
+<h2>Input</h2>
+<p>入力は以下の形式で与えられる。</p>
+<pre>
+S
+</pre>
+<p>
+1行に文字列<var>S</var>が与えられる。
+</p>
+
+<h2>Constraints</h2>
+<p>入力は以下の条件を満たす。</p>
+<ul>
+  <li>2 &le; |<var>S</var>| &le; 400000</li>
+  <li>文字列はすべてアルファベットの小文字で構成されている。</li>
+</ul>
+
+<h2>Output</h2>
+<p>
+文字列<var>S</var>を回文にするための最小の操作回数を1行に出力する。不可能な場合は変わりに-1を出力をする。
+</p>
+
+<h2>Sample Input 1</h2>
+<pre>
+acca
+</pre>
+
+<h2>Sample Output 1</h2>
+<pre>
+0
+</pre>
+
+<h2>Sample Input 2</h2>
+<pre>
+acpcacpc
+</pre>
+
+<h2>Sample Output 2</h2>
+<pre>
+3
+</pre>
+
+<h2>Sample Input 3</h2>
+<pre>
+aizu
+</pre>
+
+<h2>Sample Output 3</h2>
+<pre>
+-1
+</pre>
