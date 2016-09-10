@@ -3,7 +3,7 @@
 using namespace std;
 
 #define MAX_N 100000
-const int INF = (1<<29);
+const int INF = INT_MAX;
 
 struct Edge {
     int to, age;
