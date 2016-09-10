@@ -15,7 +15,6 @@ int main(){
   for(int i=0;i<50;i++)G[i][i]=0;
 
   cin>>n>>m>>r;
-  for(int i=0;i<n;i++)cin>>x[i];
   
   for(int i=0;i<m;i++){
     cin>>a>>b>>c;
@@ -23,6 +22,7 @@ int main(){
     G[a][b]=min(G[a][b],c);
     G[b][a]=min(G[b][a],c);
   }
+  for(int i=0;i<n;i++)cin>>x[i];
   
   for(int k=0;k<n;k++)
     for(int i=0;i<n;i++)
@@ -37,7 +37,6 @@ int main(){
       for(int prev=0;prev<n;prev++){
         if(dp[pos][prev][t]==-1e9)continue;
         int cnt=dp[pos][prev][t];
-
         
         if(pos==n-1)ans=max(ans,cnt);
         

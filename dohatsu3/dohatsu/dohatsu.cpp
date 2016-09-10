@@ -2,7 +2,7 @@
 using namespace std;
 typedef long long ll;
 
-#define MAX 200005
+#define MAX 400005
 
 int bit[MAX];
 void add(int i,int x){
