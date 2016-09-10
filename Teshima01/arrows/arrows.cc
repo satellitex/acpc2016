@@ -3,6 +3,8 @@
 using namespace std;
 
 #define EPS (1e-8)
+#define equals(a, b) (fabs(a-b) < EPS)
+
 #define MAX_V 300
 #define INF 1e9
 typedef pair<double, int> P;
@@ -15,7 +17,11 @@ struct Point {
 
     Point operator + (const Point &p) const { return Point(x + p.x, y + p.y); }
     Point operator - (const Point &p) const { return Point(x - p.x, y - p.y); }
-    Point operator * (const double &k) const { return Point(x * k, y * k); }
+    Point operator * (const double &k) const { return Point(x * k, y * k); }    
+
+    bool operator == (const Point &p) const {
+        return (equals(x, p.x) && equals(y, p.y));
+    }
 };
 
 double dot(const Point &a, const Point &b)
@@ -216,19 +222,30 @@ int main()
                 d = min(d, dist(r[i], b[j]));
             }
             for (int k = 0; k < 2; k++) {
-                vector<Point> vp1 = tangentCP(c[k], r[i]);
-                vector<Point> vp2 = tangentCP(c[k], b[j]);
-                for (int l = 0; l < (int)vp1.size(); l++) {
-                    for (int m = 0; m < (int)vp2.size(); m++) {
-                        Line l1(r[i], vp1[l]), l2(b[j], vp2[m]);
-                        if (isIntersectLL(l1, l2)) {
-                            Point cp = crosspointLL(l1, l2);
-                            Segment s1(r[i], cp), s2(b[j], cp);
-                            if (!isIntersectCS(c[k], s1) &&
-                                !isIntersectCS(c[k], s2) &&
-                                !isIntersectCS(c[1-k], s1) &&
-                                !isIntersectCS(c[1-k], s2)) {
-                                d = min(d, dist(r[i], cp) + dist(b[j], cp));
+                for (int l = 0; l < 2; l++) {
+                    vector<Point> vp1 = tangentCP(c[k], r[i]);
+                    vector<Point> vp2 = tangentCP(c[l], b[j]);                    
+                    for (int m = 0; m < (int)vp1.size(); m++) {
+                        for (int n = 0; n < (int)vp2.size(); n++) {                            
+                            Line l1(r[i], vp1[m]), l2(b[j], vp2[n]);
+                            if (r[i] == vp1[m]) {
+                                Point p1 = vp1[m] - c[k].p;                                
+                                l1.t = vp1[m] + rotate90(p1);
+                            }                            
+                            if (b[j] == vp2[n]) {
+                                Point p2 = vp2[n] - c[l].p;
+                                l2.t = vp2[n] + rotate90(p2);
+                            }
+                                
+                            if (isIntersectLL(l1, l2)) {
+                                Point cp = crosspointLL(l1, l2);
+                                Segment s1(r[i], cp), s2(b[j], cp);
+                                if (!isIntersectCS(c[k], s1) &&
+                                    !isIntersectCS(c[l], s2) &&
+                                    !isIntersectCS(c[1-k], s1) &&
+                                    !isIntersectCS(c[1-l], s2)) {
+                                    d = min(d, dist(r[i], cp) + dist(b[j], cp));
+                                }
                             }
                         }
                     }
