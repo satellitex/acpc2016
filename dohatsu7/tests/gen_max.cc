@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
         ofstream of(format("04_max_%02d.in", t+1).c_str());
         int N, M;
         N = rnd.next(100000, 100000);
-        M = rnd.next(100000, 100000);
+        M = rnd.next(200000, 200000);
         of << N << " " << M << endl;
         for (int i = 0; i < M; i++) {
             int a, b, c;

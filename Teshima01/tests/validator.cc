@@ -111,20 +111,7 @@ void check()
     
     
     // two circles haven't common parts.
-    ensuref(!isIntersectCC(c1, c2), "violates two circles haven't common parts.");
-
-    
-    vector<Segment> red(n), blue(n);
-    for (int i = 0; i < n; i++) {
-        red[i]  = Segment(Point(rx[i], ry[i]), Point(X1, Y1));
-        blue[i] = Segment(Point(bx[i], by[i]), Point(X2, Y2));
-    }
-    
-    // intersection blue oct body and red oct arms.
-    ensuref(!isIntersectCLs(c2, red), "intersect blue oct body and red oct arm");
-    
-    // intersection red oct body and blue oct arms.
-    ensuref(!isIntersectCLs(c1, blue), "intersect red oct body and blue oct arm");
+    ensuref(!isIntersectCC(c1, c2), "violates two circles haven't common parts.");   
 }
 
 int main()
@@ -168,55 +155,4 @@ bool isIntersectCC(const Circle &a, const Circle &b)
 {
     double d = abs(a.p - b.p);
     return (d < a.r + b.r && d > abs(a.r - b.r) - EPS);
-}
-
-bool isIntersectCLs(const Circle &c, const vector<Segment> &ps)
-{
-    for (int i = 0; i < n; i++) {        
-        if (isIntersectCL(c, ps[i])) return true;
-    }
-    return false;
-}
-
-Point projection(const Segment &s, const Point &p)
-{
-    Point b = s.t - s.s;
-    double t = dot(p - s.s, b) / norm(b);
-    return s.s + b * t;
-}
-
-#define COUNTER_CLOCKWISE +1
-#define CLOCKWISE         -1
-#define ONLINE_BACK       +2
-#define ONLINE_FRONT      -2
-#define ON_SEGMENT        +0
-typedef Point Vector;
-
-int ccw(const Point &p0, const Point &p1, const Point &p2)
-{
-    Vector a = p1 - p0;
-    Vector b = p2 - p0;
-    if(cross(a, b) > EPS)  return COUNTER_CLOCKWISE;
-    if(cross(a, b) < -EPS) return CLOCKWISE;
-    if(dot(a, b) < -EPS)   return ONLINE_BACK; // p2-p0-p1
-    if(norm(a) < norm(b))  return ONLINE_FRONT; // p0-p1-p2
-    return ON_SEGMENT; // p0-p2-p1
-}
-
-bool isIntersectSP(const Segment &s, const Point &p)
-{
-    return (ccw(s.s, s.t, p) == 0);
-}
-
-double distanceSP(const Segment &s, const Point &p)
-{    
-    Point r = projection(s, p);
-    if(isIntersectSP(s, r)) return abs(r - p);
-    return min(abs(s.s - p), abs(s.t - p));
-}
-
-bool isIntersectCL(const Circle &c, const Segment &s)
-{
-    double d = distanceSP(s, c.p);
-    return (d < c.r - EPS);
 }
