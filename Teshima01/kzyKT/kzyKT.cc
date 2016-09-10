@@ -45,11 +45,13 @@ vector<P> getIntersectCS(C c, L s){
   }
   return res;
 }
+double toRad(double agl) {return agl*M_PI/180.0;}
+P rotate(P a, double r){return P(a.real()*cos(r)-a.imag()*sin(r),a.real()*sin(r)+a.imag()*cos(r));}
 vector<P> tangent(C c, P q){
   vector<P> res;
   double a = abs(q - c.p);
   if(a < c.r - EPS);
-  else if(a < c.r + EPS) res.push_back(q);
+  else if(a < c.r + EPS) res.push_back(rotate(c.p-q,toRad(90))+q);
   else {
     double b = sqrt(a*a-c.r*c.r);
     double psi = arg(q - c.p);
