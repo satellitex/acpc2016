@@ -1,0 +1,105 @@
+<%@ page pageEncoding="UTF-8"%>
+
+<script language="JavaScript" type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+</script>
+
+<h1>Problem G: Curling Puzzle</h1>
+
+<h2>Problem</h2>
+<p>
+<p>
+カーリングのストーンを移動させて、ゴールのマスにストーンをぴったり重ねるパズルゲームがあった。詳しいルールは次のとおりである。
+</p>
+<p>
+フィールドは<var>H</var>*<var>W</var>マスのグリッドであり、はじめにいくつかのマスにストーンが置かれてある。<br>
+ゴールのマスは1つだけ存在しており、はじめからゴールのマスにストーンが置かれてあることはない。
+</p>
+<p>
+プレイヤーは1手ごとにストーンを1つ選び、上下左右のいずれかの方向に打ち出して滑らせることができる。<br>
+滑っているストーンは別のストーンかフィールドの外壁にぶつかるまで滑り続ける。別のストーンにぶつかった場合は、ぶつけられた側のストーンが反動を受けて連鎖的に滑り出してしまう。
+</p>
+<p>図1の状態でストーンAを右方向に打ち出した場合、最終的に図2のような状態になる。<br>
+<div style="width: 500px;">
+<img src="aoj1.png" alt="図1" style="width: 500px;"><br>
+<div style="text-align: center; font-weight: bold;">図1</div><br><br>
+</div>
+
+<div style="width: 500px;">
+<img src="aoj2.png" alt="図2" style="width: 500px;"><br>
+<div style="text-align: center; font-weight: bold;">図2</div><br><br>
+</div>
+
+</p>
+<p>
+フィールドに存在するいずれか1つのストーンをゴールのマスにぴったり重ねることができた場合のみクリアとなる。<br>
+ゴールのマスを通り過ぎた場合にはクリアにならない。
+</p>
+<p>
+あなたの仕事はフィールドの初期状態を入力として受け取り、そのパズルがクリア可能かどうかを出力するプログラムを作成することである。
+</p>
+<h2>Input</h2>
+<p>入力は以下の形式で与えられる。</p>
+<pre>
+<var>H</var> <var>W</var>
+<var>F<sub>11</sub></var> <var>F<sub>12</sub></var> ... <var>F<sub>1W</sub></var>
+<var>F<sub>21</sub></var> <var>F<sub>22</sub></var> ... <var>F<sub>2W</sub></var>
+...
+<var>F<sub>H1</sub></var> <var>F<sub>H2</sub></var> ... <var>F<sub>HW</sub></var>
+</pre>
+
+<h2>Constraints</h2>
+<ul>
+<li>‘.’ : 空白のマス</li>
+<li>‘o’ カーリングのストーンが置かれているマス</li>
+<li>‘@’ ゴールのマス</li>
+<li>1 &le; <var>H</var> &le; 16</li>
+<li>1 &le; <var>W</var> &le; 16</li>
+<li>2 &le; <var>H</var> &times; <var>W</var> &le; 256</li>
+<li>ゴールのマスが1つだけ存在することが保証されている。</li>
+<li>カーリングのストーンが置かれているマスが1つ以上存在することが保障されている。</li>
+</ul>
+
+<h2>Output</h2>
+<p>
+パズルがクリア可能かどうか "yes" または "no" (""は含まない)を出力せよ。
+</p>
+
+<h2>Sample Input 1</h2>
+<pre>
+1 10
+o........@
+</pre>
+
+<h2>Sample Output 1</h2>
+<pre>
+yes
+</pre>
+
+<h2>Sample Input 2</h2>
+<pre>
+3 6
+......
+.o..@.
+......
+</pre>
+
+<h2>Sample Output 2</h2>
+<pre>
+no
+</pre>
+
+<h2>Sample Input 3</h2>
+<pre>
+6 4
+....
+.oo.
+.oo.
+…@
+.o..
+....
+</pre>
+
+<h2>Sample Output 3</h2>
+<pre>
+yes
+</pre>
