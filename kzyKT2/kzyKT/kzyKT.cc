@@ -9,8 +9,8 @@ P a[100000];
 
 class StarrySkyTree{
 public:
-  int Mi[333333],A[333333];
-  void init(){fill(Mi,Mi+333333,0);fill(A,A+333333,0);}
+  int Mi[555555],A[555555];
+  void init(){fill(Mi,Mi+555555,0);fill(A,A+555555,0);}
   void add(int a,int b,int x,int k=0,int l=0,int r=N) {
     if(r<=a||b<=l) return;
     if(a<=l&&r<=b){
@@ -56,8 +56,8 @@ bool calc(int m) {
       for(int j=0; j<v[k][i].size(); j++) t[k].add(v[k][i][j].F.F,v[k][i][j].F.S,v[k][i][j].S);
     }
     z=min(z,t[i%2].getMin(l,r));
-    if(!f&&i>=w-1) f=1;
-    if(!f2&&i>=h-1) f2=1;
+    if(i>=w-1) f=1;
+    if(i>=h-1) f2=1;
     l+=f?(i%2?1:0):(i%2?0:-1);
     r+=f2?(i%2?0:-1):(i%2?1:0);
   }
