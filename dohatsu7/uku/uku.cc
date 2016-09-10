@@ -13,27 +13,28 @@ struct edge {
 vector< vector<edge> > G;
 int N, M;
 
-const int inf = 1 << 25;
+const int inf = 1 << 30;
 
-int bfs()
+int dijkstra()
 {
-  queue<int> que;
+  priority_queue<P, vector<P>, greater<P> > que;
   vector<int> minEngy(N + 1, inf);
-  que.push(0);  
+  que.push(P(1, 0));  
   minEngy[0] = 1;
 
   int ret = -1;
   while(!que.empty()) {
-    int now = que.front(); que.pop();
-    if(now == N-1) continue;
+    P p = que.top(); que.pop();
+    int now = p.second, engy = p.first;
+    if(now == N-1 || engy > minEngy[now]) continue;
     for(int i = 0; i < G[now].size(); i++) {
-      edge e = G[now][i];
+      edge& e = G[now][i];
       if(e.cost >= minEngy[now]) {
 	if(e.to == N-1) {
 	  ret = max(ret, e.cost);
 	}
 	if(e.cost < minEngy[e.to]) {
-	  que.push(e.to);
+	  que.push(P(e.cost, e.to));
 	  minEngy[e.to] = e.cost;
 	}
       }
@@ -53,7 +54,7 @@ int main()
     G[a].push_back(edge(b, c));
   }
   
-  cout << bfs() << endl;
+  cout << dijkstra() << endl;
   
   return 0;
 }
