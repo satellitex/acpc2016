@@ -110,7 +110,7 @@ int main() {
   C c[2];
   for(int i=0,x,y,z; i<2; i++) {
     cin >> x >> y >> z;
-    c[i]=(C){P(x,y),z};
+    c[i]=(C){P(x,y),(double)z};
   }
   P a[n],b[n];
   vector<L> v[n],v2[n];
