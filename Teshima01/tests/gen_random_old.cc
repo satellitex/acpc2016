@@ -219,6 +219,19 @@ bool validate()
             return false;
     }
 
+    rep(i, n) {
+        auto rp = P(rx[i], ry[i]);
+        auto bp = P(bx[i], by[i]);
+
+        auto segr = Segment(rc.p, rp);
+        if(intersect_cs(bc, segr))
+            return false;
+
+        auto segb = Segment(bc.p, bp);
+        if(intersect_cs(rc, segb))
+            return false;
+    }
+
     return true;
 }
 
@@ -226,7 +239,7 @@ int main(int argc, char *argv[])
 {
     registerGen(argc, argv, 1);
     for (int t = 0; t < 100; t++) {
-        ofstream of(format("03_random_%02d.in", t));
+        ofstream of(format("03_random_old_%02d.in", t));
         n = rnd.next(N_MIN, N_MAX);
         
         X1 = rnd.next(X_MIN, X_MAX);

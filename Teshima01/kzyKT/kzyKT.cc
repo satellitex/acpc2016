@@ -114,8 +114,8 @@ int main() {
     cin >> x >> y >> z;
     c[i]=(C){P(x,y),(double)z};
   }
-  P a[n],b[n];
-  vector<L> v[n],v2[n];
+  vector<P> a(n),b(n);
+  vector<vector<L>> v(n),v2(n);
   for(int i=0,x,y; i<n; i++) {
     cin >> x >> y;
     a[i]=P(x,y);

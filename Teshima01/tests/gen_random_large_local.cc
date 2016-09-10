@@ -175,25 +175,25 @@ istream& operator >> (istream& is, P& p) { Real x, y; is >> x >> y; p = P(x, y);
 }
 using namespace point_2d;
 
-const int N_MIN =   1;
+const int N_MIN =  80;
 const int N_MAX = 100;
 
-const int X_MIN = -1000;
-const int X_MAX = +1000;
-const int Y_MIN = -1000;
-const int Y_MAX = +1000;
-const int R_MIN =     1;
-const int R_MAX =    50;
+const int X_MIN = -100;
+const int X_MAX = +100;
+const int Y_MIN = -100;
+const int Y_MAX = +100;
+const int R_MIN =   40;
+const int R_MAX =   50;
 
-const int RX_MIN = -1000;
-const int RX_MAX = +1000;
-const int RY_MIN = -1000;
-const int RY_MAX = +1000;
+const int RX_MIN = -250;
+const int RX_MAX = +250;
+const int RY_MIN = -250;
+const int RY_MAX = +250;
 
-const int BX_MIN = -1000;
-const int BX_MAX = +1000;
-const int BY_MIN = -1000;
-const int BY_MAX = +1000;
+const int BX_MIN = -250;
+const int BX_MAX = +250;
+const int BY_MIN = -250;
+const int BY_MAX = +250;
 
 int n;
 int X1, Y1, R1;
@@ -226,7 +226,7 @@ int main(int argc, char *argv[])
 {
     registerGen(argc, argv, 1);
     for (int t = 0; t < 100; t++) {
-        ofstream of(format("03_random_%02d.in", t));
+        ofstream of(format("12_random_large_local_%02d.in", t));
         n = rnd.next(N_MIN, N_MAX);
         
         X1 = rnd.next(X_MIN, X_MAX);
