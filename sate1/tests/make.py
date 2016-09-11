@@ -73,6 +73,29 @@ def Generate(N, w_min = 0):
 			edgee = tree.get(i)
 			print >> f, "%d %d" % (edgee[0]+1,edgee[1]+1)
 	seq += 1
+
+def Generate_corner03(N):
+        global seq
+        filename = '%02d_corner_%02d.in' % (2, seq)
+        with open( filename, 'w' ) as f:
+                print >> f, str(N)
+                for i in xrange(N-1):
+                        print >> f, "%d %d" % (i+1,i+2)
+        seq += 1
+
+def Generate_corner04(N):
+        global seq
+        filename = '%02d_corner_%02d.in' % (2, seq)
+        with open( filename, 'w' ) as f:
+                print >> f, str(N)
+                for i in xrange(N-1):
+                        print >> f, "%d %d" % (1,i+2)
+        seq += 1
+        
+        
 if __name__ == '__main__':
         for i in xrange(20):
                 Generate(MAX_N)
+        seq = 0
+        Generate_corner03(MAX_N)
+        Generate_corner04(MAX_N)
