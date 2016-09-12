@@ -7,7 +7,7 @@ const int N=50000;
 
 int main(int argc, char* argv[]) {
   registerGen(argc, argv,1);
-  for(int t=0; t<10; t++) {
+  for(int t=0; t<20; t++) {
     ofstream ofs(format("03_random_%02d.in",t).c_str());
     int n=rnd.next(1,N),m=rnd.next(1,N);
     int k=rnd.next(1,(int)min((ll)n*m,(ll)100000));
