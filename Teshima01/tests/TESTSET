@@ -10,6 +10,7 @@ cxx_generator(src='gen_overlap_on_circle.cc')
 cxx_generator(src='gen_random.cc')
 cxx_generator(src='gen_random_old.cc')
 cxx_generator(src='gen_random_large_local.cc')
+cxx_generator(src='gen_random_oIo.cc')
 #java_generator(src='Generator.java', encoding='UTF-8', mainclass='Generator')
 
 ## Input validators.
