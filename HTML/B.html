@@ -7,13 +7,14 @@
 
 <h2>Problem</h2>
 <p>
-大地主である、がっちょ君は現在<var>N</var>面の畑と<var>M</var>個の芋を所有している。<br>
-各畑には1から<var>N</var>までの番号が付けられている。がっちょ君は畑に芋を植え収穫することで芋の数を増やしたいと考えている。<br>
+大地主であるがっちょ君は現在<var>N</var>面の畑と<var>M</var>個の芋を所有している。<br>
+各畑には1から<var>N</var>までの番号が付けられている。<br>
+がっちょ君は畑に芋を植え収穫することで芋の数を増やしたいと考えている。<br>
 しかし、がっちょ君は一人暮らしであり、1人では<var>K</var>面までの畑しか管理することができない。<br>
 また、各畑は土の状態や面積が異なるため、芋の収穫数や植えることができる数が異なる。<br>
 芋1つを畑<var>i</var>に植えると1年後に<var>a<sub>i</sub></var>個収穫できる。<br>
 また畑<var>i</var>にはたかだか<var>b<sub>i</sub></var>個の芋を植えることができる。<br>
-今、がっちょ君が<var>K</var>面以内の畑に<var>M</var>個以内の芋を植え、1年後に収穫した後に所有することができる最大の芋の数を求めてほしい。<br>
+今、がっちょ君が<var>K</var>面以内の畑に<var>M</var>個以内の芋を植えた時、1年後に所有することができる芋の数の最大値を求めてほしい。<br>
 
 </p>
 <h2>Input</h2>
@@ -25,24 +26,23 @@
 </pre>
 
 <ul>
-<li>1行目は3つの整数<var>N</var>, <var>M</var>, <var>K</var>が空白区切りで与えられる。</li>
-<li>2行目は<var>N</var>個の整数<var>a<sub>i</sub></var>が空白区切りで与えられる。</li>
-<li>3行目は<var>N</var>個の整数<var>b<sub>i</sub></var>が空白区切りで与えられる。</li>
+<li>1行目に3つの整数<var>N</var>, <var>M</var>, <var>K</var>が空白区切りで与えられる。</li>
+<li>2行目に<var>N</var>個の整数<var>a<sub>i</sub></var>が空白区切りで与えられる。</li>
+<li>3行目に<var>N</var>個の整数<var>b<sub>i</sub></var>が空白区切りで与えられる。</li>
 </ul>
 
 <h2>Constraints</h2>
 <ul>
 <li>1 &le; <var>N</var> &le; 15</li>
 <li>1 &le; <var>M</var> &le; 10<sup>4</sup></li>
-<li>1 &le; <var>K</var> &le; 3</li>
-<li><var>K</var> &le; <var>N</var></li>
+<li>1 &le; <var>K</var> &le; min(<var>N</var>,3)</li>
 <li>1 &le; <var>a<sub>i</sub></var> &le; 10<sup>3</sup></li>
 <li>1 &le; <var>b<sub>i</sub></var> &le; 10<sup>4</sup></li>
 </ul>
 
 <h2>Output</h2>
 <p>
-収穫後にがっちょ君が所有することができる最大の芋の数を1行で出力せよ。
+1年後にがっちょ君が所有することができる芋の数の最大値を1行で出力せよ。
 </p>
 
 <h2>Sample Input 1</h2>
