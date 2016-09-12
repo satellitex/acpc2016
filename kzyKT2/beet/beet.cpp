@@ -45,21 +45,21 @@ bool check(int d){
   for(i=0;i<v.size();i++){
     int x=v[i].first,y=v[i].second;
     e.push_back(edge(x+y-d,n+y-x-d,n+y-x+d,1));
-    e.push_back(edge(x+y+d,n+y-x-d,n+y-x+d,-1));
-    if(!g) continue;
+    e.push_back(edge(x+y+d+2,n+y-x-d,n+y-x+d,-1));
     e.push_back(edge(x+y-g,n+y-x-g,n+y-x+g,1));
-    e.push_back(edge(x+y+g,n+y-x-g,n+y-x+g,-1));
+    e.push_back(edge(x+y+g+2,n+y-x-g,n+y-x+g,-1));
   }
-  /*
-  for(i=0;i<e.size();i++){
-    cout << i << ":";
-    cout << e[i].p << ":" << e[i].l << ":" << e[i].r << ":" << e[i].f << endl;
+  //for(i=0;i<e.size();i++) cout << i << ":" << e[i].p <<":"<< e[i].l <<":"<< e[i].r <<":"<< e[i].f << endl;
+  if(n%2){
+    for(i=0;i<n+m;i++) add(i,i+1,MAX_SIZE,i%2);
+  }else{
+    for(i=0;i<n+m;i++) add(i,i+1,MAX_SIZE,(i+1)%2);
   }
-  */
+  
   sort(e.begin(),e.end());
   for(i=0;i<e.size();i++){
     j=e[i].p;
-    for(a=b;a<min(j,n+m-2);a++){
+    for(a=b;a<min(j,n+m-1);a++){
       if(a<n) p=a;
       else p=2*(n-1)-a;
       if(a<m) q=a;
@@ -95,13 +95,14 @@ int main(){
     v.push_back(P(x,y));
   }
   
-  int l=0,r=n+m-1,mid;
+  int l=0,r=n+m-2,mid;
   while(l+1<r){
     mid=(l+r)/2;
-    //cout << l << ":" << r << ":" << mid << endl;
+    //ccout << endl << l << ":" << r << ":" << mid << endl;
     if(check(mid)) l=mid;
     else r=mid;
   }
-  cout << l << endl;
+  if(k%n==0&&k/n==m) cout << 0 << endl;
+  else cout << l+1 << endl;
   return 0;
 }
