@@ -1,0 +1,131 @@
+<%@ page pageEncoding="UTF-8"%>
+
+<h1>Problem H: Hogemon Get</h1>
+
+<h2>Problem</h2>
+<p>
+がっちょ君は今、人気のHogemon Getというゲームに熱中している。<br>
+がっちょ君は会津国に住んでいて、会津国には1~<var>N</var>の番号がついた<var>N</var>個の町と<var>M</var>本の道があり、<var>j</var>番目の道は町<var>a<sub>j</sub></var>と町<var>b<sub>j</sub></var>を<var>c<sub>j</sub></var>分で結ぶ。
+</p>
+<p>
+Hogemon Getでは、町<var>i</var>に訪れることでボールを<var>d<sub>i</sub></var>個入手することができる。<br>
+しかし、ある町で再びボールを入手するためには、最後にその町でボールを入手してから15分以上経過している必要がある。
+</p>
+<p>
+がっちょ君は最初、町1にいて、町<var>N</var>に<var>R</var>分以内で移動しようと考えている。<br>
+そこで、がっちょ君は移動の際に、できるだけたくさんのボールを集めたい。<br>
+最大でいくつのボールを入手することができるだろうか。
+</p>
+
+<h2>Input</h2>
+<p>入力は以下の形式で与えられる。</p>
+<pre>
+  <var>N</var> <var>M</var> <var>R</var>
+  <var>d<sub>1</sub></var> <var>d<sub>2</sub></var> ... <var>d<sub>N</sub></var>
+  <var>a<sub>1</sub></var> <var>b<sub>1</sub></var> <var>c<sub>1</sub></var>
+  <var>a<sub>2</sub></var> <var>b<sub>2</sub></var> <var>c<sub>2</sub></var>
+  ...
+  <var>a<sub>M</sub></var> <var>b<sub>M</sub></var> <var>c<sub>M</sub></var>
+</pre>
+<p>
+1行目に3個の整数<var>N</var>と<var>M</var>と<var>R</var>が空白区切りで与えられる。<br>
+2行目に<var>N</var>個の整数<var>d<sub>1</sub></var>, <var>d<sub>2</sub></var>, ..., <var>d<sub>N</sub></var>が空白区切りで与えられる。<br>
+3から<var>M</var>+2行目に3個の整数<var>a<sub>j</sub></var>, <var>b<sub>j</sub></var>, <var>c<sub>j</sub></var>が空白区切りで与えられる。
+</p>
+
+<h2>Constraints</h2>
+<p>入力は以下の条件を満たす。</p>
+<ul>
+    <li>3 &le; <var>N</var> &le; 30</li>
+    <li><var>N</var>-1 &le; <var>M</var> &le; <var>min</var>(<var>N</var>&times;(<var>N</var>-1)/2, 300)
+    <li>10 &le; <var>R</var> &le; 1000</li>
+    <li>0 &le; <var>d</var> &le; 10</li>
+    <li><var>d<sub>1</sub></var>=<var>d<sub>N</sub></var>=0</li>
+    <li>1 &le; <var>a<sub>j</sub></var> &lt; <var>b<sub>j</sub></var> &le; <var>N</var></li>
+    <li>5 &le; <var>c<sub>j</sub></var> &le; 100</li>
+    <li>町1から町<var>N</var>へは<var>R</var>分以内で移動できることが保証されている。</li>
+    <li>ある2つの町に対して2本以上の道があることはない。</li>
+
+
+</ul>
+
+<h2>Output</h2>
+町1から町<var>N</var>へ<var>R</var>分以内に移動するまでに入手することができる最大のボールの個数を一行で出力せよ。
+<p>
+
+</p>
+
+<h2>Sample Input 1</h2>
+<pre>
+5 4 40
+0 1 1 1 0
+1 2 5
+2 3 5
+3 4 5
+4 5 5
+</pre>
+
+<h2>Sample Output 1</h2>
+<pre>
+6
+</pre>
+<div style="width: 500px;">
+<img src="image/H_figure1.png" alt="図1" style="width: 500px;"><br>
+</div>
+
+<p> 
+時間:場所:ボール<br>
+&nbsp;0:町1:0個<br>
+&nbsp;5:町2:1個<br>
+10:町3:2個<br>
+15:町4:3個<br>
+20:町3:3個（最後にボールを入手してから15分経っていないのでボールを入手することができない）<br>
+25:町2:4個<br>
+30:町3:5個<br>
+35:町4:6個<br>
+40:町5:6個<br>
+</p>
+
+<h2>Sample Input 2</h2>
+<pre>
+4 3 100
+0 3 1 0
+1 2 5
+2 3 30
+3 4 5
+</pre>
+
+<h2>Sample Output 2</h2>
+<pre>
+16
+</pre>
+<div style="width: 500px;">
+<img src="image/H_figure2.png" alt="図2" style="width: 500px;"><br>
+</div>
+<p>
+時間:場所:ボール<br>
+&nbsp;0:町1:0個<br>
+&nbsp;5:町2:3個<br>
+20:町2:6個（町2で15分待つ）<br>
+35:町2:9個（町2で15分待つ）<br>
+50:町2:12個（町2で15分待つ）<br>
+65:町2:15個（町2で15分待つ）<br>
+95:町3:16個 <br>
+100:町4:16個<br>
+</p>
+
+<h2>Sample Input 3</h2>
+<pre>
+5 4 50
+0 1 1 10 0
+1 2 10
+2 3 10
+2 4 10
+4 5 10
+</pre>
+
+<h2>Sample Output 3</h2>
+<pre>
+22
+</pre>
+
