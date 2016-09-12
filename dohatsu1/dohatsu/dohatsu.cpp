@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-#define MAX_V 3000
+#define MAX_V 3005
 
 vector<int> G[MAX_V];
 int match[MAX_V];
@@ -56,6 +56,7 @@ string change(string str,int flg){
 }
 
 void add_edge(string s){
+  
   string a=change(s,1);
   string b=change(s,2);
   //cout<<s<<' '<<a<<' '<<b<<endl;
@@ -93,7 +94,6 @@ int main(){
     cin>>s;
     add_edge(s);
   }
-
   
   int ans=bipartite_matching();
   cout<<ans<<endl;
@@ -116,13 +116,9 @@ int main(){
       memset(used, false, sizeof(used));
       if( dfs(target)==false ){
         cout<<str<<endl;
-        clean( id );
-        continue;
+      }else{
+        match[id]=-1;
       }
-      
-      if(match[target]>0)match[match[target]]=-1;
-      match[id]=target;
-      match[target]=id;
       
     }else{
       int ia=mA[str];
@@ -137,24 +133,27 @@ int main(){
 
       memset(used, false, sizeof(used));
       bool fa=dfs(ia);
+      if( fa == true ){
+        G[ia].push_back(ib);
+        G[ib].push_back(ia);
+        continue;
+      }
       
       memset(used, false, sizeof(used));
       bool fb=dfs(ib);
       
-      if(fa==false && fb==false){
-        cout<<str<<endl;
+      if( fb==true ){
+        G[ia].push_back(ib);
+        G[ib].push_back(ia);
         continue;
       }
 
-      if(match[ia]>0)match[match[ia]]=-1;
-      if(match[ib]>0)match[match[ib]]=-1;
+      cout<<str<<endl;
 
-      G[ia].push_back(ib);
-      G[ib].push_back(ia);
-      match[ia]=ib;
-      match[ib]=ia;
     }
   }
+
+  //  assert( bipartite_matching() == 0 );
   return 0;
 }
 
