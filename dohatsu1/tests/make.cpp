@@ -9,7 +9,7 @@ string i2s(int i){
   return res;
 }
 
-int N = 1000;
+int N = 3000; 
 
 std::mt19937 mt( (int)time(0) );
 std::uniform_int_distribution<> randA(0,17);
