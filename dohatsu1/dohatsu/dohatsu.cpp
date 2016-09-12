@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-#define MAX_V 3005
+#define MAX_V 10005
 
 vector<int> G[MAX_V];
 int match[MAX_V];
