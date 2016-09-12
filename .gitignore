@@ -14,3 +14,6 @@ rime*
 # prefix として __for_me_* をつけたファイルは無視する
 __for_me_*
 make.py
+# emacsのアレ
+\#*\#
+*~
