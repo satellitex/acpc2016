@@ -15,14 +15,14 @@ int main(){
   for(int i=0;i<50;i++)G[i][i]=0;
 
   cin>>n>>m>>r;
-  
+  for(int i=0;i<n;i++)cin>>x[i];  
   for(int i=0;i<m;i++){
     cin>>a>>b>>c;
     a--,b--;
     G[a][b]=min(G[a][b],c);
     G[b][a]=min(G[b][a],c);
   }
-  for(int i=0;i<n;i++)cin>>x[i];
+
   
   for(int k=0;k<n;k++)
     for(int i=0;i<n;i++)
