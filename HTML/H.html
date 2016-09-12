@@ -5,7 +5,7 @@
 <h2>Problem</h2>
 <p>
 がっちょ君は今、人気のHogemon Getというゲームに熱中している。<br>
-がっちょ君は会津国に住んでいて、会津国には1から<var>N</var>の番号がついた<var>N</var>個の町と<var>M</var>本の道があり、<var>j</var>番目の道は町<var>a<sub>j</sub></var>と町<var>b<sub>j</sub></var>を<var>c<sub>j</sub></var>分で結ぶ。
+がっちょ君は会津国に住んでいて、会津国には1から<var>N</var>の番号がついた<var>N</var>個の町と<var>M</var>本の道があり、<var>j</var>番目の道は町<var>a<sub>j</sub></var>と町<var>b<sub>j</sub></var>を双方向に<var>c<sub>j</sub></var>分で結ぶ。
 </p>
 <p>
 Hogemon Getでは、町<var>i</var>に訪れることでボールを<var>d<sub>i</sub></var>個入手することができる。<br>
@@ -37,14 +37,14 @@ Hogemon Getでは、町<var>i</var>に訪れることでボールを<var>d<sub>i
 <p>入力は以下の条件を満たす。</p>
 <ul>
     <li>3 &le; <var>N</var> &le; 30</li>
-    <li><var>N</var>-1 &le; <var>M</var> &le; <var>min</var>(<var>N</var>&times;(<var>N</var>-1)/2, 300)
+    <li><var>N</var>-1 &le; <var>M</var> &le; min(<var>N</var>&times;(<var>N</var>-1)/2, 300)
     <li>10 &le; <var>R</var> &le; 1000</li>
     <li>0 &le; <var>d</var> &le; 10</li>
     <li><var>d<sub>1</sub></var>=<var>d<sub>N</sub></var>=0</li>
     <li>1 &le; <var>a<sub>j</sub></var> &lt; <var>b<sub>j</sub></var> &le; <var>N</var></li>
     <li>5 &le; <var>c<sub>j</sub></var> &le; 100</li>
     <li>町1から町<var>N</var>へは<var>R</var>分以内で移動できることが保証されている。</li>
-    <li>ある2つの町に対して2本以上の道があることはない。</li>
+    <li>ある2つの町の組に対して2本以上の道があることはない。</li>
 
 
 </ul>
