@@ -28,7 +28,7 @@
 
 <p>
   1行目に、1つの整数<var>N</var>が与えられる。
-  続く<var>N</var>-1行のうち<var>i</var>行目には2つの整数<var>u<sub>i</sub></var>, <var>v<sub>i</sub></var>が空白区切りで与えられる。
+  続く<var>N</var>-1行のうち<var>i</var>行目には辺の両端の頂点を表す整数<var>u<sub>i</sub></var>, <var>v<sub>i</sub></var>が空白区切りで与えられる。
 </p>
 
 <h2>Constraints</h2>
@@ -36,15 +36,15 @@
   入力は以下の制約を満たす。
 </p>
 <ul>
-  <li>2 &le; <var>N</var> &le; 100000</li>
+  <li>2 &le; <var>N</var> &le; 10<sup>5</sup></li>
   <li>1 &le; <var>u<sub>i</sub></var>,<var>v<sub>i</sub></var> &le; <var>N</var> (1 &le; <var>i</var> &le; <var>N</var>-1)</li>
   <li><var>u<sub>i</sub></var> &ne; <var>v<sub>i</sub></var></li>
-  <li>与えられるグラフは連結である。</li>
+  <li>与えられるグラフは連結である</li>
 </ul>
 
 <h2>Output</h2>
 <p>
-  頂点1から頂点<var>N</var>について<var>i</var>行目に頂点<var>i</var>からスタートして全ての頂点を訪れるための最短のステップ数を出力せよ。
+  頂点1から頂点<var>N</var>について<var>i</var>行目に頂点<var>i</var>からスタートしてすべての頂点を訪れるための最短のステップ数を出力せよ。
 </p>
 
 <h2>Sample Input 1</h2>
