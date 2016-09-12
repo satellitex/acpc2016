@@ -17,7 +17,7 @@ void input()
     W = inf.readInt(W_MIN, W_MAX, "W");
     inf.readEoln();
     for (int i = 0; i < H; i++) {
-        F[i] = inf.readToken(format("[o.@]{%d, %d}", W_MIN, W_MAX), format("F[%d]", i+1)); 
+        F[i] = inf.readToken(format("[o.@]{%d, %d}", W, W), format("F[%d]", i+1)); 
         inf.readEoln();
     }
     inf.readEof();
