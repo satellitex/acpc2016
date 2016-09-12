@@ -29,7 +29,7 @@
 そして、最終的にできるだけ多くの魔力量を持って、点<var>N</var>へ行きたいと思っている。
 </p>
 <p>
-1から<var>N</var>-1までの点では今持っている魔力量に1以上の任意の魔力量を加算することができる。<br>
+1から<var>N</var>-1までの点ではその時点で持っている魔力量に1以上の任意の魔力量を加算することができる。<br>
 また、<var>i</var>番目の転送装置は、魔力を点<var>a<sub>i</sub></var>から点<var>b<sub>i</sub></var>へ移動させることができる。<br>
 ただし、この転送装置を使うためには、持っている魔力量がちょうど<var>c<sub>i</sub></var>でなければならない。
 </p>
@@ -47,7 +47,7 @@
 <var>a<sub>M</sub></var> <var>b<sub>M</sub></var> <var>c<sub>M</sub></var>
 </pre>
 <p>
-1行目には、2つの整数<var>N</var>, <var>M</var>が空白区切りで与えられる。
+1行目には、2つの整数<var>N</var>, <var>M</var>が空白区切りで与えられる。<br>
 2行目から<var>M</var>+1行目のそれぞれの行<var>i</var>には、3つの整数<var>a<sub>i</sub></var>, <var>b<sub>i</sub></var>, <var>c<sub>i</sub></var>が空白区切りで与えられる。
 </p>
 
@@ -59,12 +59,12 @@
     <li>1 &le; <var>a<sub>i</sub></var> &lt; <var>N</var></li>
     <li>1 &le; <var>b<sub>i</sub></var> &le; <var>N</var></li>
     <li>1 &le; <var>c<sub>i</sub></var> &le; 10<sup>9</sup></li>
-    <li><var>a<sub>i</sub></var> と <var>b<sub>i</sub></var> は相異なる。</li>
+    <li><var>a<sub>i</sub></var> &ne; <var>b<sub>i</sub></var> は相異なる</li>
 </ul>
 
 <h2>Output</h2>
 <p>
-  点<var>N</var>へ到達できる場合は、その最大の魔力を1行に出力する。できない場合は、代わりに-1を出力する。
+  点<var>N</var>へ到達できる場合は、その最大の魔力量を1行に出力する。到達できない場合は、代わりに-1を出力する。
 </p>
 
 <h2>Sample Input 1</h2>
