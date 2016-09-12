@@ -4,8 +4,8 @@
 
 <h2>Problem</h2>
 <p>
-  <var>N</var>個の頂点が<var>N</var>-1個の辺によってつながれたグラフが与えられる。
-  各頂点について、その頂点からスタートして全ての頂点を訪れるための最短のステップ数を出力して下さい。
+  <var>N</var>個の頂点が<var>N</var>-1本の無向辺によって繋がれたグラフが与えられる。
+  各頂点について、その頂点からスタートしてすべての頂点を訪れるための最短のステップ数を出力して下さい。
 </p>
 <p>
   ただし、ある頂点から辺で繋がれた別の頂点に移動することを1ステップとする。
@@ -18,18 +18,17 @@
 </p>
 
 <pre>
-  <var>N</var>
-  <var>u<sub>1</sub></var> <var>v<sub>1</sub></var>
-  .
-  .
-  .
-  <var>u<sub>N-1</sub></var> <var>v<sub>N-1</sub></var>
+<var>N</var>
+<var>u<sub>1</sub></var> <var>v<sub>1</sub></var>
+.
+.
+.
+<var>u<sub>N-1</sub></var> <var>v<sub>N-1</sub></var>
 </pre>
 
 <p>
-  1行目に、1つの整数 <var>N</var> が与えられる。
-  2行目からの <var>N</var> 行に <var>i</var>+1 行目には <var>i</var> 本目の辺の両端にある頂点をあらわす
-  2つの整数 <var>u<sub>i</sub></var> <var>v<sub>i</sub></var> が空白区切りで与えられる。
+  1行目に、1つの整数<var>N</var>が与えられる。
+  続く<var>N</var>-1行のうち<var>i</var>行目には2つの整数<var>u<sub>i</sub></var>, <var>v<sub>i</sub></var>が空白区切りで与えられる。
 </p>
 
 <h2>Constraints</h2>
@@ -38,9 +37,9 @@
 </p>
 <ul>
   <li>2 &le; <var>N</var> &le; 100000</li>
-  <li>1 &le; <var>u<sub>i</sub></var>,<var>v<sub>i</sub></var> &le; <var>N</var> ( 1 &le; <var>i</var> &le; <var>N</var>-1 )</li>
-  <li> <var>u<sub>i</sub></var> &ne; <var>v<sub>i</sub></var> </li>
-  <li> 与えられるグラフは連結である。 </li>
+  <li>1 &le; <var>u<sub>i</sub></var>,<var>v<sub>i</sub></var> &le; <var>N</var> (1 &le; <var>i</var> &le; <var>N</var>-1)</li>
+  <li><var>u<sub>i</sub></var> &ne; <var>v<sub>i</sub></var></li>
+  <li>与えられるグラフは連結である。</li>
 </ul>
 
 <h2>Output</h2>
