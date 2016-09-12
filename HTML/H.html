@@ -5,10 +5,12 @@
 <h2>Problem</h2>
 <p>
 がっちょ君は今、人気のHogemon Getというゲームに熱中している。<br>
-がっちょ君が住んでいる国には1から<var>N</var>の番号がついた<var>N</var>個の町と<var>M</var>本の道があり、<var>j</var>番目の道は町<var>a<sub>j</sub></var>と町<var>b<sub>j</sub></var>を双方向に<var>c<sub>j</sub></var>分で結ぶ。
+がっちょ君が住んでいる会津国は1から<var>N</var>の番号がついているN個の町からなり、
+町と町とは道で結ばれている。会津国には<var>M</var>本の道があり、すべての道は異なる2つの町を結んでいる。がっちょ君は道を双方向に自由に移動できるが、道以外を通ってある町から別の町に行くことはできない。<br>
 </p>
+
 <p>
-Hogemon Getでは、町<var>i</var>に訪れることでボールを<var>d<sub>i</sub></var>個入手することができる。<br>
+Hogemon Getでは、町<var>i</var>でボールを<var>d<sub>i</sub></var>個入手することができる。<br>
 しかし、ある町で再びボールを入手するためには、最後にその町でボールを入手してから15分以上経過している必要がある。
 </p>
 <p>
@@ -28,9 +30,11 @@ Hogemon Getでは、町<var>i</var>に訪れることでボールを<var>d<sub>i
 <var>a<sub>M</sub></var> <var>b<sub>M</sub></var> <var>c<sub>M</sub></var>
 </pre>
 <p>
-1行目に3個の整数<var>N</var>と<var>M</var>と<var>R</var>が空白区切りで与えられる。<br>
-2行目に<var>N</var>個の整数<var>d<sub>1</sub></var>, <var>d<sub>2</sub></var>, ..., <var>d<sub>N</sub></var>が空白区切りで与えられる。<br>
-3から<var>M</var>+2行目に3個の整数<var>a<sub>j</sub></var>, <var>b<sub>j</sub></var>, <var>c<sub>j</sub></var>が空白区切りで与えられる。
+入力はすべて整数である。<br>
+1行目は町の個数<var>N</var>,道の本数<var>M</var>,制限時間Rが空白区切りで与えられる。<br>
+2行目には町<var>i</var>(<var>i</var>=1,2,...,<var>N</var>)に訪れることで入手することができるボールの個数<var>d<sub>i</sub><var>が空白区切りで与えられる。
+3行目から<var>M</var>+2行目には道<var>j</var>(<var>j</var>=1,2,...,<var>M</var>)の情報<var>a<sub>j</sub></var>,<var>b<sub>j</sub></var>,<var>c<sub>j</sub></var>が空白区切りで与えられる。道<var>j<var>は町<var>a<sub>j</sub></var>と町<var>b<sub>j</sub></var>の間を<var>c<sub>j</sub></var>分で移動できることを表す。
+
 </p>
 
 <h2>Constraints</h2>
@@ -39,7 +43,7 @@ Hogemon Getでは、町<var>i</var>に訪れることでボールを<var>d<sub>i
     <li>3 &le; <var>N</var> &le; 30</li>
     <li><var>N</var>-1 &le; <var>M</var> &le; min(<var>N</var>&times;(<var>N</var>-1)/2, 300)
     <li>10 &le; <var>R</var> &le; 1000</li>
-    <li>0 &le; <var>d</var> &le; 10</li>
+    <li>0 &le; <var>d<sub>i</sub></var> &le; 10</li>
     <li><var>d<sub>1</sub></var>&nbsp;=&nbsp;<var>d<sub>N</sub></var>&nbsp;=&nbsp;0</li>
     <li>1 &le; <var>a<sub>j</sub></var> &lt; <var>b<sub>j</sub></var> &le; <var>N</var></li>
     <li>5 &le; <var>c<sub>j</sub></var> &le; 100</li>
@@ -75,8 +79,8 @@ Hogemon Getでは、町<var>i</var>に訪れることでボールを<var>d<sub>i
 
 <p> 
 時間:場所:ボール<br>
-&nbsp;0:町1:0個<br>
-&nbsp;5:町2:1個<br>
+0:町1:0個<br>
+5:町2:1個<br>
 10:町3:2個<br>
 15:町4:3個<br>
 20:町3:3個(最後にボールを入手してから15分経っていないのでボールを入手することができない)<br>
@@ -104,8 +108,8 @@ Hogemon Getでは、町<var>i</var>に訪れることでボールを<var>d<sub>i
 </div>
 <p>
 時間:場所:ボール<br>
-&nbsp;0:町1:0個<br>
-&nbsp;5:町2:3個<br>
+0:町1:0個<br>
+5:町2:3個<br>
 20:町2:6個(町2で15分待つ)<br>
 35:町2:9個(町2で15分待つ)<br>
 50:町2:12個(町2で15分待つ)<br>
