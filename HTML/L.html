@@ -4,10 +4,10 @@
 
 <h2>Story</h2>
 <p>
-天空都市AIZUのAIZU高校では、競技プログラミングの部活動がとても盛んである。<br>
+天空都市AIZUのUZIA高校では、競技プログラミングの部活動がとても盛んである。<br>
 この部活には、<var>n</var>人のRed Coderと<var>n</var>人のBlue Coderが所属している。<br><br>
 
-ある日の部活の時間に、Red CoderとBlue Coderでペアを組み、この部活から<var>n</var>組、PC甲子園というコンテストに参加することとなった。<br>
+ある日の部活の時間に、Red CoderとBlue Coderでペアを組み、この部活から<var>n</var>組、KCPというコンテストに参加することとなった。<br>
 ところが、コンテストの参加登録の締め切りまで時間がないことに先生が気づいた。
 先生はこのことについて部員全員に知らせた。<br><br>
 
@@ -37,6 +37,7 @@
 <var>x<sub>1</sub></var> <var>y<sub>1</sub></var> <var>r<sub>1</sub></var>
 <var>x<sub>2</sub></var> <var>y<sub>2</sub></var> <var>r<sub>2</sub></var>
 <var>rx<sub>1</sub></var> <var>ry<sub>1</sub></var>
+<var>rx<sub>2</sub></var> <var>ry<sub>2</sub></var>
 ...
 <var>rx<sub>n</sub></var> <var>ry<sub>n</sub></var>
 <var>bx<sub>1</sub></var> <var>by<sub>1</sub></var>
@@ -46,23 +47,23 @@
 
 </pre>
 <p>
+入力は全て整数で与えられる。<br>
 1行目に<var>n</var>が与えられる。<br>
 2行目に<var>x<sub>1</sub></var>, <var>y<sub>1</sub></var>, <var>r<sub>1</sub></var>が空白区切りで与えられる。<br>
 3行目に<var>x<sub>2</sub></var>, <var>y<sub>2</sub></var>, <var>r<sub>2</sub></var>が空白区切りで与えられる。<br>
-4~3+<var>n</var>行に赤い点(<var>rx<sub>i</sub></var>, <var>ry<sub>i</sub></var>)が空白区切りで与えられる。<br>
-4+<var>n</var>~3+2*<var>n</var>行に青い点(<var>bx<sub>j</sub></var>, <var>by<sub>j</sub></var>)が空白区切りで与えられる。
+4から3+<var>n</var>行に赤い点(<var>rx<sub>i</sub></var>, <var>ry<sub>i</sub></var>)が空白区切りで与えられる。<br>
+4+<var>n</var>から3+2&times;<var>n</var>行に青い点(<var>bx<sub>j</sub></var>, <var>by<sub>j</sub></var>)が空白区切りで与えられる。
 </p>
 
 <h2>Constraints</h2>
 <p>入力は以下の条件を満たす。</p>
 <ul>
-<li>入力は全て整数で与えられる。</li>
 <li>1 &le; <var>n</var> &le; 100</li>
 <li>-1000 &le; <var>x<sub>i</sub></var>, <var>y<sub>i</sub></var> &le; 1000</li>
 <li>1 &le; <var>r<sub>i</sub></var> &le; 50</li>
 <li>-1000 &le; <var>rx<sub>i</sub></var>, <var>ry<sub>i</sub></var>, <var>bx<sub>i</sub></var>, <var>by<sub>i</sub></var> &le; 1000</li>
-<li>2つの円は共通面積を持たない。</li>
-<li>各点は円に内包されない。</li>
+<li>2つの円は共通面積を持たない</li>
+<li>各点は円に内包されない</li>
 </ul>
 
 <h2>Output</h2>
