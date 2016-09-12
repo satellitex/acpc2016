@@ -5,7 +5,7 @@ using namespace std;
 typedef pair<int,int> P;
 typedef pair<int,P> PP;
 
-int dp[5][1<<8][301],dp2[6][301];
+int dp[5][1<<8][301],dp2[6][301],d[5][301];
 int main() {
   int n,m,l;
   cin >> n >> m >> l;
@@ -29,11 +29,14 @@ int main() {
     }
   }
   for(int i=0; i<5; i++) {
+    for(int t=0; t<(1<<n); t++) {
+      for(int j=0; j<=a[i].size(); j++) d[i][j]=max(d[i][j],dp[i][t][j]);
+    }
+  }
+  for(int i=0; i<5; i++) {
     for(int k=0; k<=m; k++) {
-      for(int t=0; t<(1<<n); t++) {
-        for(int j=0; j<=a[i].size(); j++) {
-          if(k+j<301) dp2[i+1][k+j]=max(dp2[i+1][k+j],dp2[i][k]+dp[i][t][j]);
-        }
+      for(int j=0; j<=a[i].size(); j++) {
+        if(k+j<301) dp2[i+1][k+j]=max(dp2[i+1][k+j],dp2[i][k]+d[i][j]);
       }
     }
   }
