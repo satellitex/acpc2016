@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#define N 5000
+#define N 100000
 #define INF 1e9
 #define f first
 #define s second
@@ -36,7 +36,8 @@ int dijkstra(){
 int main(){
   cin>>n>>m;
   for(int i=0,a,b,c;i<m;i++){
-    cin>>a>>b>>c;
+    scanf("%d%d%d",&a,&b,&c);
+    //cin>>a>>b>>c;
     G[a-1].push_back(P(c,b-1));
   }
   cout <<dijkstra()<<endl; 
