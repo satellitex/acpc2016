@@ -9,6 +9,8 @@ script_generator(src='make.py')
 ## Input validators.
 #c_validator(src='validator.c')
 cxx_validator(src='validator.cc',flags=['-std=c++11','-O2'])
+cxx_validator(src='validator_moti.cc')
+cxx_validator(src='validator_use_zukky_rupc2016treewalk.cc')
 #java_validator(src='Validator.java', encoding='UTF-8', mainclass='Validator')
 #script_validator(src='validator.py')
 

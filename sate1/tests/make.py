@@ -1,4 +1,4 @@
-#!/usr/local/pyenv/shims/python
+#!/usr/bin/python
 import random
 
 MAX_N = 100000
