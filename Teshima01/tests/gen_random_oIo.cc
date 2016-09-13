@@ -225,8 +225,8 @@ bool validate()
 int main(int argc, char *argv[])
 {
     registerGen(argc, argv, 1);
-    for (int t = 0; t < 3; t++) {
-        ofstream of(format("06_random_oIo_%02d.in", t));
+    for (int t = 0; t < 100; t++) {
+        ofstream of(format("21_random_oIo_%02d.in", t));
         n = 100;//rnd.next(N_MIN, N_MAX);
         
         X1 = rnd.next(X_MIN, X_MAX);

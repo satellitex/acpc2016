@@ -92,71 +92,39 @@ istream& operator >> (istream& is, P& p) { Real x, y; is >> x >> y; p = P(x, y);
 }
 using namespace point_2d;
 
-namespace flow {
+typedef double weight;
+typedef vector<double> vec;
+typedef vector<vec> matrix;
 
-struct edge {
-  int to; double cap, cost, rev;
-  edge(int t, double ca, double co, int r) : to(t), cap(ca), cost(co), rev(r) {}
-};
-
-struct primal_dual {
-  
-  vector<vector<edge>> G;
-  vector<double> h;
-  vector<double> dist;
-  vector<double> prevv, preve;
-  
-  primal_dual(int V) : G(V), h(V), dist(V), prevv(V), preve(V) {}
-  
-  void add_edge(int from, int to, int cap, double cost) {
-    G[from].emplace_back(to, cap, cost, G[to].size());
-    G[to].emplace_back(from, 0, -cost, G[from].size()-1);
-  }
-  
-  double min_cost_flow(int s, int t, double f) {
-    double ret = 0;
-    fill(h.begin(), h.end(), 0);
-    while(f > 0) {
-      typedef pair<double, int> P;
-      priority_queue<P, vector<P>, greater<P>> pq;
-      fill(dist.begin(), dist.end(), inf);
-      dist[s] = 0;
-      pq.emplace(0, s);
-      while(!pq.empty()) {
-        P p = pq.top(); pq.pop();
-        int v = p.second;
-        if(dist[v] < p.first) continue;
-        for(int i=0; i<G[v].size(); i++) {
-          auto& e = G[v][i];
-          if(e.cap > 0 && dist[e.to] > dist[v] + e.cost + h[v] - h[e.to] + EPS) { // ココらへんでEPSを加える
-            dist[e.to] = dist[v] + e.cost + h[v] - h[e.to];
-            prevv[e.to] = v;
-            preve[e.to] = i;
-            pq.emplace(dist[e.to], e.to);
-          }
+weight hungarian(const matrix &a) {
+  int n = a.size(), p, q;
+  vec fx(n, inf), fy(n, 0);
+  vector<int> x(n, -1), y(n, -1);
+  for (int i = 0; i < n; ++i)
+    for (int j = 0; j < n; ++j)
+      fx[i] = max(fx[i], a[i][j]);
+  for (int i = 0; i < n; ) {
+    vector<int> t(n, -1), s(n+1, i);
+    for (p = q = 0; p <= q && x[i] < 0; ++p)
+      for (int k = s[p], j = 0; j < n && x[i] < 0; ++j)
+        if (abs(fx[k] + fy[j] - a[k][j]) < EPS && t[j] < 0) {
+          s[++q] = y[j], t[j] = k;
+          if (s[q] < 0)
+            for (p = j; p >= 0; j = p)
+              y[j] = k = t[j], p = x[k], x[k] = j;
         }
-      }
-
-      if(dist[t] == inf) return -1;
-      for(int i=0; i<h.size(); i++) h[i] += dist[i];
-
-      double d = f;
-      for(int i=t; i!=s; i=prevv[i]) {
-        d = min(d, G[prevv[i]][preve[i]].cap);
-      }
-      f -= d;
-      ret += d * h[t];
-      for(int i=t; i!=s; i=prevv[i]) {
-        auto& e = G[prevv[i]][preve[i]];
-        e.cap -= d;
-        G[i][e.rev].cap += d;
-      }
-    }
-    return ret;
+    if (x[i] < 0) {
+      weight d = inf;
+      for (int k = 0; k <= q; ++k)
+        for (int j = 0; j < n; ++j)
+          if (t[j] < 0) d = min(d, fx[s[k]] + fy[j] - a[s[k]][j]);
+      for (int j = 0; j < n; ++j) fy[j] += (t[j] < 0 ? 0 : d);
+      for (int k = 0; k <= q; ++k) fx[s[k]] -= d;
+    } else ++i;
   }
-
-};
-
+  weight ret = 0;
+  for (int i = 0; i < n; ++i) ret += a[i][x[i]];
+  return ret;
 }
 
 using namespace point_2d;
@@ -171,11 +139,7 @@ int main() {
   P rs[100]; rep(i, N) cin >> rs[i];
   P bs[100]; rep(i, N) cin >> bs[i];
 
-  flow::primal_dual pd(2 * N + 2);
-  int const SRC = 2 * N;
-  int const SINK = 2 * N + 1;
-
-  vector<vector<double>> dists(N, vector<double>(N, inf));
+  matrix dists(N, vector<double>(N, inf));
 
   rep(i, N) rep(j, N) {
     auto seg = Segment(rs[i], bs[j]);
@@ -211,7 +175,7 @@ int main() {
           btangent_line = Line(btangent, btangent + (btarcircle.p - btangent) * P(0, 1));
         }
 
-        if(!intersect_ll(rtangent_line, btangent_line)) continue; // ensured non parallel
+        if(!intersect_ll(rtangent_line, btangent_line)) continue;
 
         auto purple_point = crosspoint(rtangent_line, btangent_line);
         auto rsegment = Segment(rpoint, purple_point);
@@ -230,19 +194,14 @@ int main() {
   }
 
   rep(i, N) rep(j, N) {
-    if(dists[i][j] < inf) {
-      pd.add_edge(i, N + j, 1, dists[i][j]);
-    }
+    if(dists[i][j] != inf)
+      dists[i][j] = -dists[i][j];
   }
 
-  rep(i, N) {
-    pd.add_edge(SRC, i, 1, 0);
-    pd.add_edge(N + i, SINK, 1, 0);
-  }
-  
-  auto r = pd.min_cost_flow(SRC, SINK, N);  
-  if(r < 0) cout << -1 << endl;
-  else      printf("%.10f\n", r);
+  auto r = hungarian(dists);
+
+  if(r > 0) cout << -1 << endl;
+  else      printf("%.10f\n", -r);
 
   return 0;
 }

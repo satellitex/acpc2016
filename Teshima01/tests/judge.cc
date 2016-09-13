@@ -8,7 +8,7 @@
 #define MAX_FILE_NAME_LENG 1024
 #define MAX_DOUBLE_LEN 1024
 
-#define EPS (1e-6)
+#define EPS (1e-8)
 
 bool validate_double(std::string s) {
 
