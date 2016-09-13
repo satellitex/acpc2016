@@ -4,7 +4,6 @@ using namespace std;
 std::mt19937 mt( (int)time(0) );
 std::uniform_int_distribution<> randA(0,10);
 
-//string tmp="0123cdef0123cdef";
 string tmp="0123456789abcdef";
 
 vector<string> v;
