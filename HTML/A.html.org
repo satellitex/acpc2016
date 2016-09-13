@@ -1,0 +1,130 @@
+<%@ page pageEncoding="UTF-8"%>
+
+<h1>Problem A: Soup</h1>
+
+<h2>Problem</h2>
+<p>
+3次元空間(<var>x</var><var>y</var><var>z</var>空間)内に横幅<var>X</var>、縦幅<var>Y</var>、高さ<var>Z</var>の直方体の形をした鍋があります。
+</p>
+<p>
+鍋にはスープが、つまり汁と具材が入っています。鍋の中を格子で区切ったとき、いくらかの格子中には具材が1つ入っていて、そのほかの格子中には具材は入っていません。<br>
+1つの格子中に2つ以上の具材が入っていることはありません。今、鍋の底(座標は<var>z</var>=0)に、厚みのない網が沈められています。
+</p>
+<p>
+あなたはこの網をまっすぐ上に引き上げることで、具材をすくい上げたいと思っています。このとき、いくつの具材をすくえるかを求めてください。<br>
+ただし、網を引き上げたときの汁の流れによる具材の移動はないものとします。また、網は複数枚に分かれている(連結ではない)ことがありますが、すべて引き上げることができるものとします。
+</p>
+
+<h2>Input</h2>
+<p>入力は以下の形式で与えられる。</p>
+<pre><var>X</var> <var>Y</var> <var>Z</var>
+<var>p</var>
+<var>a<sub>0</sub></var> <var>b<sub>0</sub></var> <var>c<sub>0</sub></var>
+<var>a<sub>1</sub></var> <var>b<sub>1</sub></var> <var>c<sub>1</sub></var>
+...
+<var>a<sub>p-1</sub></var> <var>b<sub>p-1</sub></var> <var>c<sub>p-1</sub></var>
+<var>s<sub>0,0</sub></var> <var>s<sub>0,1</sub></var> ... <var>s<sub>0,X-1</sub></var>
+<var>s<sub>1,0</sub></var> <var>s<sub>1,1</sub></var> ... <var>s<sub>1,X-1</sub></var>
+...
+<var>s<sub>Y-1,0</sub></var> <var>s<sub>Y-1,1</sub></var> ... <var>s<sub>Y-1,X-1</sub></var>
+</pre>
+<p>
+1行目に、鍋の横幅<var>X</var>、縦幅<var>Y</var>、高さ<var>Z</var>が与えられます。<br>
+2行目に、具材の数<var>p</var>が与えられます。<br>
+3行目から2+<var>p</var>行目までに、格子の座標(<var>a<sub>i</sub></var>,<var>b<sub>i</sub></var>,<var>c<sub>i</sub></var>)が与えられます。それぞれ、格子の横方向、縦方向、高さの座標を表し、その格子中に具材が1つ入っていることを表します。<br>
+3+<var>p</var>行目から2+<var>p</var>+<var>Y</var>行目までに、網の形が与えられます。<var>s<sub>j,k</sub></var>が0なら、座標(<var>k</var>, <var>j</var>, 0)の位置の格子に網が存在しないことを、<var>s<sub>j,k</sub></var>が1なら、座標(<var>k</var>, <var>j</var>, 0)に網が存在することを表します。<br>
+ただし、座標(<var>x</var>, <var>y</var>, <var>z</var>)に位置する格子とは、<var>V</var> = {(<var>x’</var>, <var>y’</var>, <var>z’</var>) | <var>x</var> &le; <var>x’</var> &lt; <var>x</var>+1, <var>y</var> &le; <var>y’</var> &lt; <var>y</var>+1, <var>z</var> &le; <var>z’</var> &lt; <var>z</var>+1}なる<var>V</var>のこととします。
+</p>
+
+<h2>Constraints</h2>
+<p>入力は以下の条件を満たします。</p>
+<ul>
+<li>1 &le; <var>X</var>, <var>Y</var>, <var>Z</var> &le; 50</li>
+<li>0 &le; <var>p</var> &le; min(<var>X</var>&times;<var>Y</var>&times;<var>Z</var>, 50)</li>
+<li>0 &le; <var>a<sub>i</sub></var> &lt; <var>X</var></li>
+<li>0 &le; <var>b<sub>i</sub></var> &lt; <var>Y</var></li>
+<li>0 &le; <var>c<sub>i</sub></var> &lt; <var>Z</var></li>
+<li><var>s<sub>j,k</sub></var> = 0 または 1</li>
+<li>入力はすべて整数</li>
+</ul>
+<h2>Output</h2>
+<p>
+引き上げることができる具材の数を1行に出力してください。
+</p>
+
+<h2>Sample Input 1</h2>
+<pre>
+3 3 3
+5
+2 0 0
+0 1 0
+1 1 1
+1 2 1
+2 2 0
+0 0 0
+0 1 0
+0 0 0
+</pre>
+
+<h2>Sample Output 1</h2>
+<pre>
+1
+</pre>
+
+<h2>Sample Input 2</h2>
+<pre>
+2 3 4
+2
+0 0 0
+1 1 3
+1 0
+0 0
+0 0
+</pre>
+
+<h2>Sample Output 2</h2>
+<pre>
+1
+</pre>
+
+<h2>Sample Input 3</h2>
+<pre>
+3 8 1
+3
+0 1 0
+1 7 0
+0 3 0
+0 1 1
+0 1 1
+1 0 1
+0 0 0
+1 0 0
+0 1 1
+1 1 1
+0 1 0
+</pre>
+
+<h2>Sample Output 3</h2>
+<pre>
+5
+</pre>
+
+<h2>Sample Input 4</h2>
+<pre>
+8 3 3
+6
+0 1 1
+5 1 0
+4 0 2
+3 2 0
+3 1 1
+3 0 1
+1 0 1 1 0 0 1 0
+0 0 1 1 0 1 0 1
+0 1 0 0 0 1 0 1
+</pre>
+
+<h2>Sample Output 4</h2>
+<pre>
+3
+</pre>

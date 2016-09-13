@@ -1,55 +1,54 @@
 <%@ page pageEncoding="UTF-8"%>
 
-<h1>Problem A: Soup</h1>
+<h1>Problem A: Glass</h1>
 
 <h2>Problem</h2>
-<p>
-3次元空間(<var>x</var><var>y</var><var>z</var>空間)内に横幅<var>X</var>、縦幅<var>Y</var>、高さ<var>Z</var>の直方体の形をした鍋があります。
+<p>$B2#(B<var>W</var>$B8D!"=D(B<var>H</var>$B8D$N%^%9L\$G6h@Z$i$l$?H*$,$"$k!#$$$/$D$+$N%^%9L\$NEZCO$K$O9b$5(B0cm$B$N?"J*$,(B1$BK\$@$1?"$($F$"$j!"$=$NB>$N%^%9L\$NEZCO$K$O2?$b?"$($i$l$F$$$J$$!#(B
 </p>
 <p>
-鍋にはスープが、つまり汁と具材が入っています。鍋の中を格子で区切ったとき、いくらかの格子中には具材が1つ入っていて、そのほかの格子中には具材は入っていません。<br>
-1つの格子中に2つ以上の具材が入っていることはありません。今、鍋の底(座標は<var>z</var>=0)に、厚みのない網が沈められています。
+AIZU$B$/$s$O$"$k;~9o$K$"$k%^%9L\$KHnNA$r$^$/!#HnNA$,$^$+$l$?%^%9L\$K?"J*$,?"$($i$l$F$$$k$H$-!"$=$N?"J*$N9b$5$,(B1cm$B?-$S$k!#?-$S$k$N$K$+$+$k;~4V$O$H$F$bC;$$$N$GL5;k$G$-$k!#(B
 </p>
 <p>
-あなたはこの網をまっすぐ上に引き上げることで、具材をすくい上げたいと思っています。このとき、いくつの具材をすくえるかを求めてください。<br>
-ただし、網を引き上げたときの汁の流れによる具材の移動はないものとします。また、網は複数枚に分かれている(連結ではない)ことがありますが、すべて引き上げることができるものとします。
+AIZU$B$/$s$NHnNA$^$-$N5-O?$,M?$($i$l$?$H$-!";~9o(B<var>T</var>$B;~E@$G$NH*$N?"J*$N9b$5$NOB$r7W;;$;$h!#(B
 </p>
 
 <h2>Input</h2>
-<p>入力は以下の形式で与えられる。</p>
-<pre><var>X</var> <var>Y</var> <var>Z</var>
+<p>$BF~NO$O0J2<$N7A<0$GM?$($i$l$k!#(B</p>
+<pre>
+<var>W</var> <var>H</var> <var>T</var>
 <var>p</var>
-<var>a<sub>0</sub></var> <var>b<sub>0</sub></var> <var>c<sub>0</sub></var>
-<var>a<sub>1</sub></var> <var>b<sub>1</sub></var> <var>c<sub>1</sub></var>
+<var>x<sub>0</sub></var> <var>y<sub>0</sub></var> <var>t<sub>0</sub></var>
+<var>x<sub>1</sub><var> <var>y<sub>1</sub></var> <var>t<sub>1</sub></var>
 ...
-<var>a<sub>p-1</sub></var> <var>b<sub>p-1</sub></var> <var>c<sub>p-1</sub></var>
-<var>s<sub>0,0</sub></var> <var>s<sub>0,1</sub></var> ... <var>s<sub>0,X-1</sub></var>
-<var>s<sub>1,0</sub></var> <var>s<sub>1,1</sub></var> ... <var>s<sub>1,X-1</sub></var>
+<var>x<sub>p-1</sub></var> <var>y<sub>p-1</sub></var> <var>t<sub>p-1</sub></var>
+<var>s<sub>0,0</sub></var> <var>s<sub>1,0</sub></var> $B!D(B <var>s<sub>A-1,0</sub></var>
+<var>s<sub>0,1</sub></var> <var>s<sub>1,1</sub></var> $B!D(B <var>s<sub>A-1,1</sub></var>
 ...
-<var>s<sub>Y-1,0</sub></var> <var>s<sub>Y-1,1</sub></var> ... <var>s<sub>Y-1,X-1</sub></var>
+<var>s<sub>0,B-1</sub></var> <var>s<sub>1,B-1</sub></var> $B!D(B <var>s<sub>A-1,B-1</sub></var>
 </pre>
+
 <p>
-1行目に、鍋の横幅<var>X</var>、縦幅<var>Y</var>、高さ<var>Z</var>が与えられます。<br>
-2行目に、具材の数<var>p</var>が与えられます。<br>
-3行目から2+<var>p</var>行目までに、格子の座標(<var>a<sub>i</sub></var>,<var>b<sub>i</sub></var>,<var>c<sub>i</sub></var>)が与えられます。それぞれ、格子の横方向、縦方向、高さの座標を表し、その格子中に具材が1つ入っていることを表します。<br>
-3+<var>p</var>行目から2+<var>p</var>+<var>Y</var>行目までに、網の形が与えられます。<var>s<sub>j,k</sub></var>が0なら、座標(<var>k</var>, <var>j</var>, 0)の位置の格子に網が存在しないことを、<var>s<sub>j,k</sub></var>が1なら、座標(<var>k</var>, <var>j</var>, 0)に網が存在することを表します。<br>
-ただし、座標(<var>x</var>, <var>y</var>, <var>z</var>)に位置する格子とは、<var>V</var> = {(<var>x’</var>, <var>y’</var>, <var>z’</var>) | <var>x</var> &le; <var>x’</var> &lt; <var>x</var>+1, <var>y</var> &le; <var>y’</var> &lt; <var>y</var>+1, <var>z</var> &le; <var>z’</var> &lt; <var>z</var>+1}なる<var>V</var>のこととします。
+1$B9TL\$KH*$N2#I}(B<var>W</var>$B!"=DI}(B<var>H</var>$B!";~9o(B<var>T</var>$B$,M?$($i$l$k!#(BAIZU$B$/$s$O;~9o(B<var>T</var>$B$^$G$KHnNA$r$^$-$*$o$k!#(B
+2$B9TL\$K(BAIZU$B$/$s$,HnNA$r$^$$$?2s?t(B<var>p</var>$B$,M?$($i$l$k!#(B
+3$B9TL\$+$i(B2+<var>p</var>$B9TL\$^$G$K(B<var>x<sub>i</sub></var>$B!"(B<var>y<sub>i</sub></var>$B!"(B<var>t<sub>i</sub></var>$B$,M?$($i$l!"(BAIZU$B$/$s$,;~9o(B<var>t<sub>i</sub></var>$B$K(B(<var>x<sub>i</sub></var>, <var>y<sub>i</sub></var>)$B$N%^%9L\$KHnNA$r$^$$$?$3$H$rI=$9!#(B
+3+<var>p</var>$B9TL\$+$i(B3+<var>p</var>+<var>H</var>$B9TL\$^$G$O!":G=i$NH*$N$=$l$>$l$N%^%9$K?"J*$,?"$($i$l$F$$$k$+$I$&$+$rI=$7!"(B<var>s<sub>j,k</sub></var>$B$,(B1$B$N$H$-(B(<var>j</var>, <var>k</var>)$B$N%^%9L\$K9b$5(B0cm$B$N?"J*$,?"$($i$l$F$$$k$3$H$rI=$7!"(B<var>s<sub>j,k</sub></var>$B$,(B0$B$N$H$-(B(<var>j</var>, <var>k</var>)$B$N%^%9L\$K?"J*$O(B1$BK\$b?"$($i$l$F$$$J$$$3$H$rI=$9!#(B
 </p>
 
-<h2>Constraints</h2>
-<p>入力は以下の条件を満たします。</p>
+<h2>Constraint</h2>
+<p>
 <ul>
-<li>1 &le; <var>X</var>, <var>Y</var>, <var>Z</var> &le; 50</li>
-<li>0 &le; <var>p</var> &le; min(<var>X</var>&times;<var>Y</var>&times;<var>Z</var>, 50)</li>
-<li>0 &le; <var>a<sub>i</sub></var> &lt; <var>X</var></li>
-<li>0 &le; <var>b<sub>i</sub></var> &lt; <var>Y</var></li>
-<li>0 &le; <var>c<sub>i</sub></var> &lt; <var>Z</var></li>
-<li><var>s<sub>j,k</sub></var> = 0 または 1</li>
-<li>入力はすべて整数</li>
+<li>1 &le; <var>A</var>, <var>B</var>, <var>C</var> &le; 50</li>
+<li>0 &le; <var>p</var> &le; min(<var>A</var>*<var>B</var>*<var>C</var>, 50)</li>
+<li>0 &le; <var>a<sub>i</sub></var> &lt; <var>W</var></li>
+<li>0 &le; <var>b<sub>i</sub></var> &lt; <var>H</var></li>
+<li>0 &le; <var>c<sub>i</sub></var> &lt; <var>T</var></li>
+<li><var>s<sub>j,k</sub></var> = 0$B$^$?$O(B1</li>
 </ul>
+</p>
+
 <h2>Output</h2>
 <p>
-引き上げることができる具材の数を1行に出力してください。
+$B;~9o(B<var>T</var>$B$G$NH*$N?"J*$N9b$5$NOB$r(B1$B9T$K=PNO$;$h!#(B
 </p>
 
 <h2>Sample Input 1</h2>
