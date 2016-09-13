@@ -27,7 +27,7 @@ void input()
     inf.readSpace();
     M = inf.readInt(M_MIN, M_MAX, "M");
     inf.readSpace();
-    L = inf.readInt(L_MIN, min(M, L_MAX), "L");
+    L = inf.readInt(L_MIN, min(M, N * 5), "L");
     inf.readEoln();
 
     for (int i = 0; i < M; i++) {
