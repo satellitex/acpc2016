@@ -10,10 +10,17 @@ string dial[N_MAX];
 
 void input()
 {
+  set<string> S;
+  
     N = inf.readInt(N_MIN, N_MAX);
     inf.readEoln();
     for (int i = 0; i < N; i++) {
         dial[i] = inf.readToken(format("[0-9a-f]{%d, %d}", 5, 5), format("dial[%d]", i + 1));
+
+
+        ensuref( S.count(dial[i]) > 0 , "%s is twice" , dial[i].c_str() );
+
+        S.insert(dial[i]);
         inf.readEoln();
     }
     inf.readEof();
