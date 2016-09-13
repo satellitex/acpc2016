@@ -3,7 +3,7 @@
 using namespace std;
 
 const int N_MIN =    1;
-const int N_MAX = 1000;
+const int N_MAX = 3000;
 
 int N;
 string dial[N_MAX];
