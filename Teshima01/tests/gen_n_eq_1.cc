@@ -238,8 +238,8 @@ bool validate()
 int main(int argc, char *argv[])
 {
     registerGen(argc, argv, 1);
-    for (int t = 0; t < 100; t++) {
-        ofstream of(format("01_small_%02d.in", t));
+    for (int t = 0; t < 20; t++) {
+        ofstream of(format("01_small_n_eq_1_%02d.in", t));
         n = rnd.next(N_MIN, N_MAX);
         
         X1 = rnd.next(X_MIN, X_MAX);

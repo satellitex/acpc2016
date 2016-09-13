@@ -219,7 +219,7 @@ int main(int argc, char *argv[])
   int cases[2][2] = {{0, 1}, {0, 0}};
     registerGen(argc, argv, 1);
     for (int t = 0; t < 2; t++) {
-        ofstream of(format("20_random_overlap_on_circle_%02d.in", t));
+        ofstream of(format("03_random_overlap_on_circle_%02d.in", t));
         n = rnd.next(N_MIN, N_MAX);
         
         rep(i, 2) {

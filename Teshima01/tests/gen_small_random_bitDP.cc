@@ -175,25 +175,25 @@ istream& operator >> (istream& is, P& p) { Real x, y; is >> x >> y; p = P(x, y);
 }
 using namespace point_2d;
 
-const int N_MIN =  100;
-const int N_MAX =  100;
+const int N_MIN =  1;
+const int N_MAX = 16;
 
-const int X_MIN = -100;
-const int X_MAX = +100;
-const int Y_MIN = -100;
-const int Y_MAX = +100;
-const int R_MIN =   1;
-const int R_MAX =  30;
+const int X_MIN = -1000;
+const int X_MAX = +1000;
+const int Y_MIN = -1000;
+const int Y_MAX = +1000;
+const int R_MIN =     1;
+const int R_MAX =    50;
 
-const int RX_MIN = -30;
-const int RX_MAX = +30;
-const int RY_MIN = -30;
-const int RY_MAX = +30;
+const int RX_MIN = -1000;
+const int RX_MAX = +1000;
+const int RY_MIN = -1000;
+const int RY_MAX = +1000;
 
-const int BX_MIN = -30;
-const int BX_MAX = +30;
-const int BY_MIN = -30;
-const int BY_MAX = +30;
+const int BX_MIN = -1000;
+const int BX_MAX = +1000;
+const int BY_MIN = -1000;
+const int BY_MAX = +1000;
 
 int n;
 int X1, Y1, R1;
@@ -219,27 +219,14 @@ bool validate()
             return false;
     }
 
-    rep(i, n) {
-        auto rp = P(rx[i], ry[i]);
-        auto bp = P(bx[i], by[i]);
-
-        auto segr = Segment(rc.p, rp);
-        if(intersect_cs(bc, segr))
-            return false;
-
-        auto segb = Segment(bc.p, bp);
-        if(intersect_cs(rc, segb))
-            return false;
-    }
-
     return true;
 }
 
 int main(int argc, char *argv[])
 {
     registerGen(argc, argv, 1);
-    for (int t = 0; t < 20; t++) {
-        ofstream of(format("02_large_n_eq_100_%02d.in", t));
+    for (int t = 0; t < 10; t++) {
+        ofstream of(format("01_small_random_%02d.in", t));
         n = rnd.next(N_MIN, N_MAX);
         
         X1 = rnd.next(X_MIN, X_MAX);

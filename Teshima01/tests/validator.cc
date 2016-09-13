@@ -2,7 +2,7 @@
 
 using namespace std;
 
-#define EPS (1e-8)
+#define EPS (1e-6)
 
 const int N_MIN =   1;
 const int N_MAX = 100;
