@@ -15,13 +15,13 @@ std::uniform_int_distribution<> randA(0,25);
 void solve(int ID){
   ofstream fout ( i2s(ID) );
   string str="";
-  for(int i=0;i<20000;i++){
+  for(int i=0;i<200000;i++){
     char ch='a'+ randA(mt);
     str+=ch;
     str+=ch;
   }
 
-  if( randA(mt) <=4 ){
+  if( randA(mt) <=3 ){
     str[0]= ('a'+randA(mt));
     str[1]= ('a'+randA(mt));
   }
