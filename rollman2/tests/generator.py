@@ -23,9 +23,9 @@ def generate():
     filename = '50_random_{:02}.in'.format(seq)
 
     f = open(filename, 'w')
-    X = random.randint(X_MIN, X_MAX-1)
-    Y = random.randint(Y_MIN, Y_MAX-1)
-    Z = random.randint(Z_MIN, Z_MAX-1)
+    X = random.randint(X_MIN, X_MAX)
+    Y = random.randint(Y_MIN, Y_MAX)
+    Z = random.randint(Z_MIN, Z_MAX)
     p = random.randint(p_MIN, min(p_MAX, X*Y*Z))
 
     material_all = list(itertools.product(range(X), range(Y), range(Z)))
