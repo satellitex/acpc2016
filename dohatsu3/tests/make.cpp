@@ -21,7 +21,7 @@ void solve(int ID){
     str+=ch;
   }
 
-  if( randA(mt) <=3 ){
+  if( ID <= 3 ){
     str[0]= ('a'+randA(mt));
     str[1]= ('a'+randA(mt));
   }
