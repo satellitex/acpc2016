@@ -8,7 +8,7 @@ int main()
   cin >> X >> Y >> Z;
 
   int p; cin >> p;
-  int net[55][55];
+  int net[55][55] = {{0}};
   for(int i = 0; i < p; i++) {
     int a, b, c;
     cin >> a >> b >> c;
