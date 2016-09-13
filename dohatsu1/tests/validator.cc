@@ -18,7 +18,7 @@ void input()
         dial[i] = inf.readToken(format("[0-9a-f]{%d, %d}", 5, 5), format("dial[%d]", i + 1));
 
 
-        ensuref( S.count(dial[i]) > 0 , "%s is twice" , dial[i].c_str() );
+        ensuref( S.count(dial[i]) == 0 , "%s is twice" , dial[i].c_str() );
 
         S.insert(dial[i]);
         inf.readEoln();
