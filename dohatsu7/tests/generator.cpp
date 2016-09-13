@@ -21,18 +21,16 @@ struct data{
 vector<int> X,Y;
 
 int change(int id){
-  if(id==1||id==N)return id;
-  int target=lower_bound(X.begin(),X.end(),id)-X.begin();
-  return Y[target];
+  return Y[id];
 }
 
 void init(){
   std::mt19937 MT( (int)time(0) );
-  for(int i=1;i<N;i++){
-    X.push_back(i);
+  Y.clear();
+  for(int i=0;i<=N;i++){
     Y.push_back(i);
   }
-  shuffle( Y.begin(), Y.end(), MT );
+  shuffle( Y.begin()+2, Y.end()-1, MT );
 }
 
 void start(int ID){
@@ -41,8 +39,9 @@ void start(int ID){
   std::mt19937 mt( (int)time(0) );
   std::uniform_int_distribution<> randA(1,N-1);
   std::uniform_int_distribution<> randB(1,N);
-  std::uniform_int_distribution<> randbb(0,9);
+  std::uniform_int_distribution<> randbb(0,5);
   int len = randbb(mt) * 10 + 5;
+  
   std::uniform_int_distribution<> randC(1,len*10+10);
   
 
@@ -56,6 +55,7 @@ void start(int ID){
   for(int i=0;i<N*10;i++){
     int from=randA( mt );
     int to=randB(mt);
+    if(from==to)continue;
     st.insert( (data){from,to, randC(mt) } );
   }
   
