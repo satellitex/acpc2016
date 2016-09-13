@@ -15,15 +15,15 @@ std::uniform_int_distribution<> randA(0,25);
 void solve(int ID){
   ofstream fout ( i2s(ID) );
   string str="";
-  for(int i=0;i<100;i++){
+  for(int i=0;i<20000;i++){
     char ch='a'+ randA(mt);
     str+=ch;
     str+=ch;
   }
 
-  if( randA(mt) <=10 ){
-    str+='a';
-    str+='z';
+  if( randA(mt) <=4 ){
+    str[0]= ('a'+randA(mt));
+    str[1]= ('a'+randA(mt));
   }
   
   shuffle( str.begin() , str.end() , mt );
