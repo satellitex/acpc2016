@@ -1,19 +1,19 @@
 <%@ page pageEncoding="UTF-8"%>
 
-<h1>Problem A: Glass</h1>
+<h1>Problem A: Plants</h1>
 
 <h2>Problem</h2>
-<p>$B2#(B<var>W</var>$B8D!"=D(B<var>H</var>$B8D$N%^%9L\$G6h@Z$i$l$?H*$,$"$k!#$$$/$D$+$N%^%9L\$NEZCO$K$O9b$5(B0cm$B$N?"J*$,(B1$BK\$@$1?"$($F$"$j!"$=$NB>$N%^%9L\$NEZCO$K$O2?$b?"$($i$l$F$$$J$$!#(B
+<p>横<var>W</var>個、縦<var>H</var>個のマス目で区切られた畑がある。いくつかのマス目の土地には高さ0cmの植物が1本だけ植えてあり、その他のマス目の土地には何も植えられていない。
 </p>
 <p>
-AIZU$B$/$s$O$"$k;~9o$K$"$k%^%9L\$KHnNA$r$^$/!#HnNA$,$^$+$l$?%^%9L\$K?"J*$,?"$($i$l$F$$$k$H$-!"$=$N?"J*$N9b$5$,(B1cm$B?-$S$k!#?-$S$k$N$K$+$+$k;~4V$O$H$F$bC;$$$N$GL5;k$G$-$k!#(B
+がっちょ君はある時刻にあるマス目に肥料をまく。肥料がまかれたマス目に植物が植えられているとき、その植物の高さが1cm伸びる。伸びるのにかかる時間はとても短いので無視できる。
 </p>
 <p>
-AIZU$B$/$s$NHnNA$^$-$N5-O?$,M?$($i$l$?$H$-!";~9o(B<var>T</var>$B;~E@$G$NH*$N?"J*$N9b$5$NOB$r7W;;$;$h!#(B
+がっちょ君の肥料まきの記録が与えられたとき、時刻<var>T</var>時点での畑の植物の高さの和を計算せよ。
 </p>
 
 <h2>Input</h2>
-<p>$BF~NO$O0J2<$N7A<0$GM?$($i$l$k!#(B</p>
+<p>入力は以下の形式で与えられる。</p>
 <pre>
 <var>W</var> <var>H</var> <var>T</var>
 <var>p</var>
@@ -21,34 +21,34 @@ AIZU$B$/$s$NHnNA$^$-$N5-O?$,M?$($i$l$?$H$-!";~9o(B<var>T</var>$B;~E@$G$NH*$N?
 <var>x<sub>1</sub><var> <var>y<sub>1</sub></var> <var>t<sub>1</sub></var>
 ...
 <var>x<sub>p-1</sub></var> <var>y<sub>p-1</sub></var> <var>t<sub>p-1</sub></var>
-<var>s<sub>0,0</sub></var> <var>s<sub>1,0</sub></var> $B!D(B <var>s<sub>A-1,0</sub></var>
-<var>s<sub>0,1</sub></var> <var>s<sub>1,1</sub></var> $B!D(B <var>s<sub>A-1,1</sub></var>
+<var>s<sub>0,0</sub></var> <var>s<sub>1,0</sub></var> … <var>s<sub>A-1,0</sub></var>
+<var>s<sub>0,1</sub></var> <var>s<sub>1,1</sub></var> … <var>s<sub>A-1,1</sub></var>
 ...
-<var>s<sub>0,B-1</sub></var> <var>s<sub>1,B-1</sub></var> $B!D(B <var>s<sub>A-1,B-1</sub></var>
+<var>s<sub>0,B-1</sub></var> <var>s<sub>1,B-1</sub></var> … <var>s<sub>A-1,B-1</sub></var>
 </pre>
 
 <p>
-1$B9TL\$KH*$N2#I}(B<var>W</var>$B!"=DI}(B<var>H</var>$B!";~9o(B<var>T</var>$B$,M?$($i$l$k!#(BAIZU$B$/$s$O;~9o(B<var>T</var>$B$^$G$KHnNA$r$^$-$*$o$k!#(B
-2$B9TL\$K(BAIZU$B$/$s$,HnNA$r$^$$$?2s?t(B<var>p</var>$B$,M?$($i$l$k!#(B
-3$B9TL\$+$i(B2+<var>p</var>$B9TL\$^$G$K(B<var>x<sub>i</sub></var>$B!"(B<var>y<sub>i</sub></var>$B!"(B<var>t<sub>i</sub></var>$B$,M?$($i$l!"(BAIZU$B$/$s$,;~9o(B<var>t<sub>i</sub></var>$B$K(B(<var>x<sub>i</sub></var>, <var>y<sub>i</sub></var>)$B$N%^%9L\$KHnNA$r$^$$$?$3$H$rI=$9!#(B
-3+<var>p</var>$B9TL\$+$i(B3+<var>p</var>+<var>H</var>$B9TL\$^$G$O!":G=i$NH*$N$=$l$>$l$N%^%9$K?"J*$,?"$($i$l$F$$$k$+$I$&$+$rI=$7!"(B<var>s<sub>j,k</sub></var>$B$,(B1$B$N$H$-(B(<var>j</var>, <var>k</var>)$B$N%^%9L\$K9b$5(B0cm$B$N?"J*$,?"$($i$l$F$$$k$3$H$rI=$7!"(B<var>s<sub>j,k</sub></var>$B$,(B0$B$N$H$-(B(<var>j</var>, <var>k</var>)$B$N%^%9L\$K?"J*$O(B1$BK\$b?"$($i$l$F$$$J$$$3$H$rI=$9!#(B
+1行目に畑の横幅<var>W</var>、縦幅<var>H</var>、時刻<var>T</var>が与えられる。がっちょ君は時刻<var>T</var>までに肥料をまきおわる。<br>
+2行目にがっちょ君が肥料をまいた回数<var>p</var>が与えられる。<br>
+3行目から2+<var>p</var>行目までに<var>x<sub>i</sub></var>、<var>y<sub>i</sub></var>、<var>t<sub>i</sub></var>が与えられ、がっちょ君が時刻<var>t<sub>i</sub></var>に(<var>x<sub>i</sub></var>, <var>y<sub>i</sub></var>)のマス目に肥料をまいたことを表す。<br>
+3+<var>p</var>行目から3+<var>p</var>+<var>H</var>行目までは、最初の畑のそれぞれのマスに植物が植えられているかどうかを表し、<var>s<sub>j,k</sub></var>が1のとき(<var>j</var>, <var>k</var>)のマス目に高さ0cmの植物が植えられていることを表し、<var>s<sub>j,k</sub></var>が0のとき(<var>j</var>, <var>k</var>)のマス目に植物は1本も植えられていないことを表す。<br>
 </p>
 
 <h2>Constraint</h2>
 <p>
 <ul>
-<li>1 &le; <var>A</var>, <var>B</var>, <var>C</var> &le; 50</li>
-<li>0 &le; <var>p</var> &le; min(<var>A</var>*<var>B</var>*<var>C</var>, 50)</li>
+<li>1 &le; <var>W</var>, <var>H</var>, <var>T</var> &le; 50</li>
+<li>0 &le; <var>p</var> &le; min(<var>W</var>*<var>H</var>*<var>T</var>, 50)</li>
 <li>0 &le; <var>x<sub>i</sub></var> &lt; <var>W</var></li>
 <li>0 &le; <var>y<sub>i</sub></var> &lt; <var>H</var></li>
 <li>0 &le; <var>t<sub>i</sub></var> &lt; <var>T</var></li>
-<li><var>s<sub>j,k</sub></var> = 0$B$^$?$O(B1</li>
+<li><var>s<sub>j,k</sub></var> = 0または1</li>
 </ul>
 </p>
 
 <h2>Output</h2>
 <p>
-$B;~9o(B<var>T</var>$B$G$NH*$N?"J*$N9b$5$NOB$r(B1$B9T$K=PNO$;$h!#(B
+時刻<var>T</var>での畑の植物の高さの和を1行に出力せよ。
 </p>
 
 <h2>Sample Input 1</h2>
@@ -69,6 +69,8 @@ AIZU$B$/$s$NHnNA$^$-$N5-O?$,M?$($i$l$?$H$-!";~9o(B<var>T</var>$B;~E@$G$NH*$N?
 <pre>
 1
 </pre>
+
+<p><img src="img/A_sample1.png" alt="Sample1" style="width: 70px"></p>
 
 <h2>Sample Input 2</h2>
 <pre>
@@ -127,3 +129,4 @@ AIZU$B$/$s$NHnNA$^$-$N5-O?$,M?$($i$l$?$H$-!";~9o(B<var>T</var>$B;~E@$G$NH*$N?
 <pre>
 3
 </pre>
+<p><img src="img/A_sample4.png" alt="Sample4" style="width: 70px"></p>
