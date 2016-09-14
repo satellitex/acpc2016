@@ -137,7 +137,7 @@ double min_cost_flow(int s,int t,int f){
       }
     }
  
-    if(dist[t] == INF){
+    if(dist[t] > INF / 2.0){
       return -1;
     }
  
@@ -221,7 +221,7 @@ int main(){
     int x,y; cin >> x >> y; rs[i] = P( x, y );
   }
   double res = solve();
-  if( res < -0.5 ) cout << -1 << endl;
+  if( res < -0.5 ) cout << "Impossible" << endl;
   else  printf("%.10lf\n", res );
 }
 
