@@ -195,15 +195,15 @@ bool check_circumference(const Circle &c1, const Circle &c2)
         }
 
         if (!check_point_on_circle(c2, bp) && !check_separate(c2, bp)) {
-
+            return false;
         }
 
         if (!check_point_on_circle(c1, rp) && !check_separate(c1, rp)) {
-
+            return false;
         }
 
         if (!check_point_on_circle(c2, rp) && !check_separate(c2, rp)) {
-
+            return false;
         }            
     }       
     return true;
