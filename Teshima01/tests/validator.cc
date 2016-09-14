@@ -65,6 +65,10 @@ bool contain_in_circle();
 bool isIntersectCC(const Circle &, const Circle &);
 bool isIntersectCLs(const Circle &, const vector<Segment> &);
 bool isIntersectCL(const Circle &, const Segment &);
+bool check_point_on_circle(const Circle &, const Point &);
+bool check_points_on_circle(const Circle &);
+bool check_separate(const Circle &);
+bool check_circumference(const Circle &, const Circle &);
 
 void input()
 {
@@ -112,6 +116,10 @@ void check()
     
     // two circles haven't common parts.
     ensuref(!isIntersectCC(c1, c2), "violates two circles haven't common parts.");   
+
+
+    // check about Circumference
+    ensuref(check_circumference(c1, c2), "violates constraints about circumference");
 }
 
 int main()
@@ -155,4 +163,58 @@ bool isIntersectCC(const Circle &a, const Circle &b)
 {
     double d = abs(a.p - b.p);
     return d < a.r + b.r;
+}
+
+const double eps = 1e-3;
+#define equals(a, b) (fabs(a - b) < (1e-9))
+
+double dist(const Point &a, const Point &b)
+{
+    return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2));
+}
+
+bool check_point_on_circle(const Circle &c, const Point &p)
+{
+    return equals(dist(c.p, p), c.r);
+}
+
+bool check_points_on_circle(const Circle &c)
+{
+    for (int i = 0; i < n; i++) {
+        Point bp = Point(bx[i], by[i]);
+        Point rp = Point(rx[i], ry[i]);
+        if (!check_point_on_circle(c, bp)) {
+            return false;
+        }
+        if (!check_point_on_circle(c, rp)) {
+            return false;
+        }        
+    }
+    return true;
+}
+
+#define equals2(a, b) (fabs(a - b) < (1e-3))
+
+bool check_separate(Circle &c)
+{
+    for (int i = 0; i < n; i++) {
+        Point bp = Point(bx[i], by[i]);
+        Point rp = Point(rx[i], ry[i]);
+        if (equals2(dist(c.p, bp), c.r)) {
+            return false;
+        }
+        if (equals2(dist(c.p, rp), c.r)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool check_circumference(const Circle &c1, const Circle &c2)
+{
+    if (!check_points_on_circle(c1)) return false;
+    if (!check_points_on_circle(c2)) return false;
+    if (!check_separate(c1)) return false;
+    if (!check_separate(c2)) return false;
+    return true;
 }
