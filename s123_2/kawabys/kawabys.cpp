@@ -6,7 +6,7 @@ int dfs(int p,int s,int d,int g){
   int t=0;
   if(d==k)return s+g;
   for(int i=p;i>=0;i--)
-    t=max(t,dfs(i+1,s+a[i].first*min(g,a[i].second),d+1,max(g-a[i].second,0)));
+    t=max(t,dfs(i-1,s+a[i].first*min(g,a[i].second),d+1,max(g-a[i].second,0)));
   return t;
 }
 int main(){
