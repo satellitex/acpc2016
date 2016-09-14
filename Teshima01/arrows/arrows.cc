@@ -261,7 +261,7 @@ int main()
     }
     double res = min_cost_flow(S, T, N);
     if (res == -1) {
-        cout << -1 << endl;
+        cout << "Impossible" << endl;
     } else {
         printf("%.10f\n", res);
     }
