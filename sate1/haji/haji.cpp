@@ -7,27 +7,29 @@ typedef pair<int,int> P;
 typedef pair<P,int> PP;
 vector <int> G[N];
 vector <PP> D[N];
-int n;
-bool used[N];
+int dis[N];
+int n,L;
+int start,goal;
 
-P dfs(int pos,int dep,int cnt){
-  if(used[pos])return P(0,0);
-  used[pos]=1;
-  int ndep=0,ncnt=0;
-  for(int i=0;i<(int)G[pos].size();i++){
-    P res=dfs(G[pos][i],dep+1,cnt+1);
-    res.f-=dep;
-    D[pos].push_back(PP(res,G[pos][i]));
-  }
-  return P(dep+ndep,ncnt);
+void dfs(int pos,int pre,int dep,int &a){
+  if(L<dep) L=dep,a=pre;
+  dis[pos]=dep;
+  for(int i=0;i<G[pos].size();i++)
+    if(G[pos][i]!=pre) dfs(G[pos][i],pos,dep+1,a);
 }
 
-int calc(vector <PP> &a){
-  sort(a.begin(),a.end());
-  unique(a.begin(),a.erase(a.begin(),a.end()));
-  int res=0;
-  for(int i=0;i<(int)a.size()-1;i++)res+=a[i].f.f+a[i].f.s;
-  return res+a.back().f.s;
+P mem[N];
+P dfs2(int pos,int pre,int dep){
+  if(mem[N].f!=-1) return mem[N];
+  int cnt=1,ndep=0;
+  P res;
+  for(int i=0;i<G[pos].size();i++){
+    if(G[pos][i]==pre)continue;
+    res=dfs2(G[pos][i],pos,dep+1);
+    cnt+=res.f+res.s;
+    ndep=max(ndep,res.f);
+  }
+  return mem[pos]=P(ndep,cnt);
 }
 
 int main(){
@@ -37,11 +39,11 @@ int main(){
     G[a].push_back(b);
     G[b].push_back(a);
   }
-  dfs2(0,0);
-  dfs(start,0,0);
+  dfs(0,-1,0,start);
+  memset(dis,0,sizeof(dis));
+  dfs(start,-1,0,goal);
+  memset(mem,-1,sizeof(mem));
   
-  for(int i=0;i<n;i++)cout << calc(D[i])<<endl;
-
-  
-    return 0;
+  for(int i=0;i<n;i++)cout <<dfs2(i,-1,0).s<<endl;
+  return 0;
 }
