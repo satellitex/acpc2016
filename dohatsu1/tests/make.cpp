@@ -20,6 +20,10 @@ string tmp1="13579bdf11111fffff";
 
 
 void solve(int ID){
+  if(ID<=5)N=3000;
+  else N=3000-ID;
+  
+  
   vector<string> vec;
   ofstream fout ( "random"+ i2s(ID) +".in" );
   
@@ -48,7 +52,7 @@ void solve(int ID){
 }
 
 int main(){
-  for(int i=0;i<10;i++){
+  for(int i=0;i<15;i++){
     solve(i);
   }
   return 0;
