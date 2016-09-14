@@ -52,7 +52,7 @@ void solve(int ID){
 }
 
 int main(){
-  for(int i=0;i<15;i++){
+  for(int i=0;i<14;i++){
     solve(i);
   }
   return 0;
