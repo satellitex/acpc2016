@@ -203,8 +203,6 @@ int main() {
         auto rtangent_line = Line(rpoint, rtangent);
         auto btangent_line = Line(bpoint, btangent);
 
-        // TODO: rtangent_line same as btangent_line の分岐はしてないがOKか？
-
         if(rpoint == rtangent) {
           rtangent_line = Line(rtangent, rtangent + (rtarcircle.p - rtangent) * P(0, 1));
         }
@@ -213,7 +211,7 @@ int main() {
           btangent_line = Line(btangent, btangent + (btarcircle.p - btangent) * P(0, 1));
         }
 
-        if(!intersect_ll(rtangent_line, btangent_line)) continue;
+        if(!intersect_ll(rtangent_line, btangent_line)) continue; // ensured non parallel
 
         auto purple_point = crosspoint(rtangent_line, btangent_line);
         auto rsegment = Segment(rpoint, purple_point);

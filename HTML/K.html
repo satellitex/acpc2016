@@ -1,6 +1,6 @@
 <%@ page pageEncoding="UTF-8"%>
 
-<h1>Problem K: Escape of Lappin the phantom thief</h1>
+<h1>Problem K: Escape of Lappin the Phantom Thief</h1>
 
 <h2>Problem</h2>
 <p>
@@ -10,9 +10,10 @@
 センサーは簡単に外せそうになかったので、宝石を置いて逃走することにした。<br>
 宝石をできるだけ警備ロボットから遠くに置いて、逃げるための時間稼ぎをすることにした。<br>
 <br>
-敷地は<var>n</var> &times; <var>m</var>の長方形の形をしていて、障害物は無い。<br>
-<var>k</var>体の警備ロボットがそれぞれ(<var>x<sub>i</sub></var>, <var>y<sub>i</sub></var>)(0 &le; <var>x<sub>i</sub></var> &le; <var>n</var>&minus;1, 0 &le; <var>y<sub>i</sub></var> &le; <var>m</var>&minus;1)のマスにいて、上下左右のマスに単位時間で移動でき、宝石があるマスに最短経路で移動する。<br>
-敷地内で警備ロボットが到達するまでに最も時間がかかる場所に宝石を置いた時にかかる時間を求めよ。
+敷地は<var>n</var> &times; <var>m</var>のマスからなる長方形の形をしていて、障害物はない。<br>
+<var>k</var>体の警備ロボットは、それぞれマス(<var>x<sub>i</sub></var>, <var>y<sub>i</sub></var>)(0 &le; <var>x<sub>i</sub></var> &le; <var>n</var>&minus;1, 0 &le; <var>y<sub>i</sub></var> &le; <var>m</var>&minus;1)に配置されており、上下左右のマスに単位時間で移動できる。<br>
+警備ロボットは宝石があるマスに最短経路で移動する。<br>
+敷地内に自由に宝石を置けるとき、1台以上の警備ロボットが宝石のあるマスに到達するまでにかかる移動時間の最大値を求めよ。
 </p>
 
 <h2>Input</h2>
@@ -41,7 +42,7 @@
 
 <h2>Output</h2>
 <p>
-警備ロボットが到達するまでに最も時間がかかる場所への時間を1行に出力せよ。
+警備ロボットが到達するまでに、最も時間がかかる場所への移動時間を1行に出力せよ。
 </p>
 
 <h2>Sample Input 1</h2>

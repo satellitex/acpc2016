@@ -237,7 +237,7 @@ int main() {
   #ifdef __DEBUG
   using namespace visualizer;
   init();
-  zoom = 15;//stoi(string(argv[1]));
+  zoom = 20;//stoi(string(argv[1]));
   set_offset(P(300, 160));
   set_grid();
   #endif
@@ -363,7 +363,11 @@ int main() {
     }
   }
 
-  plot(P(), "#000000");     // 原点
+  /*
+  line(Line(P(0, -1000), P(0, 1000)), "#888888");
+  line(Line(P(-1000, 0), P(1000, 0)), "#888888");
+  plot(P(), "#888888");     // 原点
+  */
   circle(cs[0], "#ff0000"); // 赤いタコ
   circle(cs[1], "#0000ff"); // 青いタコ
   rep(i, N) plot(rs[i], "#ff0000"), plot(bs[i], "#0000ff"); // 赤いタコの足、青いタコの足

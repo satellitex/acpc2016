@@ -18,7 +18,7 @@ namespace point_2d {
 
 using Real = double;
 
-Real const EPS = 1e-7;  // !!! DO CHECK EPS !!!
+Real const EPS = 1e-6;  // !!! DO CHECK EPS !!!
 
 typedef complex<Real> P;
 
@@ -39,9 +39,11 @@ bool equals (P const& l, P const& r) {
 }
 
 struct Line : public pair<P, P> {
-  Line(P const& a, P const& b) { first = a, second = b; }
+  Line() = default;
+  Line(P const& a, P const& b) { first = a, second = b; }  
   const P& operator[] (int x) const { return x == 0 ? first : second; }
   P& operator[] (int x) { return x == 0 ? first : second; }
+  Real length() const { return abs(second - first); }
 };
 typedef Line Segment;
 
@@ -221,9 +223,9 @@ ostream& circle(Circle c, string color = "") {
 }
 
 ostream& plot(P p, string color = "") {
-  auto c = Circle(P(p.real() * zoom, p.imag() * zoom), 1 * zoom);
+  auto c = Circle(P(p.real() * zoom, p.imag() * zoom), 0.5 * zoom);
   return ofs << "circle(" << c.p.real() << "," << c.p.imag() << "," << c.r << ","
-  << (color.empty() ? "\"" + random_color() + "\"" : "\"" + color + "\"") << ", true)" << endl;
+  << (color.empty() ? "\"" + random_color() + "\"" : "\"" + color + "\"") << ")" << endl;
   /*
   auto l1 = Line(P((p.real() - 1) * zoom, (p.imag() - 1) * zoom), P((p.real() + 1) * zoom, (p.imag() + 1) * zoom));
   auto l2 = Line(P((p.real() - 1) * zoom, (p.imag() + 1) * zoom), P((p.real() + 1) * zoom, (p.imag() - 1) * zoom));
@@ -300,7 +302,45 @@ int main() {
     plot(P(), "#000000");
     circle(cs[0], "#ff0000");
     circle(cs[1], "#0000ff");
-    rep(i, N) plot(rp[i], "#ff0000"), plot(bp[i], "#0000ff");
+
+    auto on_circle = [](Circle const& c, P const& p) -> bool {
+      double dist = Segment(c.p, p).length();
+      return c.r - 1e-3 < dist && dist < c.r + 1e-3;
+    };
+
+    // RP
+    rep(i, N) {
+      rep(k, 2) {
+        if(on_circle(cs[k], rp[i])) {
+          auto dir = cs[k].p - rp[i];
+          dir /= abs(dir);
+          line(Line(rp[i] - 1000. * dir * P(0, 1), rp[i] + 1000. * dir * P(0, 1)), "#888888");
+        }
+      }
+    }
+
+    // BP
+    rep(i, N) {
+      rep(k, 2) {
+        if(on_circle(cs[k], bp[i])) {
+          auto dir = cs[k].p - bp[i];
+          dir /= abs(dir);
+          line(Line(bp[i] - 1000. * dir * P(0, 1), bp[i] + 1000. * dir * P(0, 1)), "#888888");
+        }
+      }
+    }
+
+    rep(i, N) {
+      plot(rp[i], "#ff0000");
+      plot(bp[i], "#0000ff");
+      rep(k, 2) {
+        if(on_circle(cs[k], rp[i]))
+          plot(rp[i], "#00ffff");
+        if(on_circle(cs[k], bp[i]))
+          plot(rp[i], "#00ffff");
+      }
+    }
+
     show_picture();
   }
 
