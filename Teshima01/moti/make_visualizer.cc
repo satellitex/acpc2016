@@ -223,7 +223,7 @@ ostream& circle(Circle c, string color = "") {
 }
 
 ostream& plot(P p, string color = "") {
-  auto c = Circle(P(p.real() * zoom, p.imag() * zoom), 0.5 * zoom);
+  auto c = Circle(P(p.real() * zoom, p.imag() * zoom), 0.1 * zoom);
   return ofs << "circle(" << c.p.real() << "," << c.p.imag() << "," << c.r << ","
   << (color.empty() ? "\"" + random_color() + "\"" : "\"" + color + "\"") << ")" << endl;
   /*
@@ -305,7 +305,7 @@ int main() {
 
     auto on_circle = [](Circle const& c, P const& p) -> bool {
       double dist = Segment(c.p, p).length();
-      return c.r - 1e-3 < dist && dist < c.r + 1e-3;
+      return c.r - 1e-8 < dist && dist < c.r + 1e-8;
     };
 
     // RP
@@ -333,12 +333,14 @@ int main() {
     rep(i, N) {
       plot(rp[i], "#ff0000");
       plot(bp[i], "#0000ff");
+      /*
       rep(k, 2) {
         if(on_circle(cs[k], rp[i]))
           plot(rp[i], "#00ffff");
         if(on_circle(cs[k], bp[i]))
           plot(rp[i], "#00ffff");
       }
+      */
     }
 
     show_picture();

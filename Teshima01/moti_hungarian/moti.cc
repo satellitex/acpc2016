@@ -199,7 +199,7 @@ int main() {
 
   auto r = hungarian(dists);
 
-  if(r < -inf + 0.1) cout << -1 << endl;
+  if(r < -inf + 0.1) cout << "Impossible" << endl;
   else      printf("%.10f\n", -r);
 
   return 0;
