@@ -1,15 +1,15 @@
 <%@ page pageEncoding="UTF-8"%>
 
-<h1>Problem A: Glass</h1>
+<h1>Problem A: Plants</h1>
 
 <h2>Problem</h2>
 <p>横<var>W</var>個、縦<var>H</var>個のマス目で区切られた畑がある。いくつかのマス目の土地には高さ0cmの植物が1本だけ植えてあり、その他のマス目の土地には何も植えられていない。
 </p>
 <p>
-AIZUくんはある時刻にあるマス目に肥料をまく。肥料がまかれたマス目に植物が植えられているとき、その植物の高さが1cm伸びる。伸びるのにかかる時間はとても短いので無視できる。
+がっちょ君はある時刻にあるマス目に肥料をまく。肥料がまかれたマス目に植物が植えられているとき、その植物の高さが1cm伸びる。伸びるのにかかる時間はとても短いので無視できる。
 </p>
 <p>
-AIZUくんの肥料まきの記録が与えられたとき、時刻<var>T</var>時点での畑の植物の高さの和を計算せよ。
+がっちょ君の肥料まきの記録が与えられたとき、時刻<var>T</var>時点での畑の植物の高さの和を計算せよ。
 </p>
 
 <h2>Input</h2>
@@ -28,17 +28,17 @@ AIZUくんの肥料まきの記録が与えられたとき、時刻<var>T</var>�
 </pre>
 
 <p>
-1行目に畑の横幅<var>W</var>、縦幅<var>H</var>、時刻<var>T</var>が与えられる。AIZUくんは時刻<var>T</var>までに肥料をまきおわる。
-2行目にAIZUくんが肥料をまいた回数<var>p</var>が与えられる。
-3行目から2+<var>p</var>行目までに<var>x<sub>i</sub></var>、<var>y<sub>i</sub></var>、<var>t<sub>i</sub></var>が与えられ、AIZUくんが時刻<var>t<sub>i</sub></var>に(<var>x<sub>i</sub></var>, <var>y<sub>i</sub></var>)のマス目に肥料をまいたことを表す。
-3+<var>p</var>行目から3+<var>p</var>+<var>H</var>行目までは、最初の畑のそれぞれのマスに植物が植えられているかどうかを表し、<var>s<sub>j,k</sub></var>が1のとき(<var>j</var>, <var>k</var>)のマス目に高さ0cmの植物が植えられていることを表し、<var>s<sub>j,k</sub></var>が0のとき(<var>j</var>, <var>k</var>)のマス目に植物は1本も植えられていないことを表す。
+1行目に畑の横幅<var>W</var>、縦幅<var>H</var>、時刻<var>T</var>が与えられる。がっちょ君は時刻<var>T</var>までに肥料をまきおわる。<br>
+2行目にがっちょ君が肥料をまいた回数<var>p</var>が与えられる。<br>
+3行目から2+<var>p</var>行目までに<var>x<sub>i</sub></var>、<var>y<sub>i</sub></var>、<var>t<sub>i</sub></var>が与えられ、がっちょ君が時刻<var>t<sub>i</sub></var>に(<var>x<sub>i</sub></var>, <var>y<sub>i</sub></var>)のマス目に肥料をまいたことを表す。<br>
+3+<var>p</var>行目から3+<var>p</var>+<var>H</var>行目までは、最初の畑のそれぞれのマスに植物が植えられているかどうかを表し、<var>s<sub>j,k</sub></var>が1のとき(<var>j</var>, <var>k</var>)のマス目に高さ0cmの植物が植えられていることを表し、<var>s<sub>j,k</sub></var>が0のとき(<var>j</var>, <var>k</var>)のマス目に植物は1本も植えられていないことを表す。<br>
 </p>
 
 <h2>Constraint</h2>
 <p>
 <ul>
-<li>1 &le; <var>A</var>, <var>B</var>, <var>C</var> &le; 50</li>
-<li>0 &le; <var>p</var> &le; min(<var>A</var>*<var>B</var>*<var>C</var>, 50)</li>
+<li>1 &le; <var>W</var>, <var>H</var>, <var>T</var> &le; 50</li>
+<li>0 &le; <var>p</var> &le; min(<var>W</var>*<var>H</var>*<var>T</var>, 50)</li>
 <li>0 &le; <var>x<sub>i</sub></var> &lt; <var>W</var></li>
 <li>0 &le; <var>y<sub>i</sub></var> &lt; <var>H</var></li>
 <li>0 &le; <var>t<sub>i</sub></var> &lt; <var>T</var></li>
@@ -69,6 +69,8 @@ AIZUくんの肥料まきの記録が与えられたとき、時刻<var>T</var>�
 <pre>
 1
 </pre>
+
+<p><img src="img/A_sample1.png" alt="Sample1" style="width: 70px"></p>
 
 <h2>Sample Input 2</h2>
 <pre>
@@ -127,3 +129,4 @@ AIZUくんの肥料まきの記録が与えられたとき、時刻<var>T</var>�
 <pre>
 3
 </pre>
+<p><img src="img/A_sample4.png" alt="Sample4" style="width: 70px"></p>
