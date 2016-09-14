@@ -28,8 +28,6 @@ int main(){
   
   
   shuffle( v.begin() , v.end() , mt );
-
-  cout<<v.size()<<endl;
   
   cout<<3000<<endl;
   for(int i=0;i<3000;i++){
