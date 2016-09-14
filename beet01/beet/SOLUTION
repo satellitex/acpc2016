@@ -1,1 +1,1 @@
-cxx_solution(src='star.cpp')
+cxx_solution(src='beet.cpp')
