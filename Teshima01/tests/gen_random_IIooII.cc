@@ -175,25 +175,25 @@ istream& operator >> (istream& is, P& p) { Real x, y; is >> x >> y; p = P(x, y);
 }
 using namespace point_2d;
 
-const int N_MIN =   1;
-const int N_MAX =   1;
+const int N_MIN =  80;
+const int N_MAX = 100;
 
-const int X_MIN = -10;
-const int X_MAX = +10;
-const int Y_MIN = -10;
-const int Y_MAX = +10;
-const int R_MIN =   1;
-const int R_MAX =  50;
+const int X_MIN = -100;
+const int X_MAX = +100;
+const int Y_MIN = -100;
+const int Y_MAX = +100;
+const int R_MIN =   40;
+const int R_MAX =   50;
 
-const int RX_MIN = -10;
-const int RX_MAX = +10;
-const int RY_MIN = -10;
-const int RY_MAX = +10;
+const int RX_MIN = -250;
+const int RX_MAX = +250;
+const int RY_MIN = -250;
+const int RY_MAX = +250;
 
-const int BX_MIN = -10;
-const int BX_MAX = +10;
-const int BY_MIN = -10;
-const int BY_MAX = +10;
+const int BX_MIN = -250;
+const int BX_MAX = +250;
+const int BY_MIN = -250;
+const int BY_MAX = +250;
 
 int n;
 int X1, Y1, R1;
@@ -219,19 +219,6 @@ bool validate()
             return false;
     }
 
-    rep(i, n) {
-        auto rp = P(rx[i], ry[i]);
-        auto bp = P(bx[i], by[i]);
-
-        auto segr = Segment(rc.p, rp);
-        if(intersect_cs(bc, segr))
-            return false;
-
-        auto segb = Segment(bc.p, bp);
-        if(intersect_cs(rc, segb))
-            return false;
-    }
-
     return true;
 }
 
@@ -239,25 +226,31 @@ int main(int argc, char *argv[])
 {
     registerGen(argc, argv, 1);
     for (int t = 0; t < 100; t++) {
-        ofstream of(format("01_small_%02d.in", t));
-        n = rnd.next(N_MIN, N_MAX);
+        ofstream of(format("21_random_IIooII_%02d.in", t));
+        n = 100;//rnd.next(N_MIN, N_MAX);
         
         X1 = rnd.next(X_MIN, X_MAX);
         Y1 = rnd.next(Y_MIN, Y_MAX);
         R1 = rnd.next(R_MIN, R_MAX);
         
-        X2 = rnd.next(X_MIN, X_MAX);
-        Y2 = rnd.next(Y_MIN, Y_MAX);
-        R2 = rnd.next(R_MIN, R_MAX);
+        X2 = X1 + 2 * R1;//rnd.next(X_MIN, X_MAX);
+        Y2 = Y1;//rnd.next(Y_MIN, Y_MAX);
+        R2 = R1;//rnd.next(R_MIN, R_MAX);
+
+        rx[0] = X1 + R1;
+        ry[0] = Y1 - R1;
         
-        for (int i = 0; i < n; i++) {
+        for (int i = 1; i < n; i++) {
             rx[i] = rnd.next(RX_MIN, RX_MAX);
-            ry[i] = rnd.next(RY_MIN, RY_MAX);
+            ry[i] = rnd.next(0, 1) ? Y1 - R1 : Y1 + R1;//rnd.next(RY_MIN, RY_MAX);
         }
+
+        bx[0] = X1 + R1;
+        by[0] = Y1 + R1;
         
-        for (int i = 0; i < n; i++) {
+        for (int i = 1; i < n; i++) {
             bx[i] = rnd.next(BX_MIN, BX_MAX);
-            by[i] = rnd.next(BY_MIN, BY_MAX);
+            by[i] = rnd.next(0, 1) ? Y1 - R1 : Y1 + R1;//rnd.next(BY_MIN, BY_MAX);
         }
 
         if(validate()) {

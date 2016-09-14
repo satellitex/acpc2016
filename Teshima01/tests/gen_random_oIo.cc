@@ -237,20 +237,14 @@ int main(int argc, char *argv[])
         Y2 = Y1;//rnd.next(Y_MIN, Y_MAX);
         R2 = R1;//rnd.next(R_MIN, R_MAX);
 
-        rx[0] = X1 + R1;
-        ry[0] = Y1 - R1;
-        
-        for (int i = 1; i < n; i++) {
-            rx[i] = rnd.next(RX_MIN, RX_MAX);
-            ry[i] = rnd.next(0, 1) ? Y1 - R1 : Y1 + R1;//rnd.next(RY_MIN, RY_MAX);
+        for (int i = 0; i < n; i++) {
+            rx[i] = rnd.next(X1 + R1, X1 + R1);
+            ry[i] = rnd.next(RY_MIN, RY_MAX);
         }
 
-        bx[0] = X1 + R1;
-        by[0] = Y1 + R1;
-        
-        for (int i = 1; i < n; i++) {
-            bx[i] = rnd.next(BX_MIN, BX_MAX);
-            by[i] = rnd.next(0, 1) ? Y1 - R1 : Y1 + R1;//rnd.next(BY_MIN, BY_MAX);
+        for (int i = 0; i < n; i++) {
+            bx[i] = rnd.next(X1 + R1, X1 + R1);
+            by[i] = rnd.next(BY_MIN, BY_MAX);
         }
 
         if(validate()) {

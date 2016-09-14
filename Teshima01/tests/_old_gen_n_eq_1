@@ -10,7 +10,9 @@ namespace point_2d {
 
 using Real = double;
 
-Real const EPS = 1e-8;  // !!! DO CHECK EPS !!!
+const Real EPS_ON_LINE      = 1e-9;
+const Real EPS              = EPS_ON_LINE;
+const Real EPS_OUT_OF_LINE  = 1e-3;
 
 typedef complex<Real> P;
 
@@ -74,7 +76,7 @@ bool intersect_lp(Line const& l, P const& p) {
 }
 
 bool intersect_sp(Line const& s, P const& p) {
-  return abs(s[0]-p)+abs(s[1]-p)-abs(s[1]-s[0]) < EPS; // triangle inequality
+  return abs(s[0]-p)+abs(s[1]-p)-abs(s[1]-s[0]) < EPS_ON_LINE; // triangle inequality
 }
 
 bool intersect_ss(Segment const& s, Segment const& t) {
@@ -122,6 +124,10 @@ bool intersect_cs(Circle const& c, Line const& l) {
 
 bool intersect_cc(Circle const& c1, Circle const& c2) {
   return abs(c1.p - c2.p) < c1.r + c2.r - EPS;  // has common area
+}
+
+bool intersect_cp(Circle const& c, P const& p) {
+  return abs(c.p - p) < c.r - EPS_ON_LINE;
 }
 
 bool intersect_gs(Polygon const& g, Segment const& s) { // not verified
@@ -209,6 +215,15 @@ bool validate()
 
     if(intersect_cc(rc, bc))
         return false;
+
+    rep(i, n) {
+      auto rp = P(rx[i], ry[i]);
+      auto bp = P(bx[i], by[i]);
+      if(!intersect_cp(rc, rp) && abs(rc.p - rp) < EPS_OUT_OF_LINE)
+        return false;
+      if(!intersect_cp(bc, bp) && abs(bc.p - bp) < EPS_OUT_OF_LINE)
+        return false;
+    }
 
     rep(i, n) {
         auto rp = P(rx[i], ry[i]);

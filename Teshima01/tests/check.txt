@@ -1,0 +1,2 @@
+同じデータ
+01_small_corner_02.in 01_small_92.in
