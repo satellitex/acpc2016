@@ -2,9 +2,9 @@
 
 ## Input generators.
 #c_generator(src='generator.c')
-cxx_generator(src='gen_large.cc')
+#cxx_generator(src='gen_large.cc')
 #cxx_generator(src='gen_rand.cc')
-cxx_generator(src='gen_max.cc')
+#cxx_generator(src='gen_max.cc')
 cxx_generator(src='gen_small.cc')
 cxx_generator(src='generator.cpp')
 #java_generator(src='Generator.java', encoding='UTF-8', mainclass='Generator')

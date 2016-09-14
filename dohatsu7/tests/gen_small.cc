@@ -7,8 +7,8 @@ int main(int argc, char *argv[])
 {
     registerGen(argc, argv, 1);
     
-    for (int t = 0; t < 50; t++) {
-        ofstream of(format("05_mysmall_%02d.in", t+1).c_str());
+    for (int t = 0; t < 10; t++) {
+        ofstream of(format("02_rnd_small_%02d.in", t+1).c_str());
         int N, M;
         N = rnd.next(2, 5);
         M = rnd.next(1, 15);
