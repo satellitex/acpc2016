@@ -214,6 +214,8 @@ int main()
     add_edge(s,i,1,0);
     add_edge(i+n,t,1,0);
   }
-  printf("%.10f\n",min_cost_flow(s,t,n));
+  double res=min_cost_flow(s,t,n);
+  if(res==-1)cout<<"Impossible"<<endl;
+  else printf("%.10f\n",res);
   return 0;
 }
