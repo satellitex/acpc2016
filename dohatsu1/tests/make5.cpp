@@ -4,7 +4,7 @@ using namespace std;
 std::mt19937 mt( (int)time(0) );
 std::uniform_int_distribution<> randA(0,10);
 
-string tmp="0125496d";
+string tmp="8135bdf";
 
 vector<string> v;
 string s="xxxxx";
@@ -13,11 +13,11 @@ void dfs(int x,int f){
   if(x==5){
     if(f==1)v.push_back(s);
   }else{
-    for(int i=0;i<8;i++){
-      if(f==1 && i%2==0)continue;
+    for(int i=0;i<7;i++){
+      if(f==1 && i==0)continue;
       s[x]=tmp[i];
       int nf=f;
-      if(i%2==0)nf=1;
+      if(i==0)nf=1;
       dfs(x+1,nf);
     }
   }
