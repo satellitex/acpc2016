@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/Users/kagetaku/.pyenv/shims/python3
 # -*- coding: utf-8 -*-
 
 import sys
