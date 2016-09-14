@@ -31,6 +31,7 @@ def main():
     assert m, 'strange line \"{}\"'.format(line)
     p = int(line)
     assert p_MIN <= p <= p_MAX, 'p out of range: {}'.format(p)
+    assert p <= X*Y*Z, 'p out of range:{}'.format(p)
 
     lines = sys.stdin.readlines()
     assert len(lines) == p+Y, '{} extra line(s) detected.'.format( p+Y-len(lines) )
