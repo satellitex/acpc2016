@@ -350,7 +350,7 @@ int main() {
   }
   
   auto r = pd.min_cost_flow(SRC, SINK, N);  
-  if(r < 0) cout << -1 << endl;
+  if(r < 0) cout << "Impossible" << endl;
   else      printf("%.10f\n", r);
   
   #ifdef __DEBUG

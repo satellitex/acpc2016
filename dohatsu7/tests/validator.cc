@@ -21,7 +21,7 @@ void input()
     inf.readEoln();
     
     for (int i = 0; i < M; i++) {
-        a[i] = inf.readInt(1, N, format("a[%d]", i+1));
+        a[i] = inf.readInt(1, N-1, format("a[%d]", i+1));
         inf.readSpace();        
         b[i] = inf.readInt(1, N, format("b[%d]", i+1));
         inf.readSpace();
