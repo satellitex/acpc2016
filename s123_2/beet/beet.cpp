@@ -1,26 +1,24 @@
 #include<bits/stdc++.h>
 using namespace std;
-int dp[20][10050][20]={};
-int main(){
-  int n,m,k,i,j,l,c;
-  cin>>n>>m>>k;
-  int a[n],b[n];
-  for(i=0;i<n;i++) cin >> a[i];
-  for(i=0;i<n;i++) cin >> b[i];
-  for(i=0;i<n;i++){
-    for(j=0;j<=m;j++){
-      for(l=0;l<=b[i];l++){
-	if(j+l>m) break;
-	for(c=0;c<=k;c++){
-	  dp[i+1][j+l][c+(l!=0)]=max(dp[i+1][j+l][c+(l!=0)],dp[i][j][c]+a[i]*l);
-	}
-      }
-    }
+int n,m,k,ans=0;
+typedef pair<int,int> P;
+vector<P> v;
+int rec(int x,int y,int z){//x=imo;y=men;z=mensuu
+  int res=0,i,j;
+  if(z==k) return m-x;
+  for(i=y;i<n;i++){
+    j=min(v[i].second,m-x);
+    res=max(res,v[i].first*j+rec(x+j,i+1,z+1));
   }
-  int ans=0;
-  for(i=0;i<=m;i++)
-    for(j=0;j<=k;j++)
-      ans=max(ans,dp[n][i][j]+m-i);
-  cout << ans << endl;
+  return res;
+}
+int main(){
+  int i,j;
+  cin>>n>>m>>k;
+  v.resize(n);
+  for(i=0;i<n;i++) cin>>v[i].first;
+  for(i=0;i<n;i++) cin>>v[i].second;
+  sort(v.begin(),v.end(),greater<P>());
+  cout << rec(0,0,0) << endl;
   return 0;
 }
