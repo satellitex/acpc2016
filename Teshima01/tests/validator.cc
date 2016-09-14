@@ -190,19 +190,23 @@ bool check_circumference(const Circle &c1, const Circle &c2)
     for (int i = 0; i < n; i++) {
         Point bp = Point(bx[i], by[i]);
         Point rp = Point(rx[i], ry[i]);
-        if (!check_point_on_circle(c1, bp) && !check_separate(c1, bp)) {
+        if (( !check_point_on_circle(c1, bp) && check_separate(c1, bp) )||
+            ( check_point_on_circle(c1, bp) && !check_separate(c1, bp) ) ) {
+          return false;
+        }
+
+        if (( !check_point_on_circle(c2, bp) && check_separate(c2, bp) )||
+            ( check_point_on_circle(c2, bp) && !check_separate(c2, bp) ) ) {
+          return false;
+        }
+        
+        if (( !check_point_on_circle(c1, rp) && check_separate(c1, rp) )||
+            ( check_point_on_circle(c1, rp) && !check_separate(c1, rp) ) ) {
             return false;
         }
 
-        if (!check_point_on_circle(c2, bp) && !check_separate(c2, bp)) {
-            return false;
-        }
-
-        if (!check_point_on_circle(c1, rp) && !check_separate(c1, rp)) {
-            return false;
-        }
-
-        if (!check_point_on_circle(c2, rp) && !check_separate(c2, rp)) {
+        if (( !check_point_on_circle(c2, rp) && check_separate(c2, rp) )||
+            ( check_point_on_circle(c2, rp) && !check_separate(c2, rp) ) ) {
             return false;
         }            
     }       
