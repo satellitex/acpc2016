@@ -12,7 +12,6 @@ int main()
   for(int i = 0; i < p; i++) {
     int a, b, c;
     cin >> a >> b >> c;
-    --a, --b;
     net[b][a]++;
   }
   
