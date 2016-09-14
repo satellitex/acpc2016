@@ -154,5 +154,5 @@ bool contain_in_circle()
 bool isIntersectCC(const Circle &a, const Circle &b)
 {
     double d = abs(a.p - b.p);
-    return (d < a.r + b.r && d > abs(a.r - b.r) - EPS);
+    return d < a.r + b.r;
 }
