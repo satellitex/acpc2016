@@ -25,8 +25,8 @@ void solve(int ID){
 
 
   shuffle( vec.begin() , vec.end() , mt );
-  fout<<N<<endl;
-  for(int i=0;i<N;i++)
+  fout<<N-ID<<endl;
+  for(int i=0;i<N-ID;i++)
     fout<< vec[i] <<endl;
 
   fout.close();
