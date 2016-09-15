@@ -8,7 +8,12 @@
 #define MAX_FILE_NAME_LENG 1024
 #define MAX_DOUBLE_LEN 1024
 
-#define EPS (1e-8)
+#define EPS (1e-6)
+
+bool relative_equal(double true_value, double x) {
+    if(true_value == 0) return fabs(x) <= EPS;
+    return fabs((true_value - x) / true_value) <= EPS;
+}
 
 bool validate_double(std::string s) {
 
@@ -90,10 +95,10 @@ int main(int argc, char** argv)
       return 1;
     }
 
-    double diff = stod(diff_str);
-    double out = stod(out_str);
+    double true_value = stod(diff_str);
+    double out_value = stod(out_str);
 
-    if(fabs( diff - out ) <= EPS) {
+    if(fabs( true_value - out_value ) <= EPS || relative_equal(true_value, out_value)) {
         return 0;
     }
     
