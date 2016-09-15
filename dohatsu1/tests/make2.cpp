@@ -49,8 +49,7 @@ void dfs(int x,int f){
 
 int main(){
   dfs(0,0);
-  cout<< vec.size() <<endl;
-  for(int i=0;i<14;i++){
+  for(int i=0;i<8;i++){
     solve(i);
   }
   return 0;
