@@ -26,7 +26,7 @@ void addV(string s){
   }
 }
 
-int V,base,cur;
+int V,base,cur,res=0;
 vector<int> G[MAX_V];
 int match[MAX_V];
 bool used[MAX_V],lr[MAX_V],er[MAX_V],erv[MAX_V],rm[MAX_V],rme[MAX_V];
@@ -116,8 +116,6 @@ bool dfs(int v){
 }
 
 int bipartite_matching(){
-  int res=0;
-  memset(match,-1,sizeof(match));
   for(int v=0;v<V;v++){
     if(rm[v]) continue;
     if(match[v]<0){
@@ -130,26 +128,61 @@ int bipartite_matching(){
   return res;
 }
 
+bool ch(string s){
+  if(match[mv[s]]<0) return true;
+  match[match[mv[s]]]=-1;
+  match[mv[s]]=-1;
+  res--;
+  return false;
+}
+
+bool che(string s){
+  string s1,s2;
+  for(int i=0;i<5;i++){
+    if((('0'<=s[i]&&s[i]<='9')&&(s[i]-'0')%2==0)||
+       (('a'<=s[i]&&s[i]<='f')&&(s[i]-'a')%2==0)){
+      if(s[i]=='0') {
+	s[i]='f';s1=s;s[i]='0';
+      }else if(s[i]=='a') {
+	s[i]='9';s1=s;s[i]='a';
+      }else{
+	s[i]--;s1=s;s[i]++;
+      }
+      s[i]++;s2=s;s[i]--;
+    }
+  }
+  if(mv[s2]==match[mv[s1]]&&mv[s1]==match[mv[s2]]){
+    match[mv[s1]]=-1;
+    match[mv[s2]]=-1;
+    res--;
+    return false;
+  }
+  return true;
+}
+
 void addA(){
   memset(rm,0,sizeof(rm));
   memset(rme,0,sizeof(rme));
   for(int i=0;i<v3.size();i++){
     //cout << v3[i].first << ":" << base << ":";
     if(v3[i].second){
+      if(ch(v3[i].first)) continue;
       rm[mv[v3[i].first]]=true;
       cur=bipartite_matching();
       if(base-cur==1)
-	ans.push_back(v3[i].first),base=cur;
+	ans.push_back(v3[i].first),base--;
       else
 	rm[mv[v3[i].first]]=false;
     }else{
+      if(che(v3[i].first)) continue;
       rme[me[v3[i].first]]=true;
       cur=bipartite_matching();
       if(base-cur==1)
-	ans.push_back(v3[i].first),base=cur;
+	ans.push_back(v3[i].first),base--;
       else
 	rme[me[v3[i].first]]=false;
     }
+    
     //cout << cur << endl;
   }
 }
@@ -166,6 +199,8 @@ int main(){
   v2.erase(unique(v2.begin(),v2.end()),v2.end());
   addE();
   V=v2.size();
+  
+  memset(match,-1,sizeof(match));
   base=bipartite_matching();
   //cout << base << endl;
   addA();
