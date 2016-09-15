@@ -2,7 +2,8 @@
 
 ## Input generators.
 #c_generator(src='generator.c')
-cxx_generator(src='make.cpp')
+cxx_generator(src='make1.cpp')
+cxx_generator(src='make2.cpp')
 #java_generator(src='Generator.java', encoding='UTF-8', mainclass='Generator')
 #script_generator(src='generator.py')
 
