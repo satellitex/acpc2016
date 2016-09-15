@@ -9,49 +9,48 @@ string i2s(int i){
   return res;
 }
 
-int N = 3000; 
+int N = 6000; 
 
 std::mt19937 mt( (int)time(0) );
 std::uniform_int_distribution<> randA(0,17);
 std::uniform_int_distribution<> randB(0,4);
-string tmp0="02468ace00000eeeee";
-string tmp1="13579bdf11111fffff";
-
+string tmp="0123456789abcdef";
+vector<string> vec;
 
 
 void solve(int ID){
-  if(ID<=5)N=3000;
-  else N=3000-ID;
-  
-  
-  vector<string> vec;
+
   ofstream fout ( "random"+ i2s(ID) +".in" );
-  
   set<string> st;
-  
-  for(int i=0;i<N;i++){
-    string str="";
-    int target=randB( mt );
-    
-    for(int j=0;j<5;j++){
-      if(j==target) str+=tmp0[ randA(mt) ];
-      else str+=tmp1[ randA(mt) ];
-    }
 
-    
-    if(st.count(str)>0)continue;
-    st.insert(str);
-    vec.push_back(str);
-  }
 
-  fout<<vec.size()<<endl;
-  for(int i=0;i<(int)vec.size();i++)
+  shuffle( vec.begin() , vec.end() , mt );
+  fout<<N<<endl;
+  for(int i=0;i<N;i++)
     fout<< vec[i] <<endl;
 
   fout.close();
 }
 
+string s="xxxxx";
+void dfs(int x,int f){
+  if(x==5){
+    if(f==1)vec.push_back(s);
+  }else{
+    for(int i=0;i<16;i++){
+      if(f==1 && i%2==0)continue;
+      s[x]=tmp[i];
+      int nf=f;
+      if(i%2==0)nf=1;
+      dfs(x+1,nf);
+    }
+  }
+}
+
 int main(){
+  dfs(0,0);
+  cout<< vec.size() <<endl;
+  
   for(int i=0;i<14;i++){
     solve(i);
   }
