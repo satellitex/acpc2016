@@ -9,18 +9,18 @@ string i2s(int i){
   return res;
 }
 
-int N = 5000; 
+int N = 6000; 
 
 std::mt19937 mt( (int)time(0) );
 std::uniform_int_distribution<> randA(0,17);
 std::uniform_int_distribution<> randB(0,4);
-string tmp="0123cdef";
+string tmp="0123456789abcdef";
 vector<string> vec;
 
 
 void solve(int ID){
 
-  ofstream fout ( "m3random"+ i2s(ID) +".in" );
+  ofstream fout ( "m1random"+ i2s(ID) +".in" );
   set<string> st;
 
 
@@ -37,7 +37,7 @@ void dfs(int x,int f){
   if(x==5){
     if(f==1)vec.push_back(s);
   }else{
-    for(int i=0;i<8;i++){
+    for(int i=0;i<16;i++){
       if(f==1 && i%2==0)continue;
       s[x]=tmp[i];
       int nf=f;
