@@ -1,38 +1,56 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+string i2s(int i){
+  stringstream ss;
+  ss<<i;
+  string res;
+  ss>>res;
+  return res;
+}
+
+int N = 6000; 
+
 std::mt19937 mt( (int)time(0) );
-std::uniform_int_distribution<> randA(0,10);
+std::uniform_int_distribution<> randA(0,17);
+std::uniform_int_distribution<> randB(0,4);
+string tmp="8135bdf";
+vector<string> vec;
 
-string tmp="0123cdef";
 
-vector<string> v;
+void solve(int ID){
+
+  ofstream fout ( "m4random"+ i2s(ID) +".in" );
+  set<string> st;
+
+
+  shuffle( vec.begin() , vec.end() , mt );
+  fout<<N<<endl;
+  for(int i=0;i<N;i++)
+    fout<< vec[i] <<endl;
+
+  fout.close();
+}
+
 string s="xxxxx";
-
 void dfs(int x,int f){
   if(x==5){
-    if(f==1)v.push_back(s);
+    if(f==1)vec.push_back(s);
   }else{
-    for(int i=0;i<8;i++){
-      if(f==1 && i%2==0)continue;
+    for(int i=0;i<7;i++){
+      if(f==1 && i==0)continue;
       s[x]=tmp[i];
       int nf=f;
-      if(i%2==0)nf=1;
+      if(i==0)nf=1;
       dfs(x+1,nf);
     }
   }
 }
+
 int main(){
-  
-  dfs(0,0);  
-  
-  
-  shuffle( v.begin() , v.end() , mt );
-
-
-  cout<<3000<<endl;
-  for(int i=0;i<3000;i++){
-    cout<<v[i]<<endl;
+  dfs(0,0);
+  for(int i=0;i<4;i++){
+    solve(i);
   }
   return 0;
 }
