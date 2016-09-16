@@ -50,9 +50,10 @@ Hogemon Getでは、町<var>i</var>でボールを<var>d<sub>i</sub></var>個入
     <li>5 &le; <var>c<sub>j</sub></var> &le; 100</li>
     <li>町1から町<var>N</var>へは<var>R</var>分以内で移動できることが保証されている</li>
     <li>ある2つの町の組に対して2本以上の道があることはない</li>
-
+    <li>同じ町で任意時間、滞在することができる</li>
 
 </ul>
+
 
 <h2>Output</h2>
 町1から町<var>N</var>へ<var>R</var>分以内に移動するまでに入手することができる最大のボールの個数を1行で出力せよ。
@@ -74,22 +75,25 @@ Hogemon Getでは、町<var>i</var>でボールを<var>d<sub>i</sub></var>個入
 <pre>
 6
 </pre>
+
+
 <div style="width: 500px;">
 <img src="image/H_figure1.png" alt="図1" style="width: 500px;"><br>
 </div>
-
-<p> 
-時間:場所:ボール<br>
-0:町1:0個<br>
-5:町2:1個<br>
-10:町3:2個<br>
-15:町4:3個<br>
-20:町3:3個(最後にボールを入手してから15分経過していないのでボールを入手することができない)<br>
-25:町2:4個<br>
-30:町3:5個<br>
-35:町4:6個<br>
-40:町5:6個<br>
-</p>
+<br>
+<table border="1">
+<tr><td>時間(分)</td><td>町の番号</td><td>ボールの数(個)</td></tr>
+<tr><td>0</td><td>1</td><td>0</td></tr>
+<tr> <td>5</td><td>2</td><td>1</td></tr>
+<tr> <td>10</td><td>3</td><td>2</td></tr>
+<tr> <td>15</td><td>4</td><td>3</td></tr>
+<tr> <td>20</td><td>3</td><td>3</td></tr> 
+<tr> <td>25</td><td>2</td><td>4</td></tr>
+<tr> <td>30</td><td>3</td><td>5</td></tr>
+<tr> <td>35</td><td>4</td><td>6</td></tr>
+<tr> <td>40</td><td>5</td><td>6</td></tr>
+</table>
+※時間20分の町3では最後に町3でボールを入手してから15分経過していないのでボールを入手することができない。
 
 <h2>Sample Input 2</h2>
 <pre>
@@ -108,16 +112,20 @@ Hogemon Getでは、町<var>i</var>でボールを<var>d<sub>i</sub></var>個入
 <img src="image/H_figure2.png" alt="図2" style="width: 500px;"><br>
 </div>
 <p>
-時間:場所:ボール<br>
-0:町1:0個<br>
-5:町2:3個<br>
-20:町2:6個(町2で15分待つ)<br>
-35:町2:9個(町2で15分待つ)<br>
-50:町2:12個(町2で15分待つ)<br>
-65:町2:15個(町2で15分待つ)<br>
-95:町3:16個 <br>
-100:町4:16個<br>
-</p>
+
+<table border="1">
+<tr><td>時間(分)</td><td>町の番号</td><td>ボールの数(個)</td></tr>
+<tr><td>0</td><td>1</td><td>0</td></tr>
+<tr> <td>5</td><td>2</td><td>3</td></tr>
+<tr> <td>20</td><td>2</td><td>6</td></tr>
+<tr> <td>35</td><td>2</td><td>9</td></tr>
+<tr> <td>50</td><td>2</td><td>12</td></tr>
+<tr> <td>65</td><td>2</td><td>15</td></tr>
+<tr> <td>95</td><td>3</td><td>16</td></tr>
+<tr> <td>100</td><td>4</td><td>16</td></tr>
+</table>
+
+
 
 <h2>Sample Input 3</h2>
 <pre>
