@@ -32,6 +32,11 @@ P dfs2(int pos,int pre,int dep){
   return mem[pos]=P(ndep,cnt);
 }
 
+P bfs(){
+  
+
+}
+
 int main(){
   cin>>n;
   for(int i=0,a,b;i<n-1;i++){

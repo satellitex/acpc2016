@@ -7,6 +7,6 @@
 ##   time_limit: The time limit of this problem in seconds.
 problem(title = "HOGE",
     id = "X",
-    time_limit = 5.0,
+    time_limit = 20.0,
    # reference_solution='haji_TLE'
 )
