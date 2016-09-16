@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-const int MAX_V = 6222;
+const int MAX_V = 12222;
 const int INF = 1<<29;
 struct edge{int to,cap,rev;};
 struct Edge{
