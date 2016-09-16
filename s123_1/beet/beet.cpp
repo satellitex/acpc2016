@@ -62,6 +62,7 @@ int main(){
       
     }
   }
+
   int ans=0;
   for(i=0;i<2050;i++)
     for(j=0;j<n;j++)
