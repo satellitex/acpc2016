@@ -16,7 +16,7 @@ Hogemon Getでは、町<var>i</var>でボールを<var>d<sub>i</sub></var>個入
 
 </p>
 <p>
-がっちょ君は最初、町1にいて、町<var>N</var>に<var>R</var>分以内で移動しなければならない。<br>
+がっちょ君は最初、町1にいて、町<var>N</var>に<var>R</var>分以内で移動しなければならない。(R分後に町Nにいる必要がある。)<br>
 がっちょ君は移動の際に、最大でいくつのボールを入手することができるだろうか。
 </p>
 
@@ -50,15 +50,12 @@ Hogemon Getでは、町<var>i</var>でボールを<var>d<sub>i</sub></var>個入
     <li>5 &le; <var>c<sub>j</sub></var> &le; 100</li>
     <li>町1から町<var>N</var>へは<var>R</var>分以内で移動できることが保証されている</li>
     <li>ある2つの町の組に対して2本以上の道があることはない</li>
-    <li>同じ町で任意時間、滞在することができる</li>
-
 </ul>
 
 
 <h2>Output</h2>
-町1から町<var>N</var>へ<var>R</var>分以内に移動するまでに入手することができる最大のボールの個数を1行で出力せよ。
 <p>
-
+町1から町<var>N</var>へ<var>R</var>分以内に移動するまでに入手することができる最大のボールの個数を1行で出力せよ。
 </p>
 
 <h2>Sample Input 1</h2>
@@ -76,11 +73,13 @@ Hogemon Getでは、町<var>i</var>でボールを<var>d<sub>i</sub></var>個入
 6
 </pre>
 
-
+<p>
 <div style="width: 500px;">
 <img src="image/H_figure1.png" alt="図1" style="width: 500px;"><br>
 </div>
-<br>
+</p>
+
+<p>
 <table border="1">
 <tr><td>時間(分)</td><td>町の番号</td><td>ボールの数(個)</td></tr>
 <tr><td>0</td><td>1</td><td>0</td></tr>
@@ -94,6 +93,7 @@ Hogemon Getでは、町<var>i</var>でボールを<var>d<sub>i</sub></var>個入
 <tr> <td>40</td><td>5</td><td>6</td></tr>
 </table>
 ※時間20分の町3では最後に町3でボールを入手してから15分経過していないのでボールを入手することができない。
+</p>
 
 <h2>Sample Input 2</h2>
 <pre>
@@ -108,11 +108,14 @@ Hogemon Getでは、町<var>i</var>でボールを<var>d<sub>i</sub></var>個入
 <pre>
 16
 </pre>
+
+<p>
 <div style="width: 500px;">
 <img src="image/H_figure2.png" alt="図2" style="width: 500px;"><br>
 </div>
-<p>
+</p>
 
+<p>
 <table border="1">
 <tr><td>時間(分)</td><td>町の番号</td><td>ボールの数(個)</td></tr>
 <tr><td>0</td><td>1</td><td>0</td></tr>
@@ -124,7 +127,7 @@ Hogemon Getでは、町<var>i</var>でボールを<var>d<sub>i</sub></var>個入
 <tr> <td>95</td><td>3</td><td>16</td></tr>
 <tr> <td>100</td><td>4</td><td>16</td></tr>
 </table>
-
+</p>
 
 
 <h2>Sample Input 3</h2>
