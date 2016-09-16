@@ -6,6 +6,8 @@ int ball[31];
 int G[31][31];
 int dp[31][31][5001];
 
+
+
 int main(){
   int n,m,r;
   cin>>n>>m>>r;
