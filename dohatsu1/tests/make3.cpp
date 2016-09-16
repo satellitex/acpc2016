@@ -49,7 +49,7 @@ void dfs(int x,int f){
 
 int main(){
   dfs(0,0);
-  for(int i=0;i<4;i++){
+  for(int i=0;i<7;i++){
     solve(i);
   }
   return 0;
