@@ -1,6 +1,6 @@
 cxx_generator(src='generator.cc')
 cxx_generator(src='gen_rand_small.cc')
-cxx_generator(src='gen_small_bottom_up.cc')
+# cxx_generator(src='gen_small_bottom_up.cc')
 cxx_validator(src='validator.cc')
 cxx_validator(src='validator2.cc')
 cxx_judge(src='judge.cc')

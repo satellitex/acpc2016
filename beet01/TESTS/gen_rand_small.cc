@@ -37,7 +37,7 @@ string i2s(int x){
 
 int main() {
 
-  for(int i=0;i<100;i++){
+  for(int i=0;i<20;i++){
     string s="03_rand_small_"+i2s(i)+".in";
     randomCaseGenerator(s.c_str());
   }

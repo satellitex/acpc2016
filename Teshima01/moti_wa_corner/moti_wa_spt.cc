@@ -174,73 +174,7 @@ struct xor128 {
   }
 } rndgen;
 
-namespace visualizer {
-
-////////////////////////////////////
-ofstream ofs;
-double zoom = 1;
-////////////////////////////////////
-
-string random_color() {
-  stringstream ss; ss << std::hex << rndgen.next(16777216);
-  return "#" + ss.str();
-}
-
-ostream& set_offset(P p) {
-  return ofs << "set_offset(" << p.real() << "," << p.imag() << ")" << endl;
-}
-
-ostream& line(Line l, string color = "") {
-  l[0] *= zoom, l[1] *= zoom;
-  return ofs << "line(" << l[0].real() << "," << l[0].imag() << ","
-    << l[1].real() << "," << l[1].imag() << ","
-    << (color.empty() ? "\"" + random_color() + "\"" : "\"" + color + "\"") << ")"
-    << endl;
-}
-
-ostream& circle(Circle c, string color = "") {
-  c = Circle(P(c.p.real() * zoom, c.p.imag() * zoom), c.r * zoom);
-  return ofs << "circle(" << c.p.real() << "," << c.p.imag() << "," << c.r << ","
-  << (color.empty() ? "\"" + random_color() + "\"" : "\"" + color + "\"") << ")" << endl;
-}
-
-ostream& plot(P p, string color = "") {
-  auto c = Circle(P(p.real() * zoom, p.imag() * zoom), 0.1 * zoom);
-  return ofs << "circle(" << c.p.real() << "," << c.p.imag() << "," << c.r << ","
-  << (color.empty() ? "\"" + random_color() + "\"" : "\"" + color + "\"") << ", true)" << endl;
-}
-
-void show_picture() {
-  ofs.close();
-  int r = system("open visualizer.html");
-  assert(!WEXITSTATUS(r));
-}
-
-////////////////////////////////////////////////////
-
-void init() {
-  ofs = ofstream("data.js");
-}
-
-void set_grid() {
-  int Min = -100, Max = +100;
-  for(int i=Min; i<Max; i++) {
-    line(Line(P(i, -1000), P(i, 1000)), "#eeeeee");
-    line(Line(P(-1000, i), P(1000, i)), "#eeeeee");
-  }
-}
-
-}
-
 int main() {
-
-  #ifdef __DEBUG
-  using namespace visualizer;
-  init();
-  zoom = 15;//stoi(string(argv[1]));
-  set_offset(P(300, 160));
-  set_grid();
-  #endif
 
   int N; cin >> N;
 
@@ -265,9 +199,6 @@ int main() {
 
     if(ok) {
       dists[i][j] = min(dists[i][j], seg.length());
-      #ifdef __DEBUG
-      line(seg, "#dddddd");
-      #endif
     }
   }
 
@@ -318,17 +249,7 @@ int main() {
 
         if(intersect)
           continue;
-
-        #ifdef __DEBUG
-        line(rsegment, "#dddddd");
-        line(bsegment, "#dddddd");
-        if(intersect_sp(rsegment, rtangent))
-          plot(rtangent, "#ff8888");
-        if(intersect_sp(bsegment, btangent))
-          plot(btangent, "#8888ff");
-        plot(purple_point, "#ff00ff");
-        #endif
-
+        
         //pd.add_edge(i, N + j, 1, rsegment.length() + bsegment.length());
         auto length = rsegment.length() + bsegment.length();
         if(dists[i][j] > length) {
@@ -355,23 +276,6 @@ int main() {
   auto r = pd.min_cost_flow(SRC, SINK, N);  
   if(r < 0) cout << "Impossible" << endl;
   else      printf("%.10f\n", r);
-  
-  #ifdef __DEBUG
-
-  rep(i, N) rep(j, N) {
-    if(dists[i][j] < inf) {
-      line(min_rsegment[i][j], "#ff88ff");
-      line(min_bsegment[i][j], "#ff88ff");
-      cout << "length: " << min_rsegment[i][j].length() + min_bsegment[i][j].length() << endl;
-    }
-  }
-
-  plot(P(), "#000000");     // 原点
-  circle(cs[0], "#ff0000"); // 赤いタコ
-  circle(cs[1], "#0000ff"); // 青いタコ
-  rep(i, N) plot(rs[i], "#ff0000"), plot(bs[i], "#0000ff"); // 赤いタコの足、青いタコの足
-  show_picture();
-  #endif
 
   return 0;
 }
