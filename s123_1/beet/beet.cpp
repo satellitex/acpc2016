@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
-int dp[2050][50][50][2]={};
-int dp2[1050][50][50][2]={};
+int dp[2050][50][50][2][2]={};
+int dp2[1050][50][50][2][2]={};
 struct E{int to,cost;E(int to,int cost):to(to),cost(cost){}};
 struct status{
   int cur,pre,time,num;
@@ -13,7 +13,7 @@ struct status{
   }
 };
 int main(){
-  int n,m,r,i,j,k,a,b,c;
+  int n,m,r,i,j,k,l,a,b,c;
   cin>>n>>m>>r;
   int d[n];
 
@@ -34,28 +34,28 @@ int main(){
   while(!q.empty()){
     status s=q.top();q.pop();
     if(s.time>r) continue;
-    if(~dp[s.num][s.cur][s.pre][s.pf]&&
-       dp[s.num][s.cur][s.pre][s.pf]<=s.time) continue;
-    dp[s.num][s.cur][s.pre][s.pf]=s.time;
-    if(~dp2[s.time][s.cur][s.pre][s.pf]&&
-       dp2[s.time][s.cur][s.pre][s.pf]>=s.num) continue;
-    dp2[s.time][s.cur][s.pre][s.pf]=s.num;
+    if(~dp[s.num][s.cur][s.pre][s.f][s.pf]&&
+       dp[s.num][s.cur][s.pre][s.f][s.pf]<=s.time) continue;
+    dp[s.num][s.cur][s.pre][s.f][s.pf]=s.time;
+    if(~dp2[s.time][s.cur][s.pre][s.f][s.pf]&&
+       dp2[s.time][s.cur][s.pre][s.f][s.pf]>=s.num) continue;
+    dp2[s.time][s.cur][s.pre][s.f][s.pf]=s.num;
     
     //cout <<s.time<<":"<<s.cur<<":"<<s.pre<<":"<<s.num<<":"<<s.pf<<endl;
     for(i=0;i<v[s.cur].size();i++){
       if(s.time+v[s.cur][i].cost > r) continue;
       if(v[s.cur][i].to==s.pre&&v[s.cur][i].cost*2<15&&s.pf){
-	if(!~dp[s.num][v[s.cur][i].to][s.cur][s.f]||
-	   dp[s.num][v[s.cur][i].to][s.cur][s.f]>s.time+v[s.cur][i].cost)
+	if(!~dp[s.num][v[s.cur][i].to][s.cur][false][s.f]||
+	   dp[s.num][v[s.cur][i].to][s.cur][false][s.f]>s.time+v[s.cur][i].cost)
 	  q.push(status(s.time+v[s.cur][i].cost,v[s.cur][i].to,
 			s.cur,s.num,false,s.f));
-	if(!~dp[s.num+d[v[s.cur][i].to]][v[s.cur][i].to][s.cur][s.f]||
-	   dp[s.num+d[v[s.cur][i].to]][v[s.cur][i].to][s.cur][s.f]>s.time+15-v[s.cur][i].cost)
+	if(!~dp[s.num+d[v[s.cur][i].to]][v[s.cur][i].to][s.cur][true][s.f]||
+	   dp[s.num+d[v[s.cur][i].to]][v[s.cur][i].to][s.cur][true][s.f]>s.time+15-v[s.cur][i].cost)
 	  q.push(status(s.time+15-v[s.cur][i].cost,v[s.cur][i].to,
 			n,s.num+d[v[s.cur][i].to],true,s.f));
       }else{
-	if(!~dp[s.num+d[v[s.cur][i].to]][v[s.cur][i].to][s.cur][s.f]||
-	   dp[s.num+d[v[s.cur][i].to]][v[s.cur][i].to][s.cur][s.f]>s.time+v[s.cur][i].cost)
+	if(!~dp[s.num+d[v[s.cur][i].to]][v[s.cur][i].to][s.cur][true][s.f]||
+	   dp[s.num+d[v[s.cur][i].to]][v[s.cur][i].to][s.cur][true][s.f]>s.time+v[s.cur][i].cost)
 	  q.push(status(s.time+v[s.cur][i].cost,v[s.cur][i].to,
 			s.cur,s.num+d[v[s.cur][i].to],true,s.f));
       }
@@ -67,7 +67,8 @@ int main(){
   for(i=0;i<2050;i++)
     for(j=0;j<n;j++)
       for(k=0;k<2;k++)
-	  if(~dp[i][n-1][j][k]&&dp[i][n-1][j][k]<=r)
+	for(l=0;l<2;l++)
+	  if(~dp[i][n-1][j][k][l]&&dp[i][n-1][j][k][l]<=r)
 	    ans=max(ans,i);
   
   cout << ans << endl;
