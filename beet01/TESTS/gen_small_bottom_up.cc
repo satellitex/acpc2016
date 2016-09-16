@@ -46,7 +46,7 @@ int main() {
     }
   }
 
-  for(int i=0;i<100;i++){
+  for(int i=0;i<10;i++){
     string s="04_small_bottom_up_"+i2s(i)+".in";
     randomCaseGenerator(s.c_str());
   }
