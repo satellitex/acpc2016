@@ -45,13 +45,19 @@ int main(){
     for(i=0;i<v[s.cur].size();i++){
       if(s.time+v[s.cur][i].cost > r) continue;
       if(v[s.cur][i].to==s.pre&&v[s.cur][i].cost*2<15&&s.pf){
-	q.push(status(s.time+v[s.cur][i].cost,v[s.cur][i].to,
-		      s.cur,s.num,false,s.f));
-	q.push(status(s.time+15-v[s.cur][i].cost,v[s.cur][i].to,
-		      n,s.num+d[v[s.cur][i].to],true,s.f));
+	if(!~dp[s.num][v[s.cur][i].to][s.cur][s.f]||
+	   dp[s.num][v[s.cur][i].to][s.cur][s.f]>s.time+v[s.cur][i].cost)
+	  q.push(status(s.time+v[s.cur][i].cost,v[s.cur][i].to,
+			s.cur,s.num,false,s.f));
+	if(!~dp[s.num+d[v[s.cur][i].to]][v[s.cur][i].to][s.cur][s.f]||
+	   dp[s.num+d[v[s.cur][i].to]][v[s.cur][i].to][s.cur][s.f]>s.time+15-v[s.cur][i].cost)
+	  q.push(status(s.time+15-v[s.cur][i].cost,v[s.cur][i].to,
+			n,s.num+d[v[s.cur][i].to],true,s.f));
       }else{
-	q.push(status(s.time+v[s.cur][i].cost,v[s.cur][i].to,
-		      s.cur,s.num+d[v[s.cur][i].to],true,s.f));
+	if(!~dp[s.num+d[v[s.cur][i].to]][v[s.cur][i].to][s.cur][s.f]||
+	   dp[s.num+d[v[s.cur][i].to]][v[s.cur][i].to][s.cur][s.f]>s.time+v[s.cur][i].cost)
+	  q.push(status(s.time+v[s.cur][i].cost,v[s.cur][i].to,
+			s.cur,s.num+d[v[s.cur][i].to],true,s.f));
       }
       
     }
