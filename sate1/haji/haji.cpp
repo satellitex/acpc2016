@@ -1,54 +1,38 @@
 #include <bits/stdc++.h>
 #define N 100000
-#define f first
-#define s second
 using namespace std;
-typedef pair<int,int> P;
-typedef pair<P,int> PP;
+struct po{int dep,cnt;};
 vector <int> G[N];
-vector <PP> D[N];
-int dis[N];
-int n,L;
-int start,goal;
+int n,D[N],mxd,mxn;
 
-void dfs(int pos,int pre,int dep,int &a){
-  if(L<dep) L=dep,a=pre;
-  dis[pos]=dep;
+void dfs(int pos,int pre,int dep){
+  if(mxd<=dep) mxd=dep,mxn=pos;
+  D[pos]=max(D[pos],dep);
   for(int i=0;i<G[pos].size();i++)
-    if(G[pos][i]!=pre) dfs(G[pos][i],pos,dep+1,a);
+    if(G[pos][i]!=pre) dfs(G[pos][i],pos,dep+1);
 }
 
-P mem[N];
-P dfs2(int pos,int pre,int dep){
-  if(mem[N].f!=-1) return mem[N];
-  int cnt=1,ndep=0;
-  P res;
-  for(int i=0;i<G[pos].size();i++){
-    if(G[pos][i]==pre)continue;
-    res=dfs2(G[pos][i],pos,dep+1);
-    cnt+=res.f+res.s;
-    ndep=max(ndep,res.f);
-  }
-  return mem[pos]=P(ndep,cnt);
-}
-
-P bfs(){
-  
-
+po dfs2(int pos,int pre){
+  po res=po{0,0};
+  for(int i=0;i<G[pos].size();i++)
+    if(G[pos][i]!=pre){
+      po a=dfs2(G[pos][i],pos);
+      res.cnt+=a.dep+a.cnt;
+      res.dep=max(res.dep,a.dep);
+    }
+  return po{res.dep+1,res.cnt+1-res.dep};
 }
 
 int main(){
   cin>>n;
   for(int i=0,a,b;i<n-1;i++){
-    cin>>a>>b;a--,b--;
-    G[a].push_back(b);
-    G[b].push_back(a);
+    scanf("%d%d",&a,&b);
+    G[a-1].push_back(b-1);
+    G[b-1].push_back(a-1);
   }
-  dfs(0,-1,0,start);
-  memset(dis,0,sizeof(dis));
-  dfs(start,-1,0,goal);
-  memset(mem,-1,sizeof(mem));
-  
-  for(int i=0;i<n;i++)cout <<dfs2(i,-1,0).s<<endl;
+
+  dfs(0,-1,0),dfs(mxn,-1,0),dfs(mxn,-1,0);
+  po res=dfs2(mxn,-1);
+  for(int i=0;i<n;i++)printf("%d\n",res.cnt+(mxd-D[i]-1));
   return 0;
 }
