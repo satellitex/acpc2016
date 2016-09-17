@@ -1,0 +1,140 @@
+<%@ page pageEncoding="UTF-8"%>
+
+<h1>Problem D: Magical Girl Sun Ranger</h1>
+
+<h2>Story</h2>
+<p>
+魔法少女サンレンジャーは、悪の組織から人々を守るために日々活動をしている。<br>
+彼女は敵を倒すときの決め技「テラ粒子レクイエムシュート」を持っている。<br>
+それは、両手でハート型を作りながらステッキを持ち、ステッキから攻撃を繰り出すというものである。
+</p>
+<p>
+このステッキは内部で魔力を生成し、その魔力レベルを上げ、決め技を発射するという仕組みになっている。<br>
+ステッキの内部は、魔力レベルを上げる点や魔力を使い決め技を発射する点、魔力を転送する装置で構成される。<br>
+</p>
+<p>
+  ステッキの内部の動作はプログラムによって制御できる。<br>
+プログラムは自由に組むことができるが、せっかくなので決め技を発射するときの魔力レベルが最大になるようにしたい。
+</p>
+<p>
+  サンレンジャーはプログラムを書けないので代わりにあなたが書いてあげることにした。
+</p>
+
+<h2>Problem</h2>
+<p>
+それぞれ1から<var>N</var>までの番号が割り当てられた<var>N</var>個の点と<var>M</var>個の転送装置がある。<br>
+最初、魔力レベルが1である魔力が点1に存在する。最終的にできるだけレベルが大きい魔力を点<var>N</var>に転送したい。
+</p>
+<p>
+1から<var>N</var>-1までの各点では、現在の魔力レベルに1以上の任意の魔力レベルを加算することができる(加算しなくても良いことに注意せよ)。<br>
+また、<var>i</var>番目の転送装置は、点<var>a<sub>i</sub></var>から点<var>b<sub>i</sub></var>まで、魔力レベルがちょうど<var>c<sub>i</sub></var>のときに限り、魔力を転送することができる。<br>
+なお、このとき<var>a<sub>i</sub></var>に存在する魔力を分散させることはできない。<br> 
+</p>
+<p>
+魔力を点<var>N</var>へ転送したときの魔力レベルの最大値を出力せよ。もし、点<var>N</var>へ転送できない場合は、-1を出力せよ。
+</p>
+
+<h2>Input</h2>
+<p>入力は以下の形式で与えられる。</p>
+<pre>
+<var>N</var> <var>M</var>
+<var>a<sub>1</sub></var> <var>b<sub>1</sub></var> <var>c<sub>1</sub></var>
+<var>a<sub>2</sub></var> <var>b<sub>2</sub></var> <var>c<sub>2</sub></var>
+…
+<var>a<sub>M</sub></var> <var>b<sub>M</sub></var> <var>c<sub>M</sub></var>
+</pre>
+<p>
+1行目には、2つの整数<var>N</var>, <var>M</var>が空白区切りで与えられる。<br>
+2行目から<var>M</var>+1行目のそれぞれの行<var>i</var>には、3つの整数<var>a<sub>i</sub></var>, <var>b<sub>i</sub></var>, <var>c<sub>i</sub></var>が空白区切りで与えられる。
+</p>
+
+<h2>Constraints</h2>
+<p>入力は以下の条件を満たす。</p>
+<ul>
+    <li>2 &le; <var>N</var> &le; 10<sup>5</sup></li>
+    <li>1 &le; <var>M</var> &le; 2 &times; 10<sup>5</sup></li>
+    <li>1 &le; <var>a<sub>i</sub></var> &lt; <var>N</var></li>
+    <li>1 &le; <var>b<sub>i</sub></var> &le; <var>N</var></li>
+    <li>1 &le; <var>c<sub>i</sub></var> &le; 10<sup>9</sup></li>
+    <li><var>a<sub>i</sub></var> &ne; <var>b<sub>i</sub></var></li>
+</ul>
+
+<h2>Output</h2>
+<p>
+点<var>N</var>へ魔力を転送できる場合は、その最大の魔力レベルを1行に出力する。転送できない場合は、代わりに-1を出力する。
+</p>
+
+<h2>Sample Input 1</h2>
+<pre>
+3 2
+1 2 10
+2 3 20
+</pre>
+
+<h2>Sample Output 1</h2>
+<pre>
+20
+</pre>
+<p>
+<img src="image/D_sample1.png" alt="図1" style="width: 70px"><br>
+まず、点1で魔力レベルを10まで上げ、点2へ魔力を転送する。<br>
+次に、点2で魔力レベルを20まで上げ、点3へ魔力を転送する。<br>
+以上より、点3に魔力レベル20で転送することができる。
+</p>
+
+<h2>Sample Input 2</h2>
+<pre>
+4 4
+1 2 27
+1 3 37
+2 3 47
+3 1 57
+</pre>
+
+<h2>Sample Output 2</h2>
+<pre>
+-1
+</pre>
+
+<p>
+<img src="image/D_sample2.png" alt="図2" style="width: 200px"><br>
+点4に繋がる転送装置がないため、点4へ魔力を転送することができない。
+</p>
+
+<h2>Sample Input 3</h2>
+<pre>
+3 3
+1 2 13
+2 3 17
+2 3 15
+</pre>
+
+<h2>Sample Output 3</h2>
+<pre>
+17
+</pre>
+<p>
+<img src="image/D_sample3.png" alt="図3" style="width: 70px"><br>
+まず、点1で魔力レベルを13まで上げ、点2へ魔力を転送する。<br>
+次に、点2から点3に繋がる転送装置には、魔力レベル17で転送できるものと魔力レベル15で転送できるものがあるので、魔力レベルを17まで上げて転送する。<br>
+以上より、点3に魔力レベル17で転送することができる。
+</p>
+
+<h2>Sample Input 4</h2>
+<pre>
+3 2
+1 2 20
+2 3 10
+</pre>
+
+<h2>Sample Output 4</h2>
+<pre>
+-1
+</pre>
+<p>
+<img src="image/D_sample4.png" alt="図4" style="width: 70px"><br>
+まず、点1で魔力レベルを20まで上げ、点2へ魔力を転送する。<br>
+点2から点3へは、魔力レベルが10のとき魔力を転送することができる。<br>
+しかし、魔力レベルを下げることはできないため、点3へ魔力を転送することができない。
+</p>
+
