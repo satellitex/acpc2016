@@ -69,7 +69,7 @@ void start(int ID){
 }
 
 int main(){
-  for(int i=0;i<10;i++){
+  for(int i=0;i<24;i++){
     init();
     start(i);
   }
