@@ -1,0 +1,3 @@
+zoom, 30
+offx, 500
+offy, 250
