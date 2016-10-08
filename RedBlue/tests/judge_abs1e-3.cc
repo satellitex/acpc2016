@@ -3,13 +3,21 @@
 #include <cmath>
 #include <cstring>
 #include <string>
+#include <sstream>
 #include "testlib.h"
 
 #define MAX_FILE_NAME_LENG 1024
 #define MAX_DOUBLE_LEN 1024
 
 #define EPS (1e-3)
-
+double stod(std::string str){
+  std::stringstream ss;
+  ss<<str;
+  double res;
+  ss>>res;
+  return res;
+  
+}
 bool validate_double(std::string s) {
 
     if(s.empty())
