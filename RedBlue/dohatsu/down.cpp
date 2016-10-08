@@ -178,17 +178,18 @@ double getCost(P a,P b,C c,C d,bool debug=false){
       S bs=vb[j];
       if( isParallel(as,bs) )continue;
       P target=getcrosspoint(as.p, as.q, bs.p, bs.q);
-      /*
-      if(debug){
-        cout<<as.p<<' '<<as.q<<' '<<bs.p<<' '<<bs.q<<endl;
-      }
-      */
       
       if( getState(c, S(a,target)) !=1 )continue;
       if( getState(c, S(b,target)) !=1 )continue;
       if( getState(d, S(a,target)) !=1 )continue;
       if( getState(d, S(b,target)) !=1 )continue;
-
+      /*
+      if(debug){
+        
+        cout<<as.p<<' '<<as.q<<' '<<bs.p<<' '<<bs.q<<endl;
+        
+      }
+      */
       res=min(res, abs(target-a)+abs(target-b) );
     }
   }
@@ -206,10 +207,10 @@ int main(){
   
   double x,y,r;
   cin>>x>>y>>r;
-  C ca(x,y,r);
+  C ca(x,y,r- (1e-8));
   
   cin>>x>>y>>r;
-  C cb(x,y,r);
+  C cb(x,y,r- (1e-8));
   
 
   SI=n+n;
@@ -232,6 +233,7 @@ int main(){
     add_edge(n+i,TI,1,0);
     for(int j=0;j<n;j++){
       double cost=getCost(a[i],b[j],ca,cb, i==0&&j==0);
+      
       add_edge(i,n+j,1,cost);
     }
   }

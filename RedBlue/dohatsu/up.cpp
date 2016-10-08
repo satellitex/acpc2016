@@ -206,10 +206,10 @@ int main(){
   
   double x,y,r;
   cin>>x>>y>>r;
-  C ca(x,y,r+ (1e-9) );
+  C ca(x,y,r+ (1e-7) );
   
   cin>>x>>y>>r;
-  C cb(x,y,r- (1e-9) );
+  C cb(x,y,r- (1e-7) );
   
 
   SI=n+n;
