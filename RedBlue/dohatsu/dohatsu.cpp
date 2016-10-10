@@ -238,6 +238,9 @@ int main(){
 
 
   double ans=min_cost_flow(SI,TI,n);
+
+  assert( ans <= 10000.0 );
+  
   if(ans<0){
     cout<<"Impossible"<<endl;
   }else{
