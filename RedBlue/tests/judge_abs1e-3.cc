@@ -10,7 +10,7 @@
 #define MAX_DOUBLE_LEN 1024
 
 #define EPS (1e-3)
-double stod(std::string str){
+double mystod(std::string str){
   std::stringstream ss;
   ss<<str;
   double res;
@@ -95,8 +95,8 @@ int main(int argc, char** argv)
       return 1;
     }
 
-    double diff = stod(diff_str);
-    double out = stod(out_str);
+    double diff = mystod(diff_str);
+    double out = mystod(out_str);
 
     if(fabs( diff - out ) <= EPS) {
         return 0;
