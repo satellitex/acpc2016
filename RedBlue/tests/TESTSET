@@ -10,6 +10,9 @@
 #c_validator(src='validator.c')
 cxx_validator(src='GeoValid.cpp')
 cxx_validator(src='GeneMaxA.cpp')
+cxx_validator(src='GeneMaxB.cpp')
+cxx_validator(src='GeneMaxC.cpp')
+cxx_validator(src='GeneMaxD.cpp')
 #java_validator(src='Validator.java', encoding='UTF-8', mainclass='Validator')
 #script_validator(src='validator.py')
 

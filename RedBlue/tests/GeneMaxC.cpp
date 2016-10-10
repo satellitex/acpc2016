@@ -11,27 +11,29 @@ string i2s(int i){
 
 
 std::mt19937 mt( (int)time(0) );
-std::uniform_int_distribution<> randA(1,60);
+std::uniform_int_distribution<> randA(1,200);
 
 
 
 void solve(int ID){
-  ofstream fout ( "3_randomA_"+ i2s(ID) +".in" );
+  ofstream fout ( "3_randomC_"+ i2s(ID) +".in" );
 
   int N=100;
   
   fout<<N<<endl;
   
-  fout<<-30<<' '<<30<<' '<<30<<endl;
-  fout<<30<<' '<<-30<<' '<<30<<endl;
+  fout<<5<<' '<<15<<' '<<15<<endl;
+  fout<<-5<<' '<<-15<<' '<<15<<endl;
 
   map<int, map<int,int> > mp;
   
   for(int i=0;i<N;i++){
     while(1){
-      int x=randA(mt);
-      int y=randA(mt);
-      if(i%10==0)x=-x,y=-y;
+      int x=randA(mt)-100;
+      int y=40;
+
+      if(i%20==0)y=-y;
+       
       if(mp[x][y])continue;
       mp[x][y]=true;
       fout<<x<<' '<<y<<endl;
@@ -41,9 +43,11 @@ void solve(int ID){
   
   for(int i=0;i<N;i++){
     while(1){
-      int x= -randA(mt);
-      int y= -randA(mt);
-      if(i%10==0)x=-x,y=-y;
+      int x= randA(mt)-100;
+      int y= -40;
+      
+      if(i%20==0)y=-y;
+      
       if(mp[x][y])continue;
       mp[x][y]=true;
       fout<<x<<' '<<y<<endl;
