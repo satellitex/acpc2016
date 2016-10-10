@@ -2,14 +2,14 @@
 
 ## Input generators.
 #c_generator(src='generator.c')
-cxx_generator(src='generator.cc')
+#cxx_generator(src='generator.cc')
 #java_generator(src='Generator.java', encoding='UTF-8', mainclass='Generator')
 #script_generator(src='generator.py')
 
 ## Input validators.
 #c_validator(src='validator.c')
 cxx_validator(src='GeoValid.cpp')
-cxx_validator(src='validator.cpp')
+cxx_validator(src='GeneMaxA.cpp')
 #java_validator(src='Validator.java', encoding='UTF-8', mainclass='Validator')
 #script_validator(src='validator.py')
 
