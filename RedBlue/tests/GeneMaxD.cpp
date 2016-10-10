@@ -35,8 +35,8 @@ void solve(int ID){
       int y=randA(mt)-100;
        
       if(mp[x][y])continue;
-      if( (x-20)*(x-20) + (y-35)*(y-35) <= 49*49 )continue;
-      if( (x+7)*(x+7) + (y+5)*(y+5) <= 7*7 )continue;
+      if( (x-35)*(x-35) + (y-35)*(y-35) <= 49*49 )continue;
+      if( (x+5)*(x+5) + (y+5)*(y+5) <= 7*7 )continue;
       
       mp[x][y]=true;
       fout<<x<<' '<<y<<endl;
