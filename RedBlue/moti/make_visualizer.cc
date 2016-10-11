@@ -223,7 +223,7 @@ ostream& circle(Circle c, string color = "") {
 }
 
 ostream& plot(P p, string color = "") {
-  auto c = Circle(P(p.real() * zoom, p.imag() * zoom), 0.1 * zoom);
+  auto c = Circle(P(p.real() * zoom, p.imag() * zoom), 0.05 * zoom);
   return ofs << "circle(" << c.p.real() << "," << c.p.imag() << "," << c.r << ","
   << (color.empty() ? "\"" + random_color() + "\"" : "\"" + color + "\"") << ")" << endl;
   /*
@@ -299,7 +299,7 @@ int main() {
       set_offset(center);
     }
     set_grid();
-    plot(P(), "#000000");
+//    plot(P(), "#000000");
     circle(cs[0], "#ff0000");
     circle(cs[1], "#0000ff");
 

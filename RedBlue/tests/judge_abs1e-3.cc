@@ -99,6 +99,7 @@ int main(int argc, char** argv)
     double out = mystod(out_str);
 
     if(fabs( diff - out ) <= EPS) {
+        if(diff > 10000.0 - EPS) return 1;
         return 0;
     }
     
